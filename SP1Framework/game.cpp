@@ -200,7 +200,6 @@ void clearScreen()
 
 void renderSplashScreen()  // renders the splash screen
 {
-	//random
     COORD c = g_Console.getConsoleSize();
     c.Y /= 3;
     c.X = c.X / 2 - 9;
