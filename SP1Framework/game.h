@@ -51,7 +51,7 @@ void renderMap();           // renders the map to the buffer first
 void renderCharacter();     // renders the character into the buffer
 void renderFramerate();     // renders debug information, frame rate, elapsed time, etc
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
-bool isCollision(SGameChar chara, SGameChar chara2);
+bool isCollision(SGameChar chara, SGameChar chara2, short frame);
 
 void randMazeTypes(int maze, int row);// generates the map
 
