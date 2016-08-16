@@ -10,6 +10,10 @@
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
+bool rendmapbool = false;
+short randRendmap1 = 0;
+short randRendmap2 = 0;
+short randRendmap3 = 0;
 
 // Game specific variables here
 SGameChar   g_sChar;
@@ -18,7 +22,7 @@ EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once 
 
 // Console object
-Console g_Console(80, 25, "SP1 Framework");
+Console g_Console(80, 40, "SP1 Framework");
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -265,14 +269,18 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
-    renderMap();        // renders the map to the buffer first
+	
+		renderMap(); // renders the map to the buffer first
     renderCharacter();  // renders the character into the buffer
 }
+
+#include <fstream>
+
 
 void renderMap()
 {
     // Set up sample colours, and output shadings
-    const WORD colors[] = {
+/*    const WORD colors[] = {
         0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
         0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
     };
@@ -285,6 +293,96 @@ void renderMap()
         colour(colors[i]);
         g_Console.writeToBuffer(c, " °±²Û", colors[i]);
     }
+	*/
+	COORD c;
+
+	short Frame[152][2];
+	//Store coordinates for the Frame of the Maze
+	//Each block will be 50x8
+	short widthBorderYCoord = 2;//Y coordinates for the sider borders
+	for (int i = 0; i < 152; i++)
+	{
+		if (i < 52)
+		{
+			Frame[i][0] = i;
+			Frame[i][1] = 1;
+		}
+		else if (i >= 52 && i < 100)
+		{
+			if (i % 2 == 0)
+			{
+				Frame[i][0] = 0;//X coordinate for the left border
+				Frame[i][1] = widthBorderYCoord;
+			}
+			else
+			{
+				Frame[i][0] = 51;//X coordinate for the right border
+				Frame[i][1] = widthBorderYCoord;
+				widthBorderYCoord++;
+			}
+		}
+		else if (i >= 100)
+		{
+			Frame[i][0] = (i-100);
+			Frame[i][1] = 26;//Y coordinates for the bottom border
+		}
+	}
+
+	for (int x = 0; x < 152; x++)
+	{
+		c.X = Frame[x][0];
+		c.Y = Frame[x][1];
+	
+		g_Console.writeToBuffer(c, "M");
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		short randMap = 0;
+
+		srand(time(NULL)+i);
+
+		if (!rendmapbool)
+		{
+			randMap = rand() % 9;
+			if (i == 0)
+			{
+				randRendmap1 = randMap;
+				randMazeTypes(randRendmap1, 2);
+			}
+			else if (i == 1)
+			{
+				randRendmap2 = randMap;
+				randMazeTypes(randRendmap2, 10);
+			}
+			else if (i == 2)
+			{
+				randRendmap3 = randMap;
+				randMazeTypes(randRendmap3, 18);
+			}
+
+			if (i == 2) rendmapbool = true;
+		}
+		else
+		{
+			if (i == 0)
+			{
+				randMazeTypes(randRendmap1, 2);
+			}
+			else if (i == 1)
+			{
+				randMazeTypes(randRendmap2, 10);
+			}
+			else if (i == 2)
+			{
+				randMazeTypes(randRendmap3, 18);
+			}
+
+		}
+
+	}
+
+	
 }
 
 void renderCharacter()
@@ -321,4 +419,48 @@ void renderToScreen()
 {
     // Writes the buffer to the console, hence you will see what you have written
     g_Console.flushBufferToConsole();
+}
+void randMazeTypes(int maze,int row)
+{
+
+	std::string line;
+	COORD mazeC;
+
+	std::fstream myfile;
+
+		
+	switch (maze)
+	{
+	case 0: myfile.open("map1.txt");
+		break;
+	case 1: myfile.open("map2.txt");
+		break;
+	case 2: myfile.open("map3.txt");
+		break;
+	case 3: myfile.open("map4.txt");
+		break;
+	case 4: myfile.open("map5.txt");
+		break;
+	case 5: myfile.open("map6.txt");
+		break;
+	case 6: myfile.open("map7.txt");
+		break;
+	case 7: myfile.open("map8.txt");
+		break;
+	case 8: myfile.open("map9.txt");
+		break;
+	}
+			
+	if (myfile.is_open())
+	{
+		while (std::getline(myfile, line))
+		{
+			mazeC.X = 1;
+			mazeC.Y = row;
+			row++;
+			g_Console.writeToBuffer(mazeC, line, 0x05);
+		}
+		myfile.close();
+	}
+
 }
