@@ -268,6 +268,9 @@ void renderGame()
     renderCharacter();  // renders the character into the buffer
 }
 
+#include <fstream>
+
+
 void renderMap()
 {
     // Set up sample colours, and output shadings
@@ -340,25 +343,47 @@ void renderMap()
 		mazeType9,
 		mazeType10,
 	};
-	//TBD.
 
 
 
-/*
-
-	short wall[20][2];
-	int i = 0;
-	for (int a = 0; a < 10; i++, a++)
+/*	enum mazeTypes
 	{
-		c.X = 5 * i;
-		c.Y = i + 1;
-		wall[a][0] = c.X;
-		wall[a][1] = c.Y;
-
-		g_Console.writeToBuffer(c, "M");
-	}
-
+		mazeType1,
+		mazeType2,
+		mazeType3,
+		mazeType4,
+		mazeType5,
+		mazeType6,
+		mazeType7,
+		mazeType8,
+		mazeType9,
+		mazeType10,
+	};
 	*/
+	
+
+		short x = 1;
+		short y = 2;
+
+		std::string line;
+		COORD mazeC;
+
+		std::fstream myfile;
+		myfile.open("map1.txt");
+		if (myfile.is_open())
+		{
+			while (std::getline(myfile, line))
+			{
+				mazeC.X = 1;
+				mazeC.Y = y;
+				y++;
+				g_Console.writeToBuffer(mazeC, line);
+			}
+			myfile.close();
+		}
+
+
+	
 }
 
 void renderCharacter()
