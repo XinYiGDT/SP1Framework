@@ -157,10 +157,20 @@ void moveCharacter()
 	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.Y--;
+		g_sChar.m_cLocation.Y--;
 		g_sChar2.m_cLocation.Y--;
         bSomethingHappened = true;
     }
+	else if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
+	{
+		g_sChar.m_cLocation.Y--;
+		bSomethingHappened = true;
+	}
+	else if (g_abKeyPressed[K_UP] && g_sChar2.m_cLocation.Y > 0)
+	{
+		g_sChar2.m_cLocation.Y--;
+		bSomethingHappened = true;
+	}
 	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0 && g_sChar2.m_cLocation.X > 0)
     {
         //Beep(1440, 30);
@@ -168,6 +178,16 @@ void moveCharacter()
 		g_sChar2.m_cLocation.X--;
         bSomethingHappened = true;
     }
+	else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
+	{
+		g_sChar.m_cLocation.X--;
+		bSomethingHappened = true;
+	}
+	else if (g_abKeyPressed[K_LEFT] && g_sChar2.m_cLocation.X > 0)
+	{
+		g_sChar2.m_cLocation.X--;
+		bSomethingHappened = true;
+	}
 	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1 && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
         //Beep(1440, 30);
@@ -175,6 +195,16 @@ void moveCharacter()
 		g_sChar2.m_cLocation.Y++;
         bSomethingHappened = true;
     }
+	else if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
+	{
+		g_sChar.m_cLocation.Y++;
+		bSomethingHappened = true;
+	}
+	else if (g_abKeyPressed[K_DOWN] && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
+	{
+		g_sChar2.m_cLocation.Y++;
+		bSomethingHappened = true;
+	}
 	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1 && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
         //Beep(1440, 30);
@@ -182,6 +212,16 @@ void moveCharacter()
 		g_sChar2.m_cLocation.X++;
         bSomethingHappened = true;
     }
+	else if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
+	{
+		g_sChar.m_cLocation.X++;
+		bSomethingHappened = true;
+	}
+	else if (g_abKeyPressed[K_RIGHT] && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 1)
+	{
+		g_sChar2.m_cLocation.X++;
+		bSomethingHappened = true;
+	}
     if (g_abKeyPressed[K_SPACE])
     {
         g_sChar.m_bActive = !g_sChar.m_bActive;
