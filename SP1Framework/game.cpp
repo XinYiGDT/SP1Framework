@@ -10,6 +10,10 @@
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
+bool rendmapbool = false;
+short randRendmap1 = 0;
+short randRendmap2 = 0;
+short randRendmap3 = 0;
 
 // Game specific variables here
 SGameChar   g_sChar;
@@ -264,7 +268,8 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
-    renderMap();        // renders the map to the buffer first
+	
+		renderMap(); // renders the map to the buffer first
     renderCharacter();  // renders the character into the buffer
 }
 
@@ -330,58 +335,51 @@ void renderMap()
 		g_Console.writeToBuffer(c, "M");
 	}
 
-	enum mazeTypes
+	for (int i = 0; i < 3; i++)
 	{
-		mazeType1,
-		mazeType2,
-		mazeType3,
-		mazeType4,
-		mazeType5,
-		mazeType6,
-		mazeType7,
-		mazeType8,
-		mazeType9,
-		mazeType10,
-	};
+		short randMap = 0;
 
+		srand(time(NULL)+i);
 
-
-/*	enum mazeTypes
-	{
-		mazeType1,
-		mazeType2,
-		mazeType3,
-		mazeType4,
-		mazeType5,
-		mazeType6,
-		mazeType7,
-		mazeType8,
-		mazeType9,
-		mazeType10,
-	};
-	*/
-	
-
-		short x = 1;
-		short y = 2;
-
-		std::string line;
-		COORD mazeC;
-
-		std::fstream myfile;
-		myfile.open("map1.txt");
-		if (myfile.is_open())
+		if (!rendmapbool)
 		{
-			while (std::getline(myfile, line))
+			randMap = rand() % 9;
+			if (i == 0)
 			{
-				mazeC.X = 1;
-				mazeC.Y = y;
-				y++;
-				g_Console.writeToBuffer(mazeC, line);
+				randRendmap1 = randMap;
+				randMazeTypes(randRendmap1, 2);
 			}
-			myfile.close();
+			else if (i == 1)
+			{
+				randRendmap2 = randMap;
+				randMazeTypes(randRendmap2, 10);
+			}
+			else if (i == 2)
+			{
+				randRendmap3 = randMap;
+				randMazeTypes(randRendmap3, 18);
+			}
+
+			if (i == 2) rendmapbool = true;
+		}
+		else
+		{
+			if (i == 0)
+			{
+				randMazeTypes(randRendmap1, 2);
+			}
+			else if (i == 1)
+			{
+				randMazeTypes(randRendmap2, 10);
+			}
+			else if (i == 2)
+			{
+				randMazeTypes(randRendmap3, 18);
+			}
+
 		}
 
+	}
 
 	
 }
@@ -420,4 +418,48 @@ void renderToScreen()
 {
     // Writes the buffer to the console, hence you will see what you have written
     g_Console.flushBufferToConsole();
+}
+void randMazeTypes(int maze,int row)
+{
+
+	std::string line;
+	COORD mazeC;
+
+	std::fstream myfile;
+
+		
+	switch (maze)
+	{
+	case 0: myfile.open("map1.txt");
+		break;
+	case 1: myfile.open("map2.txt");
+		break;
+	case 2: myfile.open("map3.txt");
+		break;
+	case 3: myfile.open("map4.txt");
+		break;
+	case 4: myfile.open("map5.txt");
+		break;
+	case 5: myfile.open("map6.txt");
+		break;
+	case 6: myfile.open("map7.txt");
+		break;
+	case 7: myfile.open("map8.txt");
+		break;
+	case 8: myfile.open("map9.txt");
+		break;
+	}
+			
+	if (myfile.is_open())
+	{
+		while (std::getline(myfile, line))
+		{
+			mazeC.X = 1;
+			mazeC.Y = row;
+			row++;
+			g_Console.writeToBuffer(mazeC, line, 0x05);
+		}
+		myfile.close();
+	}
+
 }
