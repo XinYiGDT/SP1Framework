@@ -13,6 +13,7 @@ bool    g_abKeyPressed[K_COUNT];
 
 // Game specific variables here
 SGameChar   g_sChar;
+SGameChar   g_sChar2;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
 
@@ -38,6 +39,10 @@ void init( void )
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
     g_sChar.m_bActive = true;
+
+	g_sChar2.m_cLocation.X = g_Console.getConsoleSize().X / 4;
+	g_sChar2.m_cLocation.Y = g_Console.getConsoleSize().Y / 4;
+	g_sChar2.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
 }
@@ -149,33 +154,38 @@ void moveCharacter()
 
     // Updating the location of the character based on the key press
     // providing a beep sound whenver we shift the character
-    if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
+	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.Y--;
+		g_sChar2.m_cLocation.Y--;
         bSomethingHappened = true;
     }
-    if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
+	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0 && g_sChar2.m_cLocation.X > 0)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.X--;
+		g_sChar2.m_cLocation.X--;
         bSomethingHappened = true;
     }
-    if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
+	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1 && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.Y++;
+		g_sChar.m_cLocation.Y++;
+		g_sChar2.m_cLocation.Y++;
         bSomethingHappened = true;
     }
-    if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
+	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1 && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.X++;
+		g_sChar2.m_cLocation.X++;
         bSomethingHappened = true;
     }
     if (g_abKeyPressed[K_SPACE])
     {
         g_sChar.m_bActive = !g_sChar.m_bActive;
+		g_sChar2.m_bActive = !g_sChar2.m_bActive;
         bSomethingHappened = true;
     }
 
@@ -240,11 +250,12 @@ void renderCharacter()
 {
     // Draw the location of the character
     WORD charColor = 0x0C;
-    if (g_sChar.m_bActive)
+	if (g_sChar.m_bActive && g_sChar2.m_bActive)
     {
         charColor = 0x0A;
     }
     g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
+	g_Console.writeToBuffer(g_sChar2.m_cLocation, (char)1, charColor);
 }
 
 void renderFramerate()
