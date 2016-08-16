@@ -3,6 +3,7 @@
 
 #include "Framework\timer.h"
 #include "isCollision.h"
+#include "mazeCoords.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -54,5 +55,6 @@ void renderToScreen();      // dump the contents of the buffer to the screen, on
 bool isCollision(SGameChar chara, SGameChar chara2, short frame);
 
 void randMazeTypes(int maze, int row);// generates the map
+void renderAI();            // AI control
 
 #endif // _GAME_H

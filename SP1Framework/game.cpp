@@ -11,16 +11,23 @@ double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
 bool rendmapbool = false;
-short randRendmap1 = 0;
-short randRendmap2 = 0;
-short randRendmap3 = 0;
+short randRendmap1 = 0;//store the first maze type number
+short randRendmap2 = 0;//store the second maze type number
+short randRendmap3 = 0;//store the third maze type number
 short Frame[152][2];
+
+short Wall1[200][2];//holds coordinates of first maze type
+short Wall2[200][2];//holds coordinates of second maze type
+short Wall3[200][2];//holds coordinates of third maze type
+
 bool border = false;
 COORD b;
 
 // Game specific variables here
 SGameChar   g_sChar;
 SGameChar   g_sChar2;
+SGameChar   g_sAI;	//AIs
+SGameChar   g_sAI2;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once 
 
@@ -283,22 +290,6 @@ void renderGame()
 
 void renderMap()
 {
-    // Set up sample colours, and output shadings
-/*    const WORD colors[] = {
-        0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
-        0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
-    };
-
-    COORD c;
-    for (int i = 0; i < 12; ++i)
-    {
-        c.X = 5 * i;
-        c.Y = i + 1;
-        colour(colors[i]);
-        g_Console.writeToBuffer(c, " °±²Û", colors[i]);
-    }
-	*/
-	
 	
 	//short Frame[152][2];
 	//Store coordinates for the Frame of the Maze
@@ -353,16 +344,19 @@ void renderMap()
 			{
 				randRendmap1 = randMap;
 				randMazeTypes(randRendmap1, 2);
+				mazeCoords(randRendmap1, 1);
 			}
 			else if (i == 1)
 			{
 				randRendmap2 = randMap;
 				randMazeTypes(randRendmap2, 10);
+				mazeCoords(randRendmap2, 2);
 			}
 			else if (i == 2)
 			{
 				randRendmap3 = randMap;
 				randMazeTypes(randRendmap3, 18);
+				mazeCoords(randRendmap3, 3);
 			}
 
 			if (i == 2) rendmapbool = true;
@@ -388,7 +382,6 @@ void renderMap()
 
 	
 }
-
 void renderCharacter()
 {
     // Draw the location of the character
@@ -432,7 +425,6 @@ void randMazeTypes(int maze,int row)
 
 	std::fstream myfile;
 
-		
 	switch (maze)
 	{
 	case 0: myfile.open("map1.txt");
@@ -467,4 +459,103 @@ void randMazeTypes(int maze,int row)
 		myfile.close();
 	}
 
+}
+void storeGlobalWall(char *map, int mazenumber)
+{
+	short rowX = 0;
+	short colY = 0;
+	short a = 0;
+
+	for (short i = 0; colY < 8; i++)
+	{
+		if (i % 50 == 0 && i != 0)
+		{
+			rowX = 0;
+			colY++;
+		}
+		if (mazenumber == 1)
+		{
+			if (map[i] != ' ')
+			{
+				Wall1[a][0] = rowX;
+				Wall1[a][1] = colY;
+				a++;
+			}
+			//Always have a {0,8} as the last coordinate. It should be ignored. It can be used to break loop in checking coordinates.
+		}
+		else if (mazenumber == 2)
+		{
+			if (map[i] != ' ')
+			{
+				Wall2[a][0] = rowX;
+				Wall2[a][1] = colY;
+				a++;
+			}
+		}
+		else if (mazenumber == 3)
+		{
+			if (map[i] != ' ')
+			{
+				Wall3[a][0] = rowX;
+				Wall3[a][1] = colY;
+				a++;
+			}
+		}
+		rowX++;
+	}
+
+}
+
+void renderAI()
+{
+	if (g_dBounceTime > g_dElapsedTime)
+		return;
+
+	COORD test;
+	COORD testing;
+	test.X = 55;
+	test.Y = 10;
+	testing.X = 2;
+	testing.Y = 1;
+
+	char item;
+	//short Frame[152][2];
+	for (int i = 0; i < 10; i++)
+	{
+
+		if (Frame[i][0] == testing.X && Frame[i][1] == testing.Y)
+		{
+			item = ' ';
+		}
+
+	}
+
+	g_Console.writeToBuffer(test, item, 0x59);
+
+	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
+	{
+		//Beep(1440, 30);
+		g_sAI.m_cLocation.Y--;
+		g_sAI2.m_cLocation.Y--;
+	}
+	else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
+	{
+		g_sAI.m_cLocation.X--;
+	}
+	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1 && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
+	{
+		//Beep(1440, 30);
+		g_sAI.m_cLocation.Y++;
+		g_sAI2.m_cLocation.Y++;
+	}
+	else if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
+	{
+		g_sAI.m_cLocation.X++;
+	}
+
+	/*	if (g_abKeyPressed[K_SPACE])
+	{
+	g_sAI.m_bActive = !g_sChar.m_bActive;
+	g_sAI2.m_bActive = !g_sChar2.m_bActive;
+	}*/
 }
