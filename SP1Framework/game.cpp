@@ -19,7 +19,7 @@ short randRendmap3 = 0;
 SGameChar   g_sChar;
 SGameChar   g_sChar2;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
-double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once
+double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once 
 
 // Console object
 Console g_Console(80, 40, "SP1 Framework");
@@ -41,10 +41,10 @@ void init( void )
     g_eGameState = S_SPLASHSCREEN;
 
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
-    g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
+    g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 4;
     g_sChar.m_bActive = true;
 
-	g_sChar2.m_cLocation.X = g_Console.getConsoleSize().X / 4;
+	g_sChar2.m_cLocation.X = g_Console.getConsoleSize().X / 3;
 	g_sChar2.m_cLocation.Y = g_Console.getConsoleSize().Y / 4;
 	g_sChar2.m_bActive = true;
     // sets the width, height and the font name to use in the console
@@ -152,6 +152,7 @@ void gameplay()            // gameplay logic
 
 void moveCharacter()
 {
+	isCollision(g_sChar, g_sChar2);
     bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
