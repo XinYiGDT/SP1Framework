@@ -39,7 +39,11 @@
     <ClCompile Include="mazeCoords.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Puzzle2.cpp">
+=======
+    <ClCompile Include="AiPathFindHeuristic.cpp">
+>>>>>>> 4527696f811113b6788dcaa1cae6af7922c5aaaa
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,7 +63,11 @@
     <ClInclude Include="mazeCoords.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Puzzle2.h">
+=======
+    <ClInclude Include="AiPathFindHeuristic.h">
+>>>>>>> 4527696f811113b6788dcaa1cae6af7922c5aaaa
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

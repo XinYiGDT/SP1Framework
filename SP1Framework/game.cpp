@@ -16,15 +16,30 @@ short randRendmap2 = 0;//store the second maze type number
 short randRendmap3 = 0;//store the third maze type number
 short Frame[152][2];
 
-short Wall1[200][2];//holds coordinates of first maze type
-short Wall2[200][2];//holds coordinates of second maze type
-short Wall3[200][2];//holds coordinates of third maze type
+short Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Û.	Holds coords Y = 0 to Y = 9
+short Wall2[80][40];//holds coordinates of second maze type							Holds coords Y = 10 to Y = 17
+short Wall3[80][40];//holds coordinates of third maze type							Holds coords Y = 18 to Y = 25
 
+<<<<<<< HEAD
+=======
+bool border = false;
+COORD b;
+
+//AIs
+SGameChar   g_sAI;	//AIs
+COORD AIPrevious;
+double AItime = 0.0;
+short AIPathOpenlist[][5];
+short AIPathCloselist[][2];
+short AIPathfind[][5];
+int closelistcount = 0;
+
+
+>>>>>>> 4527696f811113b6788dcaa1cae6af7922c5aaaa
 // Game specific variables here
 SGameChar   g_sChar;
 SGameChar   g_sChar2;
-SGameChar   g_sAI;	//AIs
-SGameChar   g_sAI2;
+
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once 
 
@@ -56,6 +71,10 @@ void init( void )
 	g_sChar2.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
+
+	g_sAI.m_cLocation.X = g_Console.getConsoleSize().X / 5;
+	g_sAI.m_cLocation.Y = g_Console.getConsoleSize().Y / 5;
+	g_sAI.m_bActive = true;
 }
 
 //--------------------------------------------------------------
@@ -155,6 +174,7 @@ void gameplay()            // gameplay logic
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
                         // sound can be played here too.
+	moveAI();
 }
 
 void moveCharacter()
@@ -325,7 +345,8 @@ void renderSplashScreen()  // renders the splash screen
 void renderGame()
 {
 	
-		renderMap(); // renders the map to the buffer first
+	renderMap(); // renders the map to the buffer first
+	renderAI();
     renderCharacter();  // renders the character into the buffer
 }
 
@@ -506,45 +527,28 @@ void randMazeTypes(int maze,int row)
 }
 void storeGlobalWall(char *map, int mazenumber)
 {
-	short rowX = 0;
-	short colY = 0;
-	short a = 0;
+	short rowX = 1;
+	short colY = 2;
 
-	for (short i = 0; colY < 8; i++)
+	for (short i = 0; colY < 2 + (8* mazenumber); i++)
 	{
 		if (i % 50 == 0 && i != 0)
 		{
-			rowX = 0;
+			rowX = 1;
 			colY++;
 		}
 		if (mazenumber == 1)
 		{
-			if (map[i] != ' ')
-			{
-				Wall1[a][0] = rowX;
-				Wall1[a][1] = colY;
-				a++;
-			}
-			//Always have a {0,8} as the last coordinate. It should be ignored. It can be used to break loop in checking coordinates.
+			Wall1[rowX][colY] = map[i];
 		}
 		else if (mazenumber == 2)
 		{
-			if (map[i] != ' ')
-			{
-				Wall2[a][0] = rowX;
-				Wall2[a][1] = colY;
-				a++;
-			}
+			Wall2[rowX][colY] = map[i];
 		}
 		else if (mazenumber == 3)
 		{
-			if (map[i] != ' ')
-			{
-				Wall3[a][0] = rowX;
-				Wall3[a][1] = colY;
-				a++;
-			}
-		}
+			Wall3[rowX][colY] = map[i];
+		}		
 		rowX++;
 	}
 
@@ -552,54 +556,56 @@ void storeGlobalWall(char *map, int mazenumber)
 
 void renderAI()
 {
-	if (g_dBounceTime > g_dElapsedTime)
-		return;
+	WORD AIColor = 0xFF;
+	if (g_sAI.m_bActive && g_sAI.m_bActive)
+	{
+		AIColor = 0xCF;
+	}
+	g_Console.writeToBuffer(g_sAI.m_cLocation, (char)2, AIColor);
 
-	COORD test;
-	COORD testing;
-	test.X = 55;
-	test.Y = 10;
-	testing.X = 2;
-	testing.Y = 1;
-
+<<<<<<< HEAD
 	char item;
 	short Frame[152][2];
 	for (int i = 0; i < 10; i++)
+=======
+}
+void moveAI()
+{
+	if (AItime == 0)
 	{
-
-		if (Frame[i][0] == testing.X && Frame[i][1] == testing.Y)
-		{
-			item = ' ';
-		}
-
+		AItime = g_dElapsedTime;
+	}
+	else
+>>>>>>> 4527696f811113b6788dcaa1cae6af7922c5aaaa
+	{
+		if (g_dElapsedTime - AItime > 1)
+			AItime = 0;
+			return;
 	}
 
-	g_Console.writeToBuffer(test, item, 0x59);
+	AIPrevious.X = g_sAI.m_cLocation.X;
+	AIPrevious.Y = g_sAI.m_cLocation.Y;
 
-	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
+
+//	AIPathCloselist[closelistcount][0] = g_sAI.m_cLocation.X;
+//	AIPathCloselist[closelistcount][1] = g_sAI.m_cLocation.Y;
+//	closelistcount++;
+
+//	AIPathOpenlist[1024][5];
+//	AIPathCloselist[1024][2];
+//	AIPathfind[1024][5];
+
+	if (g_sChar.m_cLocation.X && g_sChar.m_cLocation.Y || g_sChar2.m_cLocation.X && g_sChar.m_cLocation.Y)
+		
+
+	if (g_sAI.m_cLocation.Y > 1)
 	{
-		//Beep(1440, 30);
 		g_sAI.m_cLocation.Y--;
-		g_sAI2.m_cLocation.Y--;
 	}
-	else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
+	else
 	{
-		g_sAI.m_cLocation.X--;
-	}
-	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1 && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
-	{
-		//Beep(1440, 30);
 		g_sAI.m_cLocation.Y++;
-		g_sAI2.m_cLocation.Y++;
-	}
-	else if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
-	{
-		g_sAI.m_cLocation.X++;
 	}
 
-	/*	if (g_abKeyPressed[K_SPACE])
-	{
-	g_sAI.m_bActive = !g_sChar.m_bActive;
-	g_sAI2.m_bActive = !g_sChar2.m_bActive;
-	}*/
+
 }
