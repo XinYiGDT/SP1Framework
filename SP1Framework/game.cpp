@@ -20,11 +20,6 @@ short Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Û
 short Wall2[80][40];//holds coordinates of second maze type							Holds coords Y = 10 to Y = 17
 short Wall3[80][40];//holds coordinates of third maze type							Holds coords Y = 18 to Y = 25
 
-<<<<<<< HEAD
-=======
-bool border = false;
-COORD b;
-
 //AIs
 SGameChar   g_sAI;	//AIs
 COORD AIPrevious;
@@ -34,8 +29,6 @@ short AIPathCloselist[][2];
 short AIPathfind[][5];
 int closelistcount = 0;
 
-
->>>>>>> 4527696f811113b6788dcaa1cae6af7922c5aaaa
 // Game specific variables here
 SGameChar   g_sChar;
 SGameChar   g_sChar2;
