@@ -20,9 +20,6 @@ short Wall1[200][2];//holds coordinates of first maze type
 short Wall2[200][2];//holds coordinates of second maze type
 short Wall3[200][2];//holds coordinates of third maze type
 
-bool border = false;
-COORD b;
-
 // Game specific variables here
 SGameChar   g_sChar;
 SGameChar   g_sChar2;
@@ -162,81 +159,128 @@ void gameplay()            // gameplay logic
 
 void moveCharacter()
 {
-	border = isCollision(g_sChar, g_sChar2, Frame[152][2]);
+	//isCollision(g_sChar, g_sChar2, Frame[152][2], g_abKeyPressed[K_COUNT]);
     bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
 
     // Updating the location of the character based on the key press
     // providing a beep sound whenver we shift the character
-	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 2 && g_sChar2.m_cLocation.Y > 2)
+	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
     {
 			//Beep(1440, 30);
 			g_sChar.m_cLocation.Y--;
 			g_sChar2.m_cLocation.Y--;
 			bSomethingHappened = true;
 
+			
     }
-	else if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 2)
+	else if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
 	{
 			g_sChar.m_cLocation.Y--;
 			bSomethingHappened = true;
+
+			if (Frame[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] == '77')
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+
 	}
-	else if (g_abKeyPressed[K_UP] && g_sChar2.m_cLocation.Y > 2)
+	else if (g_abKeyPressed[K_UP] && g_sChar2.m_cLocation.Y > 0)
 	{
 		g_sChar2.m_cLocation.Y--;
 		bSomethingHappened = true;
+
+		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y - 1] == '77')
+		{
+			g_sChar2.m_cLocation.Y++;
+		}
+
 	}
-	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 1 && g_sChar2.m_cLocation.X > 1)
+	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0 && g_sChar2.m_cLocation.X > 0)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.X--;
 		g_sChar2.m_cLocation.X--;
         bSomethingHappened = true;
+
+		
     }
-	else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 1)
+	else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
 	{
 		g_sChar.m_cLocation.X--;
 		bSomethingHappened = true;
+
+		if (Frame[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '77')
+		{
+			g_sChar.m_cLocation.X++;
+		}
 	}
-	else if (g_abKeyPressed[K_LEFT] && g_sChar2.m_cLocation.X > 1)
+	else if (g_abKeyPressed[K_LEFT] && g_sChar2.m_cLocation.X > 0)
 	{
 		g_sChar2.m_cLocation.X--;
 		bSomethingHappened = true;
+
+		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '77')
+		{
+			g_sChar2.m_cLocation.X++;
+		}
 	}
-	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 15 && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 15)
+	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1 && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
         //Beep(1440, 30);
 		g_sChar.m_cLocation.Y++;
 		g_sChar2.m_cLocation.Y++;
         bSomethingHappened = true;
+
+		
     }
-	else if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 15)
+	else if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
 	{
 		g_sChar.m_cLocation.Y++;
 		bSomethingHappened = true;
+
+		if (Frame[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '77')
+		{
+			g_sChar.m_cLocation.Y--;
+		}
 	}
-	else if (g_abKeyPressed[K_DOWN] && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 15)
+	else if (g_abKeyPressed[K_DOWN] && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
 	{
 		g_sChar2.m_cLocation.Y++;
 		bSomethingHappened = true;
+		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '77')
+		{
+			g_sChar2.m_cLocation.Y--;
+		}
 	}
-	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 30 && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 30)
+	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1 && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.X++;
 		g_sChar2.m_cLocation.X++;
         bSomethingHappened = true;
+
+		
     }
-	else if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 30)
+	else if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
-		g_sChar.m_cLocation.X++;
+		//g_sChar.m_cLocation.X++;
 		bSomethingHappened = true;
+		if (Wall1[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] == ' ')
+		{
+			g_sChar.m_cLocation.X++;
+		}
 	}
-	else if (g_abKeyPressed[K_RIGHT] && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 30)
+	else if (g_abKeyPressed[K_RIGHT] && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
 		g_sChar2.m_cLocation.X++;
 		bSomethingHappened = true;
+
+		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == 'M')
+		{
+			g_sChar2.m_cLocation.X--;
+		}
 	}
     if (g_abKeyPressed[K_SPACE])
     {
@@ -290,7 +334,7 @@ void renderGame()
 
 void renderMap()
 {
-	
+	COORD c;
 	//short Frame[152][2];
 	//Store coordinates for the Frame of the Maze
 	//Each block will be 50x8
@@ -325,10 +369,10 @@ void renderMap()
 
 	for (int x = 0; x < 152; x++)
 	{
-		b.X = Frame[x][0];
-		b.Y = Frame[x][1];
+		c.X = Frame[x][0];
+		c.Y = Frame[x][1];
 	
-		g_Console.writeToBuffer(b, "M");
+		g_Console.writeToBuffer(c, "M");
 	}
 
 	for (int i = 0; i < 3; i++)
@@ -519,7 +563,7 @@ void renderAI()
 	testing.Y = 1;
 
 	char item;
-	//short Frame[152][2];
+	short Frame[152][2];
 	for (int i = 0; i < 10; i++)
 	{
 

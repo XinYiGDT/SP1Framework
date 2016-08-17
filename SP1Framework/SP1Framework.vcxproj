@@ -83,6 +83,7 @@
     <ClCompile Include="isCollision.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mazeCoords.cpp" />
+    <ClCompile Include="Puzzle2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h" />
@@ -90,6 +91,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="isCollision.h" />
     <ClInclude Include="mazeCoords.h" />
+    <ClInclude Include="Puzzle2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
