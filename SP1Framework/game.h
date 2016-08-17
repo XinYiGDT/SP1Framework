@@ -4,6 +4,7 @@
 #include "Framework\timer.h"
 #include "isCollision.h"
 #include "mazeCoords.h"
+#include "AiPathFindHeuristic.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -56,5 +57,6 @@ bool isCollision(SGameChar chara, SGameChar chara2, short frame);
 
 void randMazeTypes(int maze, int row);// generates the map
 void renderAI();            // AI control
+void moveAI();
 
 #endif // _GAME_H
