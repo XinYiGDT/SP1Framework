@@ -5,6 +5,7 @@
 #include "isCollision.h"
 #include "mazeCoords.h"
 #include "AiPathFindHeuristic.h"
+#include "distCharToAi.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
