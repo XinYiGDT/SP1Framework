@@ -38,10 +38,6 @@ std::fstream myfile;
 SGameChar g_sAI;	//AIs
 COORD AIPrevious;
 double AItime = 0.0;
-<<<<<<< HEAD
-
-=======
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 
 // Game specific variables here
 SGameChar   g_sChar;
@@ -188,10 +184,7 @@ void gameplay()            // gameplay logic
 void moveCharacter()
 {
 	//border = isCollision(g_sChar, g_sChar2, Frame[152][2]);
-<<<<<<< HEAD
-=======
 	//isCollision(g_sChar, g_sChar2, Frame[152][2], g_abKeyPressed[K_COUNT]);
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
     bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
@@ -201,7 +194,6 @@ void moveCharacter()
 
 	if (g_abKeyPressed[K_UP])
 	{
-<<<<<<< HEAD
 		g_sChar2.m_cLocation.Y--;
 		bSomethingHappened = true;
 
@@ -284,54 +276,40 @@ void moveCharacter()
 	if (g_abKeyPressed[K_RIGHT])
 	{
 		g_sChar2.m_cLocation.X++;
-=======
 		g_sChar.m_cLocation.Y--;
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 		bSomethingHappened = true;
 
 		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 			{
-<<<<<<< HEAD
 				g_sChar.m_cLocation.Y--;
-=======
 				g_sChar.m_cLocation.Y++;
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 			}
 		}
 		else if (g_sChar.m_cLocation.Y >= 10 && g_sChar.m_cLocation.Y < 18)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 			{
-<<<<<<< HEAD
 				g_sChar.m_cLocation.Y--;
-=======
 				g_sChar.m_cLocation.Y++;
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 			}
 		}
 		else if (g_sChar.m_cLocation.Y >= 18 && g_sChar.m_cLocation.Y <= 25)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 			{
-<<<<<<< HEAD
 				g_sChar.m_cLocation.Y--;
-=======
 				g_sChar.m_cLocation.Y++;
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 			}
 		}
 	}
 
 	/*if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 2 && g_sChar2.m_cLocation.Y > 2)
-<<<<<<< HEAD
-=======
 
 
 
 	/*if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
     {
 			//Beep(1440, 30);
 			g_sChar.m_cLocation.Y--;
@@ -441,14 +419,11 @@ void moveCharacter()
 	{
 		g_sChar2.m_cLocation.X++;
 		bSomethingHappened = true;
-<<<<<<< HEAD
-=======
 
 		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == 'M')
 		{
 			g_sChar2.m_cLocation.X--;
 		}
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	}*/
     if (g_abKeyPressed[K_SPACE])
     {
@@ -499,31 +474,6 @@ void renderGame()
 	
 }
 
-<<<<<<< HEAD
-
-
-
-void renderMap()
-{
-	std::string line;
-	std::fstream bord;
-	int bRow = 1;
-
-	bord.open("border.txt");
-
-	if (bord.is_open())
-	{
-		while (std::getline(bord, line))
-		{
-			b.X = 0;
-			b.Y = bRow;
-			bRow++;
-			g_Console.writeToBuffer(b, line, 0x07);
-		}
-		bord.close();
-	}
-	
-=======
 void renderMap()
 {
 	COORD c;
@@ -543,7 +493,6 @@ void renderMap()
 		myfile.close();
 	}
 
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	//short Frame[152][2];
 	//Store coordinates for the Frame of the Maze
 	//Each block will be 50x8
@@ -582,11 +531,9 @@ void renderMap()
 		c.Y = Frame[x][1];
 
 		g_Console.writeToBuffer(b, "M");
-<<<<<<< HEAD
-=======
+
 		g_Console.writeToBuffer(c, "M");
 
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	}*/
 
 	for (int i = 0; i < 3; i++)
@@ -678,13 +625,10 @@ void renderToScreen()
 void randMazeTypes(int maze,int row)
 {
 	COORD mazeC;
-<<<<<<< HEAD
 	std::string line;
 	std::fstream myfile;
-=======
 	//std::string line;
 	//std::fstream myfile;
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 
 	switch (maze)
 	{
@@ -744,18 +688,10 @@ void storeGlobalWall(char *map, int mazenumber)
 		{
 			Wall3[rowX][colY] = map[i];
 		}
-<<<<<<< HEAD
 		if (colY <= 2 + (8 * mazenumber))
 		{
 			rowX++;
 		}
-		
-=======
-		if (colY == 2 + (8 * mazenumber))
-		{
-			rowX++;
-		}
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	}
 
 }
@@ -779,12 +715,8 @@ void renderAI()
 //Please put new functions above this.
 void moveAI()
 {
-<<<<<<< HEAD
 
-	if (AItime == 0)
-=======
 	/*if (AItime == 0)
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	{
 		AItime = g_dElapsedTime;
 	}
@@ -1073,10 +1005,10 @@ void moveAI()
 		}
 
 <<<<<<< HEAD
-	}*/
+	}
 	g_sAI.m_cLocation.X = AIPathCloselist[1][0];
 	g_sAI.m_cLocation.Y = AIPathCloselist[1][1];
-
+*/
 /*
 =======
 	}
@@ -1112,12 +1044,11 @@ void moveAI()
 //	{
 //		g_sAI.m_cLocation.Y++;
 //	}
-=======
-	
+
 
 //	if (g_sChar.m_cLocation.X && g_sChar.m_cLocation.Y || g_sChar2.m_cLocation.X && g_sChar.m_cLocation.Y)
 		
->>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
+
 
 //	if (g_sAI.m_cLocation.Y > 1)
 //	{
@@ -1128,5 +1059,5 @@ void moveAI()
 //		g_sAI.m_cLocation.Y++;
 //	}
 
-*/
+
 }
