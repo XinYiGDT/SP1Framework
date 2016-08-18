@@ -195,7 +195,30 @@ void moveCharacter()
 	if (g_abKeyPressed[K_UP])
 	{
 		g_sChar2.m_cLocation.Y--;
+		g_sChar.m_cLocation.Y--;
 		bSomethingHappened = true;
+
+		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
+		{
+			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+		}
+		else if (g_sChar.m_cLocation.Y >= 10 && g_sChar.m_cLocation.Y < 18)
+		{
+			if (Wall2[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+		}
+		else if (g_sChar.m_cLocation.Y >= 18 && g_sChar.m_cLocation.Y <= 25)
+		{
+			if (Wall3[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+		}
 
 	if (g_sChar2.m_cLocation.Y >= 0 && g_sChar2.m_cLocation.Y < 10)
 		{
@@ -206,14 +229,14 @@ void moveCharacter()
 		}
 		else if (g_sChar2.m_cLocation.Y >= 10 && g_sChar2.m_cLocation.Y < 18)
 		{
-			if (Wall1[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			if (Wall2[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
 			{
 				g_sChar2.m_cLocation.Y++;
 			}
 		}
 		else if (g_sChar2.m_cLocation.Y >= 18 && g_sChar2.m_cLocation.Y <= 25)
 		{
-			if (Wall1[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			if (Wall3[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
 			{
 				g_sChar2.m_cLocation.Y++;
 			}
@@ -221,62 +244,8 @@ void moveCharacter()
 	}
 	if (g_abKeyPressed[K_DOWN])
 	{
+		g_sChar.m_cLocation.Y++;
 		g_sChar2.m_cLocation.Y++;
-		bSomethingHappened = true;
-
-/*		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
-		{
-			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
-			{
-				g_sChar.m_cLocation.Y--;
-			}
-		}
-		else if (g_sChar.m_cLocation.Y >= 10 && g_sChar.m_cLocation.Y < 18)
-		{
-			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
-			{
-				g_sChar.m_cLocation.Y--;
-			}
-		}
-		else if (g_sChar.m_cLocation.Y >= 18 && g_sChar.m_cLocation.Y <= 25)
-		{
-			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
-			{
-				g_sChar.m_cLocation.Y--;
-			}
-		}*/
-	}
-	if (g_abKeyPressed[K_LEFT])
-	{
-		g_sChar2.m_cLocation.X--;
-		bSomethingHappened = true;
-
-	/*	if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
-		{
-			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
-			{
-				g_sChar.m_cLocation.X++;
-			}
-		}
-		else if (g_sChar.m_cLocation.Y >= 10 && g_sChar.m_cLocation.Y < 18)
-		{
-			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
-			{
-				g_sChar.m_cLocation.X++;
-			}
-		}
-		else if (g_sChar.m_cLocation.Y >= 18 && g_sChar.m_cLocation.Y <= 25)
-		{
-			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
-			{
-				g_sChar.m_cLocation.X++;
-			}
-		}*/
-	}
-	if (g_abKeyPressed[K_RIGHT])
-	{
-		g_sChar2.m_cLocation.X++;
-		g_sChar.m_cLocation.Y--;
 		bSomethingHappened = true;
 
 		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
@@ -284,23 +253,142 @@ void moveCharacter()
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 			{
 				g_sChar.m_cLocation.Y--;
-				g_sChar.m_cLocation.Y++;
 			}
 		}
 		else if (g_sChar.m_cLocation.Y >= 10 && g_sChar.m_cLocation.Y < 18)
 		{
-			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			if (Wall2[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 			{
 				g_sChar.m_cLocation.Y--;
-				g_sChar.m_cLocation.Y++;
 			}
 		}
 		else if (g_sChar.m_cLocation.Y >= 18 && g_sChar.m_cLocation.Y <= 25)
 		{
-			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			if (Wall3[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 			{
 				g_sChar.m_cLocation.Y--;
-				g_sChar.m_cLocation.Y++;
+			}
+		}
+
+		if (g_sChar2.m_cLocation.Y >= 0 && g_sChar2.m_cLocation.Y < 10)
+		{
+			if (Wall1[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			{
+				g_sChar2.m_cLocation.Y--;
+			}
+		}
+		else if (g_sChar2.m_cLocation.Y >= 10 && g_sChar2.m_cLocation.Y < 18)
+		{
+			if (Wall2[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			{
+				g_sChar2.m_cLocation.Y--;
+			}
+		}
+		else if (g_sChar2.m_cLocation.Y >= 18 && g_sChar2.m_cLocation.Y <= 25)
+		{
+			if (Wall3[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			{
+				g_sChar2.m_cLocation.Y--;
+			}
+		}
+	}
+	if (g_abKeyPressed[K_LEFT])
+	{
+		g_sChar.m_cLocation.X--;
+		g_sChar2.m_cLocation.X--;
+		bSomethingHappened = true;
+
+		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
+		{
+			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.X++;
+			}
+		}
+		else if (g_sChar.m_cLocation.Y >= 10 && g_sChar.m_cLocation.Y < 18)
+		{
+			if (Wall2[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.X++;
+			}
+		}
+		else if (g_sChar.m_cLocation.Y >= 18 && g_sChar.m_cLocation.Y <= 25)
+		{
+			if (Wall3[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.X++;
+			}
+		}
+
+		if (g_sChar2.m_cLocation.Y >= 0 && g_sChar2.m_cLocation.Y < 10)
+		{
+			if (Wall1[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			{
+				g_sChar2.m_cLocation.X++;
+			}
+		}
+		else if (g_sChar2.m_cLocation.Y >= 10 && g_sChar2.m_cLocation.Y < 18)
+		{
+			if (Wall2[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			{
+				g_sChar2.m_cLocation.X++;
+			}
+		}
+		else if (g_sChar2.m_cLocation.Y >= 18 && g_sChar2.m_cLocation.Y <= 25)
+		{
+			if (Wall3[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			{
+				g_sChar2.m_cLocation.X++;
+			}
+		}
+	}
+	if (g_abKeyPressed[K_RIGHT])
+	{
+		g_sChar.m_cLocation.X++;
+		g_sChar2.m_cLocation.X++;
+		bSomethingHappened = true;
+
+		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
+		{
+			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.X--;
+			}
+		}
+		else if (g_sChar.m_cLocation.Y >= 10 && g_sChar.m_cLocation.Y < 18)
+		{
+			if (Wall2[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.X--;
+			}
+		}
+		else if (g_sChar.m_cLocation.Y >= 18 && g_sChar.m_cLocation.Y <= 25)
+		{
+			if (Wall3[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.X--;
+			}
+		}
+
+		if (g_sChar2.m_cLocation.Y >= 0 && g_sChar2.m_cLocation.Y < 10)
+		{
+			if (Wall1[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			{
+				g_sChar2.m_cLocation.X--;
+			}
+		}
+		else if (g_sChar2.m_cLocation.Y >= 10 && g_sChar2.m_cLocation.Y < 18)
+		{
+			if (Wall2[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			{
+				g_sChar2.m_cLocation.X--;
+			}
+		}
+		else if (g_sChar2.m_cLocation.Y >= 18 && g_sChar2.m_cLocation.Y <= 25)
+		{
+			if (Wall3[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '#')
+			{
+				g_sChar2.m_cLocation.X--;
 			}
 		}
 	}
@@ -688,7 +776,7 @@ void storeGlobalWall(char *map, int mazenumber)
 		{
 			Wall3[rowX][colY] = map[i];
 		}
-		if (colY <= 2 + (8 * mazenumber))
+		if (colY != 2 + (8 * mazenumber))
 		{
 			rowX++;
 		}
