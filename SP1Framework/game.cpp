@@ -16,7 +16,7 @@ bool rendmapbool = false;
 short randRendmap1 = 0;//store the first maze type number
 short randRendmap2 = 0;//store the second maze type number
 short randRendmap3 = 0;//store the third maze type number
-char Frame[152][2];
+char Frame[40][52];
 
 
 COORD b;
@@ -198,6 +198,17 @@ void moveCharacter()
 		g_sChar.m_cLocation.Y--;
 		bSomethingHappened = true;
 
+		//Border
+		if (Frame[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M')
+		{
+			g_sChar.m_cLocation.Y++;
+		}
+		if (Frame[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M')
+		{
+			g_sChar2.m_cLocation.Y++;
+		}
+
+		//Wall
 		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
@@ -248,6 +259,17 @@ void moveCharacter()
 		g_sChar2.m_cLocation.Y++;
 		bSomethingHappened = true;
 
+		//Border
+		if (Frame[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M')
+		{
+			g_sChar.m_cLocation.Y--;
+		}
+		if (Frame[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M')
+		{
+			g_sChar2.m_cLocation.Y--;
+		}
+
+		//Wall
 		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
@@ -298,6 +320,17 @@ void moveCharacter()
 		g_sChar2.m_cLocation.X--;
 		bSomethingHappened = true;
 
+		//Border
+		if (Frame[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M')
+		{
+			g_sChar.m_cLocation.X++;
+		}
+		if (Frame[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M')
+		{
+			g_sChar2.m_cLocation.X++;
+		}
+
+		//Wall
 		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
@@ -348,6 +381,17 @@ void moveCharacter()
 		g_sChar2.m_cLocation.X++;
 		bSomethingHappened = true;
 
+		//Border
+		if (Frame[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M')
+		{
+			g_sChar.m_cLocation.X--;
+		}
+		if (Frame[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M')
+		{
+			g_sChar2.m_cLocation.X--;
+		}
+
+		//Wall
 		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
@@ -566,6 +610,7 @@ void renderMap()
 {
 	COORD c;
 	int bRow = 1;
+	int bCol = 0;
 
 	myfile.open("border.txt");
 
@@ -573,10 +618,24 @@ void renderMap()
 	{
 		while (std::getline(myfile, line))
 		{
+			for (int i = 0; i < 52; i++)
+			{
+				if (line[i] == 'M')
+				{
+					Frame[bRow][i] = 'M';
+				}
+				else
+				{
+					Frame[bRow][i] = ' ';
+				}
+				
+			}
+			
 			c.X = 0;
 			c.Y = bRow;
-			bRow++;
+			
 			g_Console.writeToBuffer(c, line, 0x07);
+			bRow++;
 		}
 		myfile.close();
 	}
