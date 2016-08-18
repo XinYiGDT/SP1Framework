@@ -1,6 +1,6 @@
 #include "isCollision.h"
 
-bool isCollision(SGameChar chara, SGameChar chara2, short frame)
+void isCollision(SGameChar chara, SGameChar chara2, short frame, bool g_abKeyPressed[K_COUNT])
 {
 	//int dist;
 	char border = 'Û';
@@ -16,13 +16,5 @@ bool isCollision(SGameChar chara, SGameChar chara2, short frame)
 	}*/
 
 
-	if ((chara.m_cLocation.X + 1) == border || (chara.m_cLocation.Y + 1) == border)
-	{
-		return true;
-	}
-	if (chara2.m_cLocation.X == border || chara2.m_cLocation.Y == border)
-	{
-		return true;
-	}
-	return false;
+	
 }

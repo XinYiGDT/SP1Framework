@@ -16,22 +16,32 @@ bool rendmapbool = false;
 short randRendmap1 = 0;//store the first maze type number
 short randRendmap2 = 0;//store the second maze type number
 short randRendmap3 = 0;//store the third maze type number
-short Frame[152][2];
+char Frame[152][2];
 
-short Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Û.	Holds coords Y = 0 to Y = 9
-short Wall2[80][40];//holds coordinates of second maze type							Holds coords Y = 10 to Y = 17
-short Wall3[80][40];//holds coordinates of third maze type							Holds coords Y = 18 to Y = 25
 
 COORD b;
 short rowX = 1;
 short colY = 2;
 
 
+char Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Û.	Holds coords Y = 0 to Y = 9
+char Wall2[80][40];//holds coordinates of second maze type							Holds coords Y = 10 to Y = 17
+char Wall3[80][40];//holds coordinates of third maze type							Holds coords Y = 18 to Y = 25
+
+std::string line;
+std::fstream myfile;
+
+
+
+
 //AIs
 SGameChar g_sAI;	//AIs
 COORD AIPrevious;
 double AItime = 0.0;
+<<<<<<< HEAD
 
+=======
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 
 // Game specific variables here
 SGameChar   g_sChar;
@@ -178,6 +188,10 @@ void gameplay()            // gameplay logic
 void moveCharacter()
 {
 	//border = isCollision(g_sChar, g_sChar2, Frame[152][2]);
+<<<<<<< HEAD
+=======
+	//isCollision(g_sChar, g_sChar2, Frame[152][2], g_abKeyPressed[K_COUNT]);
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
     bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
@@ -187,6 +201,7 @@ void moveCharacter()
 
 	if (g_abKeyPressed[K_UP])
 	{
+<<<<<<< HEAD
 		g_sChar2.m_cLocation.Y--;
 		bSomethingHappened = true;
 
@@ -269,99 +284,171 @@ void moveCharacter()
 	if (g_abKeyPressed[K_RIGHT])
 	{
 		g_sChar2.m_cLocation.X++;
+=======
+		g_sChar.m_cLocation.Y--;
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 		bSomethingHappened = true;
 
 		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 			{
+<<<<<<< HEAD
 				g_sChar.m_cLocation.Y--;
+=======
+				g_sChar.m_cLocation.Y++;
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 			}
 		}
 		else if (g_sChar.m_cLocation.Y >= 10 && g_sChar.m_cLocation.Y < 18)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 			{
+<<<<<<< HEAD
 				g_sChar.m_cLocation.Y--;
+=======
+				g_sChar.m_cLocation.Y++;
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 			}
 		}
 		else if (g_sChar.m_cLocation.Y >= 18 && g_sChar.m_cLocation.Y <= 25)
 		{
 			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
 			{
+<<<<<<< HEAD
 				g_sChar.m_cLocation.Y--;
+=======
+				g_sChar.m_cLocation.Y++;
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 			}
 		}
 	}
 
 	/*if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 2 && g_sChar2.m_cLocation.Y > 2)
+<<<<<<< HEAD
+=======
+
+
+
+	/*if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
     {
 			//Beep(1440, 30);
 			g_sChar.m_cLocation.Y--;
 			g_sChar2.m_cLocation.Y--;
 			bSomethingHappened = true;
 
+			
     }
-	else if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 2)
+	else if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0)
 	{
 			g_sChar.m_cLocation.Y--;
 			bSomethingHappened = true;
+
+			if (Frame[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y - 1] == '77')
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+
 	}
-	else if (g_abKeyPressed[K_UP] && g_sChar2.m_cLocation.Y > 2)
+	else if (g_abKeyPressed[K_UP] && g_sChar2.m_cLocation.Y > 0)
 	{
 		g_sChar2.m_cLocation.Y--;
 		bSomethingHappened = true;
+
+		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y - 1] == '77')
+		{
+			g_sChar2.m_cLocation.Y++;
+		}
+
 	}
-	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 1 && g_sChar2.m_cLocation.X > 1)
+	if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0 && g_sChar2.m_cLocation.X > 0)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.X--;
 		g_sChar2.m_cLocation.X--;
         bSomethingHappened = true;
+
+		
     }
-	else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 1)
+	else if (g_abKeyPressed[K_LEFT] && g_sChar.m_cLocation.X > 0)
 	{
 		g_sChar.m_cLocation.X--;
 		bSomethingHappened = true;
+
+		if (Frame[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '77')
+		{
+			g_sChar.m_cLocation.X++;
+		}
 	}
-	else if (g_abKeyPressed[K_LEFT] && g_sChar2.m_cLocation.X > 1)
+	else if (g_abKeyPressed[K_LEFT] && g_sChar2.m_cLocation.X > 0)
 	{
 		g_sChar2.m_cLocation.X--;
 		bSomethingHappened = true;
+
+		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '77')
+		{
+			g_sChar2.m_cLocation.X++;
+		}
 	}
-	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 15 && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 15)
+	if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1 && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
         //Beep(1440, 30);
 		g_sChar.m_cLocation.Y++;
 		g_sChar2.m_cLocation.Y++;
         bSomethingHappened = true;
+
+		
     }
-	else if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 15)
+	else if (g_abKeyPressed[K_DOWN] && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
 	{
 		g_sChar.m_cLocation.Y++;
 		bSomethingHappened = true;
+
+		if (Frame[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '77')
+		{
+			g_sChar.m_cLocation.Y--;
+		}
 	}
-	else if (g_abKeyPressed[K_DOWN] && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 15)
+	else if (g_abKeyPressed[K_DOWN] && g_sChar2.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
 	{
 		g_sChar2.m_cLocation.Y++;
 		bSomethingHappened = true;
+		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == '77')
+		{
+			g_sChar2.m_cLocation.Y--;
+		}
 	}
-	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 30 && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 30)
+	if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1 && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
         //Beep(1440, 30);
         g_sChar.m_cLocation.X++;
 		g_sChar2.m_cLocation.X++;
         bSomethingHappened = true;
+
+		
     }
-	else if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 30)
+	else if (g_abKeyPressed[K_RIGHT] && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
-		g_sChar.m_cLocation.X++;
+		//g_sChar.m_cLocation.X++;
 		bSomethingHappened = true;
+		if (Wall1[g_sChar.m_cLocation.X + 1][g_sChar.m_cLocation.Y] == ' ')
+		{
+			g_sChar.m_cLocation.X++;
+		}
 	}
-	else if (g_abKeyPressed[K_RIGHT] && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 30)
+	else if (g_abKeyPressed[K_RIGHT] && g_sChar2.m_cLocation.X < g_Console.getConsoleSize().X - 1)
 	{
 		g_sChar2.m_cLocation.X++;
 		bSomethingHappened = true;
+<<<<<<< HEAD
+=======
+
+		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == 'M')
+		{
+			g_sChar2.m_cLocation.X--;
+		}
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	}*/
     if (g_abKeyPressed[K_SPACE])
     {
@@ -412,6 +499,7 @@ void renderGame()
 	
 }
 
+<<<<<<< HEAD
 
 
 
@@ -435,6 +523,27 @@ void renderMap()
 		bord.close();
 	}
 	
+=======
+void renderMap()
+{
+	COORD c;
+	int bRow = 1;
+
+	myfile.open("border.txt");
+
+	if (myfile.is_open())
+	{
+		while (std::getline(myfile, line))
+		{
+			c.X = 0;
+			c.Y = bRow;
+			bRow++;
+			g_Console.writeToBuffer(c, line, 0x07);
+		}
+		myfile.close();
+	}
+
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	//short Frame[152][2];
 	//Store coordinates for the Frame of the Maze
 	//Each block will be 50x8
@@ -469,10 +578,15 @@ void renderMap()
 
 	for (int x = 0; x < 152; x++)
 	{
-		b.X = Frame[x][0];
-		b.Y = Frame[x][1];
-	
+		c.X = Frame[x][0];
+		c.Y = Frame[x][1];
+
 		g_Console.writeToBuffer(b, "M");
+<<<<<<< HEAD
+=======
+		g_Console.writeToBuffer(c, "M");
+
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	}*/
 
 	for (int i = 0; i < 3; i++)
@@ -564,8 +678,13 @@ void renderToScreen()
 void randMazeTypes(int maze,int row)
 {
 	COORD mazeC;
+<<<<<<< HEAD
 	std::string line;
 	std::fstream myfile;
+=======
+	//std::string line;
+	//std::fstream myfile;
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 
 	switch (maze)
 	{
@@ -625,11 +744,18 @@ void storeGlobalWall(char *map, int mazenumber)
 		{
 			Wall3[rowX][colY] = map[i];
 		}
+<<<<<<< HEAD
 		if (colY <= 2 + (8 * mazenumber))
 		{
 			rowX++;
 		}
 		
+=======
+		if (colY == 2 + (8 * mazenumber))
+		{
+			rowX++;
+		}
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	}
 
 }
@@ -643,6 +769,9 @@ void renderAI()
 	}
 	g_Console.writeToBuffer(g_sAI.m_cLocation, (char)2, AIColor);
 
+	//char item;
+	//short Frame[152][2];
+	//for (int i = 0; i < 10; i++)
 }
 
 #include <vector>
@@ -650,12 +779,17 @@ void renderAI()
 //Please put new functions above this.
 void moveAI()
 {
+<<<<<<< HEAD
 
 	if (AItime == 0)
+=======
+	/*if (AItime == 0)
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	{
 		AItime = g_dElapsedTime;
 	}
 	else
+
 	{
 		if (g_dElapsedTime - AItime > 1)
 			AItime = 0;
@@ -785,6 +919,7 @@ void moveAI()
 
 		//Add shortest node amongst the area to closelist.
 		//Reassign new node in shorter finding cost.
+<<<<<<< HEAD
 		
 		int shortestfindscore = 0;
 		int shortestScore = 0;
@@ -835,6 +970,58 @@ void moveAI()
 			AI.Y = AIPathCloselist[closelistcount][1];
 			closelistcount++;
 
+=======
+		
+		int shortestfindscore = 0;
+		int shortestScore = 0;
+		for (int count = openlistcount - 1; count > ignopenlistcount; count--)
+		{
+			if (shortestfindscore == 0)
+			{
+				shortestfindscore = AIPathOpenlist[count][4];
+				shortestScore = count;
+			}
+			else if (AIPathOpenlist[count][4] < shortestfindscore && AIPathOpenlist[count][0] != 0 && AIPathOpenlist[count][1] != 0)
+			{
+				shortestfindscore = AIPathOpenlist[count][4];
+				shortestScore = count;
+			}
+			if (count == ignopenlistcount)
+				ignopenlistcount = openlistcount;
+
+		}
+	
+		AIPathCloselist[closelistcount][0] = AIPathOpenlist[shortestScore][0];
+		AIPathCloselist[closelistcount][1] = AIPathOpenlist[shortestScore][1];
+		AIPathOpenlist[shortestScore][0] = 0;
+		AIPathOpenlist[shortestScore][1] = 0;
+		AIPathOpenlist[shortestScore][2] = 0;
+		AIPathOpenlist[shortestScore][3] = 0;
+		AIPathOpenlist[shortestScore][4] = 0;
+		
+//		bool InsideCloselist = false;
+		for (int i = 0; i < closelistcount; i++)
+		{
+			for (int j = ignopenlistcount; j < openlistcount; j++)
+			{
+				if (AIPathCloselist[i][0] == AIPathOpenlist[j][0] && AIPathCloselist[i][1] == AIPathOpenlist[j][1] && AIPathOpenlist[j][0] != 0 && AIPathOpenlist[j][1] != 0)
+				{
+//					InsideCloselist = true;
+//					break;
+					//if any coords in open list is inside closed list, ignore and do not assign as new node.
+				}
+			}
+			//Reassign new node
+			
+		}
+
+//		if (!InsideCloselist)
+//		{
+			AI.X = AIPathCloselist[closelistcount][0];
+			AI.Y = AIPathCloselist[closelistcount][1];
+			closelistcount++;
+
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 			AIPathfind[AI.X][AI.Y] = 1;
 //		}
 
@@ -885,11 +1072,19 @@ void moveAI()
 			}
 		}
 
+<<<<<<< HEAD
 	}*/
 	g_sAI.m_cLocation.X = AIPathCloselist[1][0];
 	g_sAI.m_cLocation.Y = AIPathCloselist[1][1];
 
 /*
+=======
+	}
+	g_sAI.m_cLocation.X = AIPathCloselist[1][0];
+	g_sAI.m_cLocation.Y = AIPathCloselist[1][1];
+
+
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 	//assign new location for AI
 	int shortest = 0;
 	for (int closerow = 0; closerow < 80; closerow++)
@@ -903,6 +1098,7 @@ void moveAI()
 		}
 		
 	}
+<<<<<<< HEAD
 	*/
 
 //	if (g_sChar.m_cLocation.X && g_sChar.m_cLocation.Y || g_sChar2.m_cLocation.X && g_sChar.m_cLocation.Y)
@@ -916,6 +1112,21 @@ void moveAI()
 //	{
 //		g_sAI.m_cLocation.Y++;
 //	}
+=======
+	
 
+//	if (g_sChar.m_cLocation.X && g_sChar.m_cLocation.Y || g_sChar2.m_cLocation.X && g_sChar.m_cLocation.Y)
+		
+>>>>>>> c3f05c03dfd35846dccb597cb836ce50c34dd217
 
+//	if (g_sAI.m_cLocation.Y > 1)
+//	{
+//		g_sAI.m_cLocation.Y--;
+//	}
+//	else
+//	{
+//		g_sAI.m_cLocation.Y++;
+//	}
+
+*/
 }
