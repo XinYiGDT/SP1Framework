@@ -6,10 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-<<<<<<< HEAD
 #include <cmath>
-=======
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
 #include <fstream>
 
 double  g_dElapsedTime;
@@ -21,16 +18,16 @@ short randRendmap2 = 0;//store the second maze type number
 short randRendmap3 = 0;//store the third maze type number
 char Frame[152][2];
 
-<<<<<<< HEAD
+
 COORD b;
-=======
+
 char Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Û.	Holds coords Y = 0 to Y = 9
 char Wall2[80][40];//holds coordinates of second maze type							Holds coords Y = 10 to Y = 17
 char Wall3[80][40];//holds coordinates of third maze type							Holds coords Y = 18 to Y = 25
-int bRow = 1;
+
 std::string line;
 std::fstream myfile;
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
+
 
 
 
@@ -183,11 +180,8 @@ void gameplay()            // gameplay logic
 
 void moveCharacter()
 {
-<<<<<<< HEAD
 	//border = isCollision(g_sChar, g_sChar2, Frame[152][2]);
-=======
 	//isCollision(g_sChar, g_sChar2, Frame[152][2], g_abKeyPressed[K_COUNT]);
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
     bool bSomethingHappened = false;
     if (g_dBounceTime > g_dElapsedTime)
         return;
@@ -223,14 +217,11 @@ void moveCharacter()
 		}
 	}
 
-<<<<<<< HEAD
 	/*if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 2 && g_sChar2.m_cLocation.Y > 2)
-=======
 
 
 
 	/*if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
     {
 			//Beep(1440, 30);
 			g_sChar.m_cLocation.Y--;
@@ -340,14 +331,11 @@ void moveCharacter()
 	{
 		g_sChar2.m_cLocation.X++;
 		bSomethingHappened = true;
-<<<<<<< HEAD
-=======
 
 		if (Frame[g_sChar2.m_cLocation.X][g_sChar2.m_cLocation.Y] == 'M')
 		{
 			g_sChar2.m_cLocation.X--;
 		}
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
 	}*/
     if (g_abKeyPressed[K_SPACE])
     {
@@ -398,34 +386,10 @@ void renderGame()
 	
 }
 
-<<<<<<< HEAD
-
-
-
-void renderMap()
-{
-	std::string line;
-	std::fstream bord;
-	int bRow = 1;
-
-	bord.open("border.txt");
-
-	if (bord.is_open())
-	{
-		while (std::getline(bord, line))
-		{
-			b.X = 0;
-			b.Y = bRow;
-			bRow++;
-			g_Console.writeToBuffer(b, line, 0x07);
-		}
-		bord.close();
-	}
-	
-=======
 void renderMap()
 {
 	COORD c;
+	int bRow = 1;
 
 	myfile.open("border.txt");
 
@@ -441,7 +405,6 @@ void renderMap()
 		myfile.close();
 	}
 
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
 	//short Frame[152][2];
 	//Store coordinates for the Frame of the Maze
 	//Each block will be 50x8
@@ -478,12 +441,10 @@ void renderMap()
 	{
 		c.X = Frame[x][0];
 		c.Y = Frame[x][1];
-	
-<<<<<<< HEAD
+
 		g_Console.writeToBuffer(b, "M");
-=======
 		g_Console.writeToBuffer(c, "M");
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
+
 	}*/
 
 	for (int i = 0; i < 3; i++)
@@ -575,12 +536,8 @@ void renderToScreen()
 void randMazeTypes(int maze,int row)
 {
 	COORD mazeC;
-<<<<<<< HEAD
-	std::string line;
-	std::fstream myfile;
-=======
-	
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
+	//std::string line;
+	//std::fstream myfile;
 
 	switch (maze)
 	{
@@ -641,18 +598,10 @@ void storeGlobalWall(char *map, int mazenumber)
 		{
 			Wall3[rowX][colY] = map[i];
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
 		if (colY == 2 + (8 * mazenumber))
 		{
 			rowX++;
 		}
-<<<<<<< HEAD
-		
-=======
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
 	}
 
 }
@@ -676,12 +625,7 @@ void renderAI()
 //Please put new functions above this.
 void moveAI()
 {
-<<<<<<< HEAD
-
-	if (AItime == 0)
-=======
 	/*if (AItime == 0)
->>>>>>> 7ed564c4368cec2eb348e47faf3a3d282d932404
 	{
 		AItime = g_dElapsedTime;
 	}
@@ -916,11 +860,11 @@ void moveAI()
 			}
 		}
 
-	}*/
+	}
 	g_sAI.m_cLocation.X = AIPathCloselist[1][0];
 	g_sAI.m_cLocation.Y = AIPathCloselist[1][1];
 
-/*
+
 	//assign new location for AI
 	int shortest = 0;
 	for (int closerow = 0; closerow < 80; closerow++)
@@ -934,7 +878,7 @@ void moveAI()
 		}
 		
 	}
-	*/
+	
 
 //	if (g_sChar.m_cLocation.X && g_sChar.m_cLocation.Y || g_sChar2.m_cLocation.X && g_sChar.m_cLocation.Y)
 		
