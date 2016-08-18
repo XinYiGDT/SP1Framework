@@ -4,11 +4,8 @@
 #include "Framework\timer.h"
 #include "isCollision.h"
 #include "mazeCoords.h"
-<<<<<<< HEAD
 #include "Puzzle2.h"
-=======
 #include "AiPathFindHeuristic.h"
->>>>>>> 4527696f811113b6788dcaa1cae6af7922c5aaaa
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;

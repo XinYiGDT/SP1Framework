@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -14,11 +15,14 @@ bool rendmapbool = false;
 short randRendmap1 = 0;//store the first maze type number
 short randRendmap2 = 0;//store the second maze type number
 short randRendmap3 = 0;//store the third maze type number
-short Frame[152][2];
+char Frame[152][2];
 
-short Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Û.	Holds coords Y = 0 to Y = 9
-short Wall2[80][40];//holds coordinates of second maze type							Holds coords Y = 10 to Y = 17
-short Wall3[80][40];//holds coordinates of third maze type							Holds coords Y = 18 to Y = 25
+char Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Û.	Holds coords Y = 0 to Y = 9
+char Wall2[80][40];//holds coordinates of second maze type							Holds coords Y = 10 to Y = 17
+char Wall3[80][40];//holds coordinates of third maze type							Holds coords Y = 18 to Y = 25
+int bRow = 1;
+std::string line;
+std::fstream myfile;
 
 //AIs
 SGameChar   g_sAI;	//AIs
@@ -179,7 +183,39 @@ void moveCharacter()
 
     // Updating the location of the character based on the key press
     // providing a beep sound whenver we shift the character
-	if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
+
+	if (g_abKeyPressed[K_UP])
+	{
+		g_sChar.m_cLocation.Y--;
+		bSomethingHappened = true;
+
+		if (g_sChar.m_cLocation.Y >= 0 && g_sChar.m_cLocation.Y < 10)
+		{
+			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+		}
+		else if (g_sChar.m_cLocation.Y >= 10 && g_sChar.m_cLocation.Y < 18)
+		{
+			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+		}
+		else if (g_sChar.m_cLocation.Y >= 18 && g_sChar.m_cLocation.Y <= 25)
+		{
+			if (Wall1[g_sChar.m_cLocation.X][g_sChar.m_cLocation.Y] == '#')
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+		}
+	}
+
+
+
+
+	/*if (g_abKeyPressed[K_UP] && g_sChar.m_cLocation.Y > 0 && g_sChar2.m_cLocation.Y > 0)
     {
 			//Beep(1440, 30);
 			g_sChar.m_cLocation.Y--;
@@ -294,7 +330,7 @@ void moveCharacter()
 		{
 			g_sChar2.m_cLocation.X--;
 		}
-	}
+	}*/
     if (g_abKeyPressed[K_SPACE])
     {
         g_sChar.m_bActive = !g_sChar.m_bActive;
@@ -343,16 +379,28 @@ void renderGame()
     renderCharacter();  // renders the character into the buffer
 }
 
-#include <fstream>
-
-
 void renderMap()
 {
 	COORD c;
+
+	myfile.open("border.txt");
+
+	if (myfile.is_open())
+	{
+		while (std::getline(myfile, line))
+		{
+			c.X = 0;
+			c.Y = bRow;
+			bRow++;
+			g_Console.writeToBuffer(c, line, 0x07);
+		}
+		myfile.close();
+	}
+
 	//short Frame[152][2];
 	//Store coordinates for the Frame of the Maze
 	//Each block will be 50x8
-	short widthBorderYCoord = 2;//Y coordinates for the sider borders
+	/*short widthBorderYCoord = 2;//Y coordinates for the sider borders
 	for (int i = 0; i < 152; i++)
 	{
 		if (i < 52)
@@ -387,7 +435,7 @@ void renderMap()
 		c.Y = Frame[x][1];
 	
 		g_Console.writeToBuffer(c, "M");
-	}
+	}*/
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -477,11 +525,8 @@ void renderToScreen()
 }
 void randMazeTypes(int maze,int row)
 {
-
-	std::string line;
 	COORD mazeC;
-
-	std::fstream myfile;
+	
 
 	switch (maze)
 	{
@@ -541,8 +586,12 @@ void storeGlobalWall(char *map, int mazenumber)
 		else if (mazenumber == 3)
 		{
 			Wall3[rowX][colY] = map[i];
-		}		
-		rowX++;
+		}
+
+		if (colY == 2 + (8 * mazenumber))
+		{
+			rowX++;
+		}
 	}
 
 }
@@ -556,20 +605,18 @@ void renderAI()
 	}
 	g_Console.writeToBuffer(g_sAI.m_cLocation, (char)2, AIColor);
 
-<<<<<<< HEAD
-	char item;
-	short Frame[152][2];
-	for (int i = 0; i < 10; i++)
-=======
+	//char item;
+	//short Frame[152][2];
+	//for (int i = 0; i < 10; i++)
 }
 void moveAI()
 {
-	if (AItime == 0)
+	/*if (AItime == 0)
 	{
 		AItime = g_dElapsedTime;
 	}
 	else
->>>>>>> 4527696f811113b6788dcaa1cae6af7922c5aaaa
+
 	{
 		if (g_dElapsedTime - AItime > 1)
 			AItime = 0;
@@ -600,5 +647,5 @@ void moveAI()
 		g_sAI.m_cLocation.Y++;
 	}
 
-
+*/
 }
