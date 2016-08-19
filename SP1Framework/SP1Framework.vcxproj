@@ -78,22 +78,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AiPathFindHeuristic.cpp" />
+    <ClCompile Include="CharacterMovement.cpp" />
     <ClCompile Include="distCharToAi.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="isCollision.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mazeCoords.cpp" />
     <ClCompile Include="Puzzle2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AiPathFindHeuristic.h" />
+    <ClInclude Include="CharacterMovement.h" />
     <ClInclude Include="distCharToAi.h" />
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="isCollision.h" />
     <ClInclude Include="mazeCoords.h" />
     <ClInclude Include="Puzzle2.h" />
   </ItemGroup>

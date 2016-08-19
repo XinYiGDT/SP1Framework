@@ -8,6 +8,7 @@
 #include <sstream>
 #include <cmath>
 #include <fstream>
+#include <windows.h>
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -28,15 +29,12 @@ short randPointY;
 short randPointX2;
 short randPointY2;
 
-char Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Û.	Holds coords Y = 0 to Y = 9
+char Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Ã›.	Holds coords Y = 0 to Y = 9
 char Wall2[80][40];//holds coordinates of second maze type							Holds coords Y = 10 to Y = 17
 char Wall3[80][40];//holds coordinates of third maze type							Holds coords Y = 18 to Y = 25
 
 std::string line;
 std::fstream myfile;
-
-
-
 
 //AIs
 SGameChar g_sAI;	//AIs
@@ -64,19 +62,79 @@ Console g_Console(80, 40, "SP1 Framework");
 //--------------------------------------------------------------
 void init( void )
 {
+	//random the positions
+	for (int i = 0; i < 4; i++)
+	{
+		srand(time(NULL) + i);
+
+		if (i == 0)
+		{
+			if (g_sChar.m_cLocation.X != '#')
+			{
+				randPointX = (rand() % 25) + 1;
+			}
+			else
+			{
+				g_sChar.m_cLocation.X++;
+
+			}
+
+		}
+		if (i == 1)
+		{
+			if (g_sChar.m_cLocation.Y != '#')
+			{
+				randPointY = (rand() % 14) + 2;
+			}
+			else
+			{
+				g_sChar.m_cLocation.Y++;
+			}
+
+		}
+		if (i == 2)
+		{
+			if (g_sChar2.m_cLocation.X != '#')
+			{
+				randPointX2 = (rand() % 25) + 23;
+			}
+			else
+			{
+				g_sChar2.m_cLocation.X++;
+
+			}
+
+		}
+		if (i == 3)
+		{
+
+			if (g_sChar2.m_cLocation.Y != '#')
+			{
+				randPointY2 = (rand() % 14) + 12;
+			}
+			else
+			{
+				g_sChar2.m_cLocation.Y++;
+
+			}
+
+		}
+
+	}
+
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
     g_dBounceTime = 0.0;
 
     // sets the initial state for the game
-    g_eGameState = S_SPLASHSCREEN;
+	g_eGameState = S_SPLASHSCREEN;
 
-    g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
-    g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
+    g_sChar.m_cLocation.X = randPointX;
+    g_sChar.m_cLocation.Y = randPointY;
     g_sChar.m_bActive = true;
 
-	g_sChar2.m_cLocation.X = 20;//g_Console.getConsoleSize().X / 3;
-	g_sChar2.m_cLocation.Y = 5;//g_Console.getConsoleSize().Y / 4;
+	g_sChar2.m_cLocation.X = randPointX2;//g_Console.getConsoleSize().X / 3;
+	g_sChar2.m_cLocation.Y = randPointY2;//g_Console.getConsoleSize().Y / 4;
 	g_sChar2.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
@@ -86,6 +144,7 @@ void init( void )
 	g_sAI.m_bActive = true;
 
 	
+
 }
 
 //--------------------------------------------------------------
@@ -452,33 +511,13 @@ void moveCharacter()
         bSomethingHappened = true;
     }
 
+	//when both character touches
 	if (g_sChar.m_cLocation.X == g_sChar2.m_cLocation.X && g_sChar.m_cLocation.Y == g_sChar2.m_cLocation.Y)
 	{
 
 		rendmapbool = false;
 
-		for (int i = 0; i < 4; i++)
-		{
-			srand(time(NULL) + i);
-
-			if (i == 0)
-			{
-				randPointX = (rand() % 25) + 1;
-			}
-			if (i == 1)
-			{
-				randPointY = (rand() % 14) + 2;
-			}
-			if (i == 2)
-			{
-				randPointX2 = (rand() % 25) + 24;
-			}
-			if (i == 3)
-			{
-				randPointY2 = (rand() % 14) + 13;
-			}
-
-		}
+		
 
 		g_sChar.m_cLocation.X = randPointX;
 		g_sChar.m_cLocation.Y = randPointY;
@@ -664,12 +703,24 @@ void renderCharacter()
 {
     // Draw the location of the character
     WORD charColor = 0x0C;
-	if (g_sChar.m_bActive && g_sChar2.m_bActive)
+	WORD charColor2 = 0x0C;
+	//char chara1 = 2642;
+	//char chara2 = 2640;
+
+	if (g_sChar.m_bActive)
     {
-        charColor = 0x0A;
+        charColor = 0x0B;
+		//chara1 = 2642;
+		
     }
-    g_Console.writeToBuffer(g_sChar.m_cLocation, (char)1, charColor);
-	g_Console.writeToBuffer(g_sChar2.m_cLocation, (char)1, charColor);
+	if (g_sChar2.m_bActive)
+	{
+		charColor2 = 0x0D;
+		//chara2 = 2640;
+		
+	}
+	g_Console.writeToBuffer(g_sChar.m_cLocation, 0x95, charColor);
+	g_Console.writeToBuffer(g_sChar2.m_cLocation, 0x94, charColor2);
 }
 
 void renderFramerate()
@@ -730,7 +781,7 @@ void randMazeTypes(int maze,int row)
 			mazeC.X = 1;
 			mazeC.Y = row;
 			row++;
-			g_Console.writeToBuffer(mazeC, line, 0x05);
+			g_Console.writeToBuffer(mazeC, line, 0x02);
 		}
 		myfile.close();
 	}

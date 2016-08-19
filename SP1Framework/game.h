@@ -2,7 +2,6 @@
 #define _GAME_H
 
 #include "Framework\timer.h"
-#include "isCollision.h"
 #include "mazeCoords.h"
 #include "Puzzle2.h"
 #include "AiPathFindHeuristic.h"
@@ -55,7 +54,6 @@ void renderMap();           // renders the map to the buffer first
 void renderCharacter();     // renders the character into the buffer
 void renderFramerate();     // renders debug information, frame rate, elapsed time, etc
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
-void isCollision(SGameChar chara, SGameChar chara2); //players trigger
 
 void randMazeTypes(int maze, int row);// generates the map
 void renderAI();            // AI control
