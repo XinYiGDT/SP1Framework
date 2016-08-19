@@ -35,6 +35,7 @@ short randPointY2;
 char Wall1[80][40];//holds coordinates of first maze type	32 is space, -37 is Û.	Holds coords Y = 0 to Y = 9
 char Wall2[80][40];//holds coordinates of second maze type							Holds coords Y = 10 to Y = 17
 char Wall3[80][40];//holds coordinates of third maze type							Holds coords Y = 18 to Y = 25
+bool checkloca = false;
 
 std::string line;
 std::fstream myfile;
@@ -65,66 +66,7 @@ Console g_Console(80, 40, "SP1 Framework");
 //--------------------------------------------------------------
 void init( void )
 {
-	//random the positions
-	for (int i = 0; i < 4; i++)
-	{
-		srand(time(NULL) + i);
-
-		if (i == 0)
-		{
-			if (g_sChar.m_cLocation.X != '#')
-			{
-				randPointX = (rand() % 25) + 1;
-			}
-			else
-			{
-				g_sChar.m_cLocation.X++;
-
-			}
-
-		}
-		if (i == 1)
-		{
-			if (g_sChar.m_cLocation.Y != '#')
-			{
-				randPointY = (rand() % 14) + 2;
-			}
-			else
-			{
-				g_sChar.m_cLocation.Y++;
-			}
-
-		}
-		if (i == 2)
-		{
-			if (g_sChar2.m_cLocation.X != '#')
-			{
-				randPointX2 = (rand() % 25) + 23;
-			}
-			else
-			{
-				g_sChar2.m_cLocation.X++;
-
-			}
-
-		}
-		if (i == 3)
-		{
-
-			if (g_sChar2.m_cLocation.Y != '#')
-			{
-				randPointY2 = (rand() % 14) + 12;
-			}
-			else
-			{
-				g_sChar2.m_cLocation.Y++;
-
-			}
-
-		}
-
-	}
-
+		
     // Set precision for floating point output
     g_dElapsedTime = 0.0;
     g_dBounceTime = 0.0;
@@ -132,12 +74,12 @@ void init( void )
     // sets the initial state for the game
 	g_eGameState = S_SPLASHSCREEN;
 
-    g_sChar.m_cLocation.X = randPointX;
-    g_sChar.m_cLocation.Y = randPointY;
+    g_sChar.m_cLocation.X = 1;
+    g_sChar.m_cLocation.Y = 2;
     g_sChar.m_bActive = true;
 
-	g_sChar2.m_cLocation.X = randPointX2;//g_Console.getConsoleSize().X / 3;
-	g_sChar2.m_cLocation.Y = randPointY2;//g_Console.getConsoleSize().Y / 4;
+	g_sChar2.m_cLocation.X = 50;//g_Console.getConsoleSize().X / 3;
+	g_sChar2.m_cLocation.Y = 25;//g_Console.getConsoleSize().Y / 4;
 	g_sChar2.m_bActive = true;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
@@ -524,7 +466,21 @@ void moveCharacter()
 
 		rendmapbool = false;
 
-		
+		while (checkloca)
+		{
+			randPointX = (rand() % 25)+1;
+			randPointY = (rand() % 14)+2;
+
+			randPointX2 = (rand() % 25)+1;
+			randPointY2 = (rand() % 14)+2;
+
+			if (Wall1[randPointX][randPointY] != '#' || Wall2[randPointX][randPointY] != '#' || Wall3[randPointX][randPointY] != '#' || Frame[randPointY][randPointX] != 'M'
+				&& Wall1[randPointX2][randPointY2] != '#' || Wall2[randPointX2][randPointY2] != '#' || Wall3[randPointX2][randPointY2] != '#' || Frame[randPointY2][randPointX2] != 'M')
+			{
+
+				checkloca=false;
+			}
+		}
 
 		g_sChar.m_cLocation.X = randPointX;
 		g_sChar.m_cLocation.Y = randPointY;
@@ -644,7 +600,11 @@ void renderMap()
 				mazeCoords(randRendmap3, 3);
 			}
 
-			if (i == 2) rendmapbool = true;
+			if (i == 2)
+			{
+				rendmapbool = true;
+				checkloca = true;
+			}
 		}
 		else
 		{
