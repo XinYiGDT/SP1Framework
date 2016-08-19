@@ -2,10 +2,7 @@
 #define _GAME_H
 
 #include "Framework\timer.h"
-<<<<<<< HEAD
-=======
 #include "randMazeTypes.h"
->>>>>>> bc82859311a0152ea02c048f59453b7d9e6543b9
 #include "mazeCoords.h"
 #include "Puzzle2.h"
 #include "AiPathFindHeuristic.h"

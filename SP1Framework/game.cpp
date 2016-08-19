@@ -8,11 +8,8 @@
 #include <sstream>
 #include <cmath>
 #include <fstream>
-<<<<<<< HEAD
 #include <windows.h>
-=======
 #include <string>
->>>>>>> bc82859311a0152ea02c048f59453b7d9e6543b9
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -718,44 +715,7 @@ void renderToScreen()
     g_Console.flushBufferToConsole();
 }
 
-<<<<<<< HEAD
-	switch (maze)
-	{
-	case 0: myfile.open("map1.txt");
-		break;
-	case 1: myfile.open("map2.txt");
-		break;
-	case 2: myfile.open("map3.txt");
-		break;
-	case 3: myfile.open("map4.txt");
-		break;
-	case 4: myfile.open("map5.txt");
-		break;
-	case 5: myfile.open("map6.txt");
-		break;
-	case 6: myfile.open("map7.txt");
-		break;
-	case 7: myfile.open("map8.txt");
-		break;
-	case 8: myfile.open("map9.txt");
-		break;
-	}
-			
-	if (myfile.is_open())
-	{
-		while (std::getline(myfile, line))
-		{
-			mazeC.X = 1;
-			mazeC.Y = row;
-			row++;
-			g_Console.writeToBuffer(mazeC, line, 0x02);
-		}
-		myfile.close();
-	}
 
-}
-=======
->>>>>>> bc82859311a0152ea02c048f59453b7d9e6543b9
 void storeGlobalWall(char *map, int mazenumber)
 {
 

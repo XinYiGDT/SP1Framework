@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -84,10 +84,7 @@
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
-<<<<<<< HEAD
-=======
     <ClCompile Include="gametime.cpp" />
->>>>>>> bc82859311a0152ea02c048f59453b7d9e6543b9
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mazeCoords.cpp" />
     <ClCompile Include="Puzzle2.cpp" />
@@ -101,10 +98,7 @@
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
-<<<<<<< HEAD
-=======
     <ClInclude Include="gametimer.h" />
->>>>>>> bc82859311a0152ea02c048f59453b7d9e6543b9
     <ClInclude Include="mazeCoords.h" />
     <ClInclude Include="Puzzle2.h" />
     <ClInclude Include="randMazeTypes.h" />
