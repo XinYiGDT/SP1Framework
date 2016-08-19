@@ -77,25 +77,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIPathFind.cpp" />
     <ClCompile Include="AiPathFindHeuristic.cpp" />
     <ClCompile Include="CharacterMovement.cpp" />
     <ClCompile Include="distCharToAi.cpp" />
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="gametime.cpp" />
+>>>>>>> bc82859311a0152ea02c048f59453b7d9e6543b9
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mazeCoords.cpp" />
     <ClCompile Include="Puzzle2.cpp" />
+    <ClCompile Include="randMazeTypes.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIPathFind.h" />
     <ClInclude Include="AiPathFindHeuristic.h" />
     <ClInclude Include="CharacterMovement.h" />
     <ClInclude Include="distCharToAi.h" />
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
+<<<<<<< HEAD
+=======
+    <ClInclude Include="gametimer.h" />
+>>>>>>> bc82859311a0152ea02c048f59453b7d9e6543b9
     <ClInclude Include="mazeCoords.h" />
     <ClInclude Include="Puzzle2.h" />
+    <ClInclude Include="randMazeTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

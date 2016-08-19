@@ -1,5 +1,5 @@
 #include "distCharToAi.h"
-
+#include <cmath>
 double distCharToAi(short Ax, short Ay, short Bx, short By)
 {
 	double distance;

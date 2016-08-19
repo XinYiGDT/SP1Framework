@@ -2,10 +2,15 @@
 #define _GAME_H
 
 #include "Framework\timer.h"
+<<<<<<< HEAD
+=======
+#include "randMazeTypes.h"
+>>>>>>> bc82859311a0152ea02c048f59453b7d9e6543b9
 #include "mazeCoords.h"
 #include "Puzzle2.h"
 #include "AiPathFindHeuristic.h"
 #include "distCharToAi.h"
+#include "AIPathFind.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -58,5 +63,11 @@ void renderToScreen();      // dump the contents of the buffer to the screen, on
 void randMazeTypes(int maze, int row);// generates the map
 void renderAI();            // AI control
 void moveAI();
+
+void renderTime();//renders time
+
+void renderAI();            // AI control
+void moveAI();
+
 
 #endif // _GAME_H
