@@ -2,11 +2,12 @@
 #define _GAME_H
 
 #include "Framework\timer.h"
-
+#include "randMazeTypes.h"
 #include "mazeCoords.h"
 #include "Puzzle2.h"
 #include "AiPathFindHeuristic.h"
 #include "distCharToAi.h"
+#include "AIPathFind.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -62,6 +63,9 @@ void renderAI();            // AI control
 void moveAI();
 
 void renderTime();//renders time
+
+void renderAI();            // AI control
+void moveAI();
 
 
 #endif // _GAME_H

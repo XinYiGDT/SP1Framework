@@ -43,7 +43,7 @@ std::fstream myfile;
 
 //AIs
 SGameChar g_sAI;	//AIs
-COORD AIPrevious;
+SGameChar g_sAI2;
 double AItime = 0.0;
 
 // Game specific variables here
@@ -84,9 +84,13 @@ void init( void )
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
 
-	g_sAI.m_cLocation.X = g_Console.getConsoleSize().X / 5;
-	g_sAI.m_cLocation.Y = g_Console.getConsoleSize().Y / 5;
+	g_sAI.m_cLocation.X = 1;
+	g_sAI.m_cLocation.Y = 2;
 	g_sAI.m_bActive = true;
+
+	g_sAI2.m_cLocation.X = 50;
+	g_sAI2.m_cLocation.Y = 2;
+	g_sAI2.m_bActive = true;
 
 	
 }
@@ -659,47 +663,7 @@ void renderToScreen()
     // Writes the buffer to the console, hence you will see what you have written
     g_Console.flushBufferToConsole();
 }
-void randMazeTypes(int maze,int row)
-{
-	COORD mazeC;
-	std::string line;
-	std::fstream myfile;
 
-	switch (maze)
-	{
-	case 0: myfile.open("map1.txt");
-		break;
-	case 1: myfile.open("map2.txt");
-		break;
-	case 2: myfile.open("map3.txt");
-		break;
-	case 3: myfile.open("map4.txt");
-		break;
-	case 4: myfile.open("map5.txt");
-		break;
-	case 5: myfile.open("map6.txt");
-		break;
-	case 6: myfile.open("map7.txt");
-		break;
-	case 7: myfile.open("map8.txt");
-		break;
-	case 8: myfile.open("map9.txt");
-		break;
-	}
-			
-	if (myfile.is_open())
-	{
-		while (std::getline(myfile, line))
-		{
-			mazeC.X = 1;
-			mazeC.Y = row;
-			row++;
-			g_Console.writeToBuffer(mazeC, line, 0x05);
-		}
-		myfile.close();
-	}
-
-}
 void storeGlobalWall(char *map, int mazenumber)
 {
 
@@ -739,18 +703,24 @@ void renderAI()
 		AIColor = 0xCF;
 	}
 	g_Console.writeToBuffer(g_sAI.m_cLocation, (char)2, AIColor);
-
-	//char item;
-	//short Frame[152][2];
-	//for (int i = 0; i < 10; i++)
+	g_Console.writeToBuffer(g_sAI2.m_cLocation, (char)2, AIColor);
 }
 
-#include <vector>
-//Ignore this part first. I will put them into another file when i finish this
-//Please put new functions above this.
+
 void moveAI()
 {
 
-	
+	if (AItime == 0)
+		AItime = g_dElapsedTime;
+	else
+	{
+		if (g_dElapsedTime - AItime > 0.5)
+			AItime = 0;
+		return;
+	}
 
+	AIPathFind(&g_sAI);
+	AIPathFind(&g_sAI2);
+//End of void moveAI
 }
+
