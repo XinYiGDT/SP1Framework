@@ -82,7 +82,7 @@
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="isCollision.cpp" />
+    <ClCompile Include="gametime.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mazeCoords.cpp" />
     <ClCompile Include="Puzzle2.cpp" />
@@ -93,7 +93,7 @@
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="isCollision.h" />
+    <ClInclude Include="gametimer.h" />
     <ClInclude Include="mazeCoords.h" />
     <ClInclude Include="Puzzle2.h" />
   </ItemGroup>

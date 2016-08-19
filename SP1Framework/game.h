@@ -2,7 +2,7 @@
 #define _GAME_H
 
 #include "Framework\timer.h"
-#include "isCollision.h"
+
 #include "mazeCoords.h"
 #include "Puzzle2.h"
 #include "AiPathFindHeuristic.h"
@@ -60,5 +60,8 @@ void isCollision(SGameChar chara, SGameChar chara2); //players trigger
 void randMazeTypes(int maze, int row);// generates the map
 void renderAI();            // AI control
 void moveAI();
+
+void renderTime();//renders time
+
 
 #endif // _GAME_H
