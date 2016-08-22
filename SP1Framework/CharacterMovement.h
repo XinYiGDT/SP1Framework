@@ -1,3 +1,3 @@
 #include "game.h"
 
-//void characterMovement();
+void characterMovement(short direction);

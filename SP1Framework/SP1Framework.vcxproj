@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -86,9 +86,8 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gametime.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mazeCoords.cpp" />
     <ClCompile Include="Puzzle2.cpp" />
-    <ClCompile Include="randMazeTypes.cpp" />
+    <ClCompile Include="storeMazeMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPathFind.h" />
@@ -99,9 +98,8 @@
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gametimer.h" />
-    <ClInclude Include="mazeCoords.h" />
+    <ClInclude Include="storeMazeMap.h" />
     <ClInclude Include="Puzzle2.h" />
-    <ClInclude Include="randMazeTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

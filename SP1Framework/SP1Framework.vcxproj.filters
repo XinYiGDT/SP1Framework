@@ -1,25 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AiPathFindHeuristic.cpp" />
-    <ClCompile Include="distCharToAi.cpp" />
-    <ClCompile Include="Framework\console.cpp" />
-    <ClCompile Include="Framework\timer.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="mazeCoords.cpp" />
-    <ClCompile Include="Puzzle2.cpp" />
-    <ClCompile Include="CharacterMovement.cpp" />
+    <ClCompile Include="storeMazeMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AiPathFindHeuristic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterMovement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="distCharToAi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\console.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\timer.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AiPathFindHeuristic.h" />
-    <ClInclude Include="distCharToAi.h" />
-    <ClInclude Include="Framework\console.h" />
-    <ClInclude Include="Framework\timer.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="mazeCoords.h" />
-    <ClInclude Include="Puzzle2.h" />
-    <ClInclude Include="CharacterMovement.h" />
     <ClCompile Include="AiPathFindHeuristic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -50,9 +60,21 @@
     <ClCompile Include="AIPathFind.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="randMazeTypes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="CharacterMovement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AiPathFindHeuristic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="distCharToAi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AiPathFindHeuristic.h">
@@ -82,7 +104,13 @@
     <ClInclude Include="AIPathFind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="randMazeTypes.h">
+    <ClInclude Include="Framework\console.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\timer.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="storeMazeMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

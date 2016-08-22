@@ -2,10 +2,7 @@
 
 extern SGameChar g_sChar;
 extern SGameChar g_sChar2;
-extern char Wall1[80][40];
-extern char Wall2[80][40];
-extern char Wall3[80][40];
-extern char Frame[40][52];
+extern char MazeMap[40][80];
 
 void AIPathFind(SGameChar *OriginalAi)
 {
@@ -92,21 +89,20 @@ void AIPathFind(SGameChar *OriginalAi)
 				if (x == 0 && y == 0)
 					continue;
 
-				if (Wall1[AI.X + x][AI.Y + y] == '#' || Wall2[AI.X + x][AI.Y + y] == '#'
-					|| Wall3[AI.X + x][AI.Y + y] == '#' || Frame[AI.Y + y][AI.X + x] == 'M')//If there is a wall, ignore
+				if (MazeMap[AI.Y + y][AI.X + x] == 'M' || MazeMap[AI.Y + y][AI.X + x] == '#')//If there is a wall, ignore
 				{
 					continue;
 				}
 
 				//Prevent Corner cutting============================================
-				if (((x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1) || (x == 1 && y == 1))				//-- 0- +-
-					&& (Wall1[AI.X + x][AI.Y] == '#' || Wall2[AI.X + x][AI.Y] == '#' || Wall3[AI.X + x][AI.Y] == '#')		//-0 00 +0
-					|| ((x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1) || (x == 1 && y == 1))			//-+ 0+ ++
-					&& (Wall1[AI.X][AI.Y + y] == '#' || Wall2[AI.X][AI.Y + y] == '#' || Wall3[AI.X][AI.Y + y] == '#'))		//if there is wall adjacent to the tile,
-				{																											//in (x=0) OR (y=0), ignore
-					continue;																								//Eg. for (x-,y-)
-				}																											//check if (x,y-) OR (x-,y) have walls
-				//if true, ignore that diagonal
+				if (((x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1) || (x == 1 && y == 1)) && (MazeMap[AI.Y][AI.X + x] == '#')		//-- 0- +-
+					|| ((x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1) || (x == 1 && y == 1)) && (MazeMap[AI.Y + y][AI.X] == '#'))		//-0 00 +0
+				{																																			//-+ 0+ ++
+					continue;																																//if there is wall adjacent to the tile,
+				}																																			//in (x=0) OR (y=0), ignore
+				//Eg. for (x-,y-)
+				//check if (x,y-) OR (x-,y) have walls
+				//if true, ignore that diagonal	
 
 				if (AIPathList[AI.Y + y][AI.X + x][0] == 'c')//if neighbour is in closelist, ignore.
 					continue;
