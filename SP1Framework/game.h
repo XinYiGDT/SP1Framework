@@ -3,12 +3,12 @@
 
 #include "Framework\timer.h"
 #include "storeMazeMap.h"
-#include "Puzzle2.h"
 #include "AiPathFindHeuristic.h"
 #include "distCharToAi.h"
 #include "AIPathFind.h"
 #include "CharacterMovement.h"
 #include "score.h"
+#include "gameState.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -22,7 +22,8 @@ enum EKEYS
 	K_RIGHT,
 	K_ESCAPE,
 	K_SPACE,
-	K_COUNT
+	K_COUNT,
+	K_ENTER
 };
 
 // Enumeration for the different screen states
@@ -30,7 +31,9 @@ enum EGAMESTATES
 {
 	S_SPLASHSCREEN,
 	S_GAME,
-	S_COUNT
+	S_COUNT,
+	S_GAMEOVER,
+	S_SELECT
 };
 
 // struct for the game character
@@ -86,5 +89,7 @@ void moveAI();
 
 void renderSound();
 
+void gameOver();
+void selectionScreen();
 
 #endif // _GAME_H

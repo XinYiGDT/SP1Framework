@@ -40,7 +40,7 @@ void characterMovement(short direction)
 			g_sChar2.m_cLocation.Y--;
 		}
 	}
-	if (direction == 0)
+	if (direction == 0) //LEFT
 	{
 		g_sChar.m_cLocation.X--;
 		g_sChar2.m_cLocation.X--;
@@ -55,7 +55,7 @@ void characterMovement(short direction)
 			g_sChar2.m_cLocation.X++;
 		}
 	}
-	if (direction == 1)
+	if (direction == 1) //RIGHT
 	{
 		g_sChar.m_cLocation.X++;
 		g_sChar2.m_cLocation.X++;

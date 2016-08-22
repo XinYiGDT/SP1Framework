@@ -71,6 +71,8 @@ Console g_Console(80, 40, "SP1 Framework");
 //--------------------------------------------------------------
 void init(void)
 {
+	//PlaySound(TEXT("The Sense Of Me by Mud Flow.mp3"), NULL, SND_FILENAME);
+
 	// Set precision for floating point output
 	g_dElapsedTime = 0.0;
 	g_dBounceTime = 0.0;
@@ -133,6 +135,7 @@ void getInput(void)
 	g_abKeyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
 	g_abKeyPressed[K_SPACE] = isKeyPressed(VK_SPACE);
 	g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
+	g_abKeyPressed[K_ENTER] = isKeyPressed(VK_RETURN);
 }
 
 //--------------------------------------------------------------
@@ -159,6 +162,8 @@ void update(double dt)
 	{
 	case S_SPLASHSCREEN: splashScreenWait(); // game logic for the splash screen
 		break;
+	case S_SELECT: selectionScreen();
+		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
 	}
@@ -178,7 +183,11 @@ void render()
 	{
 	case S_SPLASHSCREEN: renderSplashScreen();
 		break;
+	case S_SELECT: selectionScreen();
+		break;
 	case S_GAME: renderGame();
+		break;
+	case S_GAMEOVER:  gameOver();
 		break;
 
 	}
@@ -188,8 +197,8 @@ void render()
 
 void splashScreenWait()    // waits for time to pass in splash screen
 {
-	if (g_dElapsedTime > 3.0) // wait for 3 seconds to switch to game mode, else do nothing
-		g_eGameState = S_GAME;
+	if (g_dElapsedTime > 2.0) // wait for 3 seconds to switch to game mode, else do nothing
+		g_eGameState = S_SELECT;
 }
 
 void gameplay()            // gameplay logic
@@ -219,13 +228,12 @@ void moveCharacter()
 	if (g_abKeyPressed[K_RIGHT])
 		characterMovement(B_RIGHT);//1
 
-
-	if (g_abKeyPressed[K_SPACE])
+	/*if (g_abKeyPressed[K_SPACE])
 	{
 		g_sChar.m_bActive = !g_sChar.m_bActive;
 		g_sChar2.m_bActive = !g_sChar2.m_bActive;
 		bSomethingHappened = true;
-	}
+	}*/
 
 	//when both character touches
 	if (g_sChar.m_cLocation.X == g_sChar2.m_cLocation.X && g_sChar.m_cLocation.Y == g_sChar2.m_cLocation.Y)
@@ -242,10 +250,10 @@ void moveCharacter()
 		while (checkloca)
 		{
 			randPointX = (rand() % 25) + 1;
-			randPointY = (rand() % 14) + 2;
+			randPointY = (rand() % 18) + 2;
 
-			randPointX2 = (rand() % 25) + 1;
-			randPointY2 = (rand() % 14) + 2;
+			randPointX2 = (rand() % 20) + 2;
+			randPointY2 = (rand() % 25) + 1;
 
 			if (MazeMap[randPointY][randPointX] != 'M' && MazeMap[randPointY][randPointX] != '#'
 				&& MazeMap[randPointY2][randPointX2] != 'M' && MazeMap[randPointY2][randPointX2] != '#')
@@ -287,7 +295,7 @@ void processUserInput()
 void clearScreen()
 {
 	// Clears the buffer with this colour attribute
-	g_Console.clearBuffer(0x1F);
+	g_Console.clearBuffer(0x09);
 }
 
 void renderSplashScreen()  // renders the splash screen
@@ -348,20 +356,14 @@ void renderCharacter()
 	// Draw the location of the character
 	WORD charColor = 0x0C;
 	WORD charColor2 = 0x0C;
-	//char chara1 = 2642;
-	//char chara2 = 2640;
 
 	if (g_sChar.m_bActive)
 	{
 		charColor = 0x0B;
-		//chara1 = 2642;
-
 	}
 	if (g_sChar2.m_bActive)
 	{
 		charColor2 = 0x0D;
-		//chara2 = 2640;
-
 	}
 	g_Console.writeToBuffer(g_sChar.m_cLocation, 0x95, charColor);
 	g_Console.writeToBuffer(g_sChar2.m_cLocation, 0x94, charColor2);
@@ -423,8 +425,6 @@ void moveAI()
 void renderSound()
 {
 	//sound
-	PlaySound(TEXT("The Sense Of Me by Mud Flow.mp3"), 0, SND_FILENAME | SND_LOOP | SND_ASYNC);
-
-
+	//PlaySound(TEXT("The Sense Of Me by Mud Flow.mp3"), 0, SND_FILENAME | SND_LOOP | SND_ASYNC);
 
 }
