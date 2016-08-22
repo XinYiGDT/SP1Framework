@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="storeMazeMap.cpp">
@@ -28,11 +28,8 @@
     <ClCompile Include="Framework\timer.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="score.cpp">
-=======
     <ClCompile Include="BotRoam.cpp">
->>>>>>> 3637be3945e6014133f15f8ec9ca3713991f5b1e
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

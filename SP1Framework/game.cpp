@@ -311,12 +311,8 @@ void renderGame()
 	renderAI();
 	renderCharacter();  // renders the character into the buffer
 	renderTime();
-<<<<<<< HEAD
 	score();
-
-=======
 	renderSound();
->>>>>>> 3637be3945e6014133f15f8ec9ca3713991f5b1e
 }
 
 void renderMap()
