@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClCompile Include="AIPathFind.cpp" />
     <ClCompile Include="AiPathFindHeuristic.cpp" />
+    <ClCompile Include="BotRoam.cpp" />
     <ClCompile Include="CharacterMovement.cpp" />
     <ClCompile Include="distCharToAi.cpp" />
     <ClCompile Include="Framework\console.cpp" />

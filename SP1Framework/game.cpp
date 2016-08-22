@@ -38,8 +38,8 @@ std::string line;
 std::fstream myfile;
 
 //AIs
-SGameChar g_sAI;	//AIs
-SGameChar g_sAI2;
+SGameBots g_sAI;	//AIs
+SGameBots g_sAI2;
 double AItime = 0.0;
 
 // Game specific variables here
@@ -242,8 +242,8 @@ void moveCharacter()
 			randPointX2 = (rand() % 25) + 1;
 			randPointY2 = (rand() % 14) + 2;
 
-			if (MazeMap[randPointY][randPointX] != 'M' || MazeMap[randPointY][randPointX] != '#'
-				&& MazeMap[randPointY2][randPointX2] != 'M' || MazeMap[randPointY2][randPointX2] != '#')
+			if (MazeMap[randPointY][randPointX] != 'M' && MazeMap[randPointY][randPointX] != '#'
+				&& MazeMap[randPointY2][randPointX2] != 'M' && MazeMap[randPointY2][randPointX2] != '#')
 			{
 
 				checkloca = false;
