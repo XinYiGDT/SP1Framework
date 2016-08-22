@@ -8,6 +8,7 @@
 #include "distCharToAi.h"
 #include "AIPathFind.h"
 #include "CharacterMovement.h"
+#include "score.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;

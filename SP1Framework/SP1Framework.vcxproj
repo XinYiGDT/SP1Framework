@@ -87,6 +87,7 @@
     <ClCompile Include="gametime.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Puzzle2.cpp" />
+    <ClCompile Include="score.cpp" />
     <ClCompile Include="storeMazeMap.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,7 @@
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gametimer.h" />
+    <ClInclude Include="score.h" />
     <ClInclude Include="storeMazeMap.h" />
     <ClInclude Include="Puzzle2.h" />
   </ItemGroup>

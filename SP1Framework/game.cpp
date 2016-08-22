@@ -21,6 +21,8 @@ short randRendmap3 = 0;//store the third maze type number
 char MazeMap[40][80];
 double timer = 0;
 double gameTime = 60;//Set time 1min
+double gameScore = 0; //Set starting score
+double addScore = 1;//Set score per sec
 
 COORD b;
 //short colX = 1;
@@ -257,12 +259,13 @@ void moveCharacter()
 		g_sChar2.m_cLocation.Y = randPointY2;
 
 		gameTime = 60;
+		addScore++;
 	}
 
 	if (bSomethingHappened)
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
-		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enougInfant Annihilatorh
 	}
 }
 void processUserInput()
@@ -299,6 +302,8 @@ void renderGame()
 	renderAI();
 	renderCharacter();  // renders the character into the buffer
 	renderTime();
+	score();
+
 }
 
 void renderMap()

@@ -28,6 +28,9 @@
     <ClCompile Include="Framework\timer.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="score.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AiPathFindHeuristic.cpp">
@@ -43,9 +46,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mazeCoords.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Puzzle2.cpp">
@@ -89,9 +89,6 @@
     <ClInclude Include="gametimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mazeCoords.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Puzzle2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -111,6 +108,9 @@
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="storeMazeMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
