@@ -1,4 +1,5 @@
 #include "storeMazeMap.h"
+#include "Framework\console.h"
 #include <fstream>
 #include <string>
 #include <iomanip>
@@ -8,6 +9,8 @@ extern short randRendmap1;
 extern short randRendmap2;
 extern short randRendmap3;
 extern bool rendmapbool;
+extern Console g_Console;
+
 //extern short colX;
 //extern short rowY;
 short colX = 1;
@@ -106,7 +109,6 @@ void mazeCoords(int mazetype, int mazenumber)
 }
 void openMazeType(short mazeNum)
 {
-
 	switch (mazeNum)
 	{
 	case 0: myfile.open("map1.txt");

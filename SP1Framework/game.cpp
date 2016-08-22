@@ -25,14 +25,19 @@ double gameScore = 0; //Set starting score
 double addScore = 1;//Set score per sec
 
 COORD b;
-//short colX = 1;
-//short rowY = 2;
 
+//Positions
 short randPointX;
 short randPointY;
 
 short randPointX2;
 short randPointY2;
+
+short AIpositionX = 1;
+short AIpositionY = 25;
+
+short AIpositionX2 = 50;
+short AIpositionY2 = 2;
 
 bool checkloca = false;
 
@@ -40,8 +45,8 @@ std::string line;
 std::fstream myfile;
 
 //AIs
-SGameChar g_sAI;	//AIs
-SGameChar g_sAI2;
+SGameBots g_sAI;	
+SGameBots g_sAI2;
 double AItime = 0.0;
 
 // Game specific variables here
@@ -66,7 +71,6 @@ Console g_Console(80, 40, "SP1 Framework");
 //--------------------------------------------------------------
 void init(void)
 {
-
 	// Set precision for floating point output
 	g_dElapsedTime = 0.0;
 	g_dBounceTime = 0.0;
@@ -84,16 +88,15 @@ void init(void)
 	// sets the width, height and the font name to use in the console
 	g_Console.setConsoleFont(0, 16, L"Consolas");
 
-	g_sAI.m_cLocation.X = 1;
-	g_sAI.m_cLocation.Y = 2;
+	g_sAI.m_cLocation.X = AIpositionX;
+	g_sAI.m_cLocation.Y = AIpositionY;
 	g_sAI.m_bActive = true;
 
-	g_sAI2.m_cLocation.X = 50;
-	g_sAI2.m_cLocation.Y = 2;
+	g_sAI2.m_cLocation.X = AIpositionX2;
+	g_sAI2.m_cLocation.Y = AIpositionY2;
 	g_sAI2.m_bActive = true;
 
 	storeMazeMap();
-
 }
 
 //--------------------------------------------------------------
@@ -244,8 +247,8 @@ void moveCharacter()
 			randPointX2 = (rand() % 25) + 1;
 			randPointY2 = (rand() % 14) + 2;
 
-			if (MazeMap[randPointY][randPointX] != 'M' || MazeMap[randPointY][randPointX] != '#'
-				&& MazeMap[randPointY2][randPointX2] != 'M' || MazeMap[randPointY2][randPointX2] != '#')
+			if (MazeMap[randPointY][randPointX] != 'M' && MazeMap[randPointY][randPointX] != '#'
+				&& MazeMap[randPointY2][randPointX2] != 'M' && MazeMap[randPointY2][randPointX2] != '#')
 			{
 
 				checkloca = false;
@@ -257,6 +260,12 @@ void moveCharacter()
 
 		g_sChar2.m_cLocation.X = randPointX2;
 		g_sChar2.m_cLocation.Y = randPointY2;
+
+		g_sAI.m_cLocation.X = AIpositionX;
+		g_sAI.m_cLocation.Y = AIpositionY;
+
+		g_sAI2.m_cLocation.X = AIpositionX2;
+		g_sAI2.m_cLocation.Y = AIpositionY2;
 
 		gameTime = 60;
 		addScore++;
@@ -302,8 +311,12 @@ void renderGame()
 	renderAI();
 	renderCharacter();  // renders the character into the buffer
 	renderTime();
+<<<<<<< HEAD
 	score();
 
+=======
+	renderSound();
+>>>>>>> 3637be3945e6014133f15f8ec9ca3713991f5b1e
 }
 
 void renderMap()
@@ -319,8 +332,18 @@ void renderMap()
 			c.X = bCol;
 			c.Y = bRow;
 
-			g_Console.writeToBuffer(c, pix, 0x0F);
-
+			if (MazeMap[bRow][bCol] == 'M')
+			{
+				g_Console.writeToBuffer(c, pix, 0xFF);
+			}
+			else if (MazeMap[bRow][bCol] == '#')
+			{
+				g_Console.writeToBuffer(c, pix, 0x22);
+			}
+			else
+			{
+				g_Console.writeToBuffer(c, pix, 0x09);
+			}
 		}
 	}
 }
@@ -401,3 +424,11 @@ void moveAI()
 	//End of void moveAI
 }
 
+void renderSound()
+{
+	//sound
+	PlaySound(TEXT("The Sense Of Me by Mud Flow.mp3"), 0, SND_FILENAME | SND_LOOP | SND_ASYNC);
+
+
+
+}

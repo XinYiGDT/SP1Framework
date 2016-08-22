@@ -84,5 +84,7 @@ void renderTime();//renders time
 void renderAI();            // AI control
 void moveAI();
 
+void renderSound();
+
 
 #endif // _GAME_H

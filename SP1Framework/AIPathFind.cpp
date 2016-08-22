@@ -4,7 +4,7 @@ extern SGameChar g_sChar;
 extern SGameChar g_sChar2;
 extern char MazeMap[40][80];
 
-void AIPathFind(SGameChar *OriginalAi)
+void AIPathFind(struct SGameBots *OriginalAi)
 {
 	COORD AI;
 
