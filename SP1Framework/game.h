@@ -51,13 +51,19 @@ enum BOTSDIRECTION
 	B_UP,
 	B_DOWN
 };
+
 struct SGameBots
 {
 	COORD m_cLocation;
-	COORD g_bRoamArea;//game bot roam area. checks if location is more than g_bRoamArea.X or g_bRoamArea.Y
+	COORD g_bRoamAreaA;//game bot roam area. checks if location is more than g_bRoamArea.X or g_bRoamArea.Y
+	COORD g_bRoamAreaB;
 	BOTSDIRECTION g_bDirection;
+	bool PathfindToChar;
+	COORD PathfindCoord;
 	bool  m_bActive;
 };
+
+
 
 
 void init(void);      // initialize your variables, allocate memory, etc

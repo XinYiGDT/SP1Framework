@@ -4,7 +4,7 @@ extern SGameChar g_sChar;
 extern SGameChar g_sChar2;
 extern char MazeMap[40][80];
 
-void AIPathFind(struct SGameBots *OriginalAi)
+void AIPathFind(struct SGameBots *OriginalAi, short targetXCoord, short targetYCoord)
 {
 	COORD AI;
 
@@ -24,19 +24,9 @@ void AIPathFind(struct SGameBots *OriginalAi)
 	AI.X = OriginalAi->m_cLocation.X;
 	AI.Y = OriginalAi->m_cLocation.Y;
 
-	distChar1 = distCharToAi(OriginalAi->m_cLocation.X, OriginalAi->m_cLocation.Y, g_sChar.m_cLocation.X, g_sChar.m_cLocation.Y);
-	distChar2 = distCharToAi(OriginalAi->m_cLocation.X, OriginalAi->m_cLocation.Y, g_sChar2.m_cLocation.X, g_sChar2.m_cLocation.Y);
 
-	if (distChar1 < distChar2)
-	{
-		heuristictargetX = g_sChar.m_cLocation.X;
-		heuristictargetY = g_sChar.m_cLocation.Y;
-	}
-	else
-	{
-		heuristictargetX = g_sChar2.m_cLocation.X;
-		heuristictargetY = g_sChar2.m_cLocation.Y;
-	}
+	heuristictargetX = targetXCoord;
+	heuristictargetY = targetYCoord;
 
 	AIPathList[AI.Y][AI.X][0] = 'o';//[0]close/open, [1]G [2]H [3]F    'o' == 111, 'c' == 99
 	AIPathList[AI.Y][AI.X][1] = 0;

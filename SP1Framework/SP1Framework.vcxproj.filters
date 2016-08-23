@@ -1,33 +1,108 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AIPathFind.cpp" />
-    <ClCompile Include="AiPathFindHeuristic.cpp" />
-    <ClCompile Include="BotRoam.cpp" />
-    <ClCompile Include="CharacterMovement.cpp" />
-    <ClCompile Include="distCharToAi.cpp" />
-    <ClCompile Include="Framework\console.cpp" />
-    <ClCompile Include="Framework\timer.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="gametime.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Puzzle2.cpp" />
-    <ClCompile Include="score.cpp" />
-    <ClCompile Include="storeMazeMap.cpp" />
-    <ClCompile Include="gameState.cpp" />
+    <ClCompile Include="CharacterMovement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gametime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Puzzle2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="score.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="storeMazeMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIPathFind.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AiPathFindHeuristic.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="BotRoam.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="distCharToAi.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\console.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\timer.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="AiPresenceArea.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AiViewRange.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIPathFind.h" />
-    <ClInclude Include="AiPathFindHeuristic.h" />
-    <ClInclude Include="CharacterMovement.h" />
-    <ClInclude Include="distCharToAi.h" />
-    <ClInclude Include="Framework\console.h" />
-    <ClInclude Include="Framework\timer.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="gametimer.h" />
-    <ClInclude Include="score.h" />
-    <ClInclude Include="storeMazeMap.h" />
-    <ClInclude Include="Puzzle2.h" />
-    <ClInclude Include="gameState.h" />
+    <ClInclude Include="AIPathFind.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AiPathFindHeuristic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterMovement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="distCharToAi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gametimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Puzzle2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\console.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="storeMazeMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\timer.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{c990ef7e-6a49-49a1-86cb-5cd65c85d5bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{1729da1f-7d15-40dd-9ef9-c329eb934d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework">
+      <UniqueIdentifier>{609729ae-235c-4306-a5c9-6abb6e46fb65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework">
+      <UniqueIdentifier>{f68eeaa3-f144-49f9-acf2-0f3c9f34c679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI">
+      <UniqueIdentifier>{2054e390-4064-4ccb-803c-e97136c6792d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
