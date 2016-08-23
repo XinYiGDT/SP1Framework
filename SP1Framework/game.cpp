@@ -11,6 +11,9 @@
 #include <windows.h>
 #include <string>
 
+#define numOfAis 2
+
+
 double  g_dElapsedTime;
 double  g_dDeltaTime;
 bool    g_abKeyPressed[K_COUNT];
@@ -45,9 +48,9 @@ std::string line;
 std::fstream myfile;
 
 //AIs
-SGameBots g_sAI;	
-SGameBots g_sAI2;
+SGameBots gameAIs[numOfAis];
 double AItime = 0.0;
+
 
 // Game specific variables here
 SGameChar   g_sChar;
@@ -90,13 +93,24 @@ void init(void)
 	// sets the width, height and the font name to use in the console
 	g_Console.setConsoleFont(0, 16, L"Consolas");
 
-	g_sAI.m_cLocation.X = AIpositionX;
-	g_sAI.m_cLocation.Y = AIpositionY;
-	g_sAI.m_bActive = true;
+	//AIs==========================
+	gameAIs[0].m_cLocation.X = 1;
+	gameAIs[0].m_cLocation.Y = 2;
+	gameAIs[0].g_bRoamAreaA.X = 0;
+	gameAIs[0].g_bRoamAreaA.Y = 1;
+	gameAIs[0].g_bRoamAreaB.X = 25;
+	gameAIs[0].g_bRoamAreaB.Y = 13;
+	gameAIs[0].m_bActive = true;
+	gameAIs[0].PathfindToChar = false;
 
-	g_sAI2.m_cLocation.X = AIpositionX2;
-	g_sAI2.m_cLocation.Y = AIpositionY2;
-	g_sAI2.m_bActive = true;
+	gameAIs[1].m_cLocation.X = 50;
+	gameAIs[1].m_cLocation.Y = 2;
+	gameAIs[1].g_bRoamAreaA.X = 25;
+	gameAIs[1].g_bRoamAreaA.Y = 1;
+	gameAIs[1].g_bRoamAreaB.X = 52;
+	gameAIs[1].g_bRoamAreaB.Y = 13;
+	gameAIs[1].m_bActive = true;
+	gameAIs[1].PathfindToChar = false;
 
 	storeMazeMap();
 }
@@ -269,11 +283,11 @@ void moveCharacter()
 		g_sChar2.m_cLocation.X = randPointX2;
 		g_sChar2.m_cLocation.Y = randPointY2;
 
-		g_sAI.m_cLocation.X = AIpositionX;
-		g_sAI.m_cLocation.Y = AIpositionY;
+		gameAIs[0].m_cLocation.X = AIpositionX;
+		gameAIs[0].m_cLocation.Y = AIpositionY;
 
-		g_sAI2.m_cLocation.X = AIpositionX2;
-		g_sAI2.m_cLocation.Y = AIpositionY2;
+		gameAIs[1].m_cLocation.X = AIpositionX2;
+		gameAIs[1].m_cLocation.Y = AIpositionY2;
 
 		gameTime = 60;
 		addScore++;
@@ -395,13 +409,16 @@ void renderToScreen()
 
 void renderAI()
 {
-	WORD AIColor = 0xFF;
-	if (g_sAI.m_bActive)
+	WORD AIColor = 0x9F;
+	WORD AIColorPathFind = 0xCF;
+
+	for (int i = 0; i < numOfAis; ++i)
 	{
-		AIColor = 0xCF;
+		if (gameAIs[i].m_bActive == true)
+			g_Console.writeToBuffer(gameAIs[i].m_cLocation, (char)2, AIColor);
+		else
+			g_Console.writeToBuffer(gameAIs[i].m_cLocation, (char)2, AIColorPathFind);
 	}
-	g_Console.writeToBuffer(g_sAI.m_cLocation, (char)2, AIColor);
-	g_Console.writeToBuffer(g_sAI2.m_cLocation, (char)2, AIColor);
 }
 
 
@@ -417,8 +434,32 @@ void moveAI()
 		return;
 	}
 
-	AIPathFind(&g_sAI);
-	AIPathFind(&g_sAI2);
+
+	for (int i = 0; i < numOfAis; ++i)
+	{
+		AiViewRange(&gameAIs[i]);					//Check if there is any Char in the view range. If there is, PathfindToChar will be set to true
+		if (gameAIs[i].PathfindToChar == false)		//If there is no Pathfinding
+		{
+			BotRoam(&gameAIs[i]);					//Let the Ai Roam around
+			AiPresenceArea(&gameAIs[i]);			//Check if the Ai exits the Roam area. If true, get them back to their respective areas
+			gameAIs[i].m_bActive = true;
+		}
+
+		else if (gameAIs[i].PathfindToChar == true)	//If there is Pathfinding
+		{
+			gameAIs[i].m_bActive = false;			//Changes colour
+			AIPathFind(&gameAIs[i], gameAIs[i].PathfindCoord.X, gameAIs[i].PathfindCoord.Y); //Pathfinds to coordinate
+			if (gameAIs[i].m_cLocation.X == gameAIs[i].PathfindCoord.X && gameAIs[i].m_cLocation.Y == gameAIs[i].PathfindCoord.Y)
+				gameAIs[i].PathfindToChar = false;	//If Ai reaches Coordinates, set to false and continue roaming in another frame
+
+			AiPresenceArea(&gameAIs[i]);			//Checks and ensures Ai stays in roam area.
+		}
+	}
+
+	//This Allows the Ai to roam and have a view range of 10m in a cone radius of about 52degrees
+	//If Char enters the view range, the Ai will store the coordinates of the last seen of Char and pathfind to that location
+	//If Char exits the viewrange when pathfinding is active, Ai will still go to the last seen location and roam
+
 	//End of void moveAI
 }
 
