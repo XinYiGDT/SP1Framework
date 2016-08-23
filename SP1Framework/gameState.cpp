@@ -12,41 +12,31 @@ extern double  g_dElapsedTime;
 extern double  g_dBounceTime;
 extern Console g_Console;
 
-extern string line;
+string line2;
 extern fstream myfile;
 
-char Name[40][80];
+extern char Name[40][80];
 int nRow = 1;
 
 int pressed = 0;
 
-void renderSplashScreen()  // renders the splash screen
+void openLogo()
 {
-	COORD c = g_Console.getConsoleSize();
-	/*c.Y /= 3;
-	c.X = c.X / 2 - 9;
-	g_Console.writeToBuffer(c, "A game in 3 seconds", 0x03);
-	c.Y += 1;
-	c.X = g_Console.getConsoleSize().X / 2 - 20;
-	g_Console.writeToBuffer(c, "Press <Space> to change character colour", 0x09);
-	c.Y += 1;
-	c.X = g_Console.getConsoleSize().X / 2 - 9;
-	g_Console.writeToBuffer(c, "Press 'Esc' to quit", 0x09);*/
+	myfile.open("name3.txt");
 
-	myfile.open("name.txt");
-
+	//reading
 	if (myfile.is_open())
 	{
-		while (getline(myfile, line))
+		while (getline(myfile, line2))
 		{
 
-			for (int i = 0; i < 52; i++)
+			for (int i = 0; i < 80; i++)
 			{
-				if (line[i] == '|')
+				if (line2[i] == '|')
 				{
 					Name[nRow][i] = '|';
 				}
-				else if (line[i] == '_')
+				else if (line2[i] == '_')
 				{
 					Name[nRow][i] = '_';
 				}
@@ -62,12 +52,54 @@ void renderSplashScreen()  // renders the splash screen
 	}
 }
 
+void renderSplashScreen()  // renders the splash screen
+{
+	COORD c = g_Console.getConsoleSize();
+	c.Y /= 3;
+	c.X = c.X / 2 - 9;
+	g_Console.writeToBuffer(c, "A game in 3 seconds", 0x03);
+	c.Y += 1;
+	c.X = g_Console.getConsoleSize().X / 2 - 20;
+	g_Console.writeToBuffer(c, "Press <Space> to change character colour", 0x09);
+	c.Y += 1;
+	c.X = g_Console.getConsoleSize().X / 2 - 9;
+	g_Console.writeToBuffer(c, "Press 'Esc' to quit", 0x09);
+
+
+}
+
+
+
 void selectionScreen()
 {
 	string Menu[3] = { "Play Game", "Mini Puzzle Game", "Exit game" };
 	COORD c = g_Console.getConsoleSize();
+	COORD b;
 	c.Y /= 3;
 	c.X = c.X / 2 - 9;
+
+	//Printing it
+	for (int bRow = 1; bRow < 27; bRow++)
+	{
+		for (int bCol = 0; bCol < 80; bCol++)
+		{
+			char pix;
+			pix = Name[bRow][bCol];
+			b.X = bCol;
+			b.Y = bRow;
+
+			if (Name[bRow][bCol] != ' ')
+			{
+				g_Console.writeToBuffer(b, pix, 0xF3);
+			}
+			else
+			{
+				g_Console.writeToBuffer(b, pix, 0x88);
+			}
+		}
+	}
+
+	
 
 	switch (pressed)
 	{

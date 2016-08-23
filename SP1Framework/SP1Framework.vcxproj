@@ -90,7 +90,6 @@
     <ClCompile Include="gameState.cpp" />
     <ClCompile Include="gametime.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Puzzle2.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="storeMazeMap.cpp" />
   </ItemGroup>
@@ -106,7 +105,6 @@
     <ClInclude Include="gametimer.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="storeMazeMap.h" />
-    <ClInclude Include="Puzzle2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

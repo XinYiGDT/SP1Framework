@@ -27,6 +27,8 @@ double gameTime = 60;//Set time 1min
 double gameScore = 0; //Set starting score
 double addScore = 1;//Set score per sec
 
+char Name[40][80];
+
 COORD b;
 
 //Positions
@@ -113,6 +115,7 @@ void init(void)
 	gameAIs[1].PathfindToChar = false;
 
 	storeMazeMap();
+	openLogo();
 }
 
 //--------------------------------------------------------------
