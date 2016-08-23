@@ -1,5 +1,6 @@
 #include "game.h"
 
-void selectionScreen();
+void renderSelectionScreen();
 void openLogo();
 void renderSplashScreen();
+void selectionScreen();

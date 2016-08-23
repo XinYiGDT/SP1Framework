@@ -96,23 +96,7 @@ void init(void)
 	g_Console.setConsoleFont(0, 16, L"Consolas");
 
 	//AIs==========================
-	gameAIs[0].m_cLocation.X = 1;
-	gameAIs[0].m_cLocation.Y = 2;
-	gameAIs[0].g_bRoamAreaA.X = 0;
-	gameAIs[0].g_bRoamAreaA.Y = 1;
-	gameAIs[0].g_bRoamAreaB.X = 25;
-	gameAIs[0].g_bRoamAreaB.Y = 13;
-	gameAIs[0].m_bActive = true;
-	gameAIs[0].PathfindToChar = false;
-
-	gameAIs[1].m_cLocation.X = 50;
-	gameAIs[1].m_cLocation.Y = 2;
-	gameAIs[1].g_bRoamAreaA.X = 25;
-	gameAIs[1].g_bRoamAreaA.Y = 1;
-	gameAIs[1].g_bRoamAreaB.X = 52;
-	gameAIs[1].g_bRoamAreaB.Y = 13;
-	gameAIs[1].m_bActive = true;
-	gameAIs[1].PathfindToChar = false;
+	Aiinit();
 
 	storeMazeMap();
 	openLogo();
@@ -200,7 +184,7 @@ void render()
 	{
 	case S_SPLASHSCREEN: renderSplashScreen();
 		break;
-	case S_SELECT: selectionScreen();
+	case S_SELECT: renderSelectionScreen();
 		break;
 	case S_GAME: renderGame();
 		break;
@@ -258,10 +242,6 @@ void moveCharacter()
 
 		rendmapbool = false;
 
-
-		//		colX = 1;
-		//		rowY = 2;
-
 		storeMazeMap();
 
 		while (checkloca)
@@ -286,11 +266,7 @@ void moveCharacter()
 		g_sChar2.m_cLocation.X = randPointX2;
 		g_sChar2.m_cLocation.Y = randPointY2;
 
-		gameAIs[0].m_cLocation.X = AIpositionX;
-		gameAIs[0].m_cLocation.Y = AIpositionY;
-
-		gameAIs[1].m_cLocation.X = AIpositionX2;
-		gameAIs[1].m_cLocation.Y = AIpositionY2;
+		Aiinit();
 
 		gameTime = 60;
 		addScore++;
@@ -439,6 +415,7 @@ void moveAI()
 		{
 			gameAIs[i].m_bActive = false;			//Changes colour
 			AIPathFind(&gameAIs[i], gameAIs[i].PathfindCoord.X, gameAIs[i].PathfindCoord.Y); //Pathfinds to coordinate
+
 			if (gameAIs[i].m_cLocation.X == gameAIs[i].PathfindCoord.X && gameAIs[i].m_cLocation.Y == gameAIs[i].PathfindCoord.Y)
 				gameAIs[i].PathfindToChar = false;	//If Ai reaches Coordinates, set to false and continue roaming in another frame
 

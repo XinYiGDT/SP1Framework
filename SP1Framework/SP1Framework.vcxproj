@@ -77,6 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIinit.cpp" />
     <ClCompile Include="AIPathFind.cpp" />
     <ClCompile Include="AiPathFindHeuristic.cpp" />
     <ClCompile Include="AiPresenceArea.cpp" />

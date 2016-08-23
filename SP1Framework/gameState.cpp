@@ -30,15 +30,15 @@ void openLogo()
 		while (getline(myfile, line2))
 		{
 
-			for (int i = 0; i < 80; i++)
+			for (int i = 0; i < 70; i++)
 			{
-				if (line2[i] == '|')
+				if (line2[i] == '>')
 				{
-					Name[nRow][i] = '|';
+					Name[nRow][i] = '>';
 				}
-				else if (line2[i] == '_')
+				else if (line2[i] == '<')
 				{
-					Name[nRow][i] = '_';
+					Name[nRow][i] = '<';
 				}
 				else
 				{
@@ -68,20 +68,18 @@ void renderSplashScreen()  // renders the splash screen
 
 }
 
-
-
-void selectionScreen()
+void renderSelectionScreen()
 {
 	string Menu[3] = { "Play Game", "Mini Puzzle Game", "Exit game" };
 	COORD c = g_Console.getConsoleSize();
-	COORD b;
+	COORD b = g_Console.getConsoleSize();;
 	c.Y /= 3;
 	c.X = c.X / 2 - 9;
 
 	//Printing it
-	for (int bRow = 1; bRow < 27; bRow++)
+	for (int bRow = 1; bRow < 9; bRow++)
 	{
-		for (int bCol = 0; bCol < 80; bCol++)
+		for (int bCol = 0; bCol < 70; bCol++)
 		{
 			char pix;
 			pix = Name[bRow][bCol];
@@ -99,41 +97,25 @@ void selectionScreen()
 		}
 	}
 
-	
+	g_Console.writeToBuffer(c, Menu[0], (pressed == 0 ? 0x03 : 0x09));
+	c.Y += 1;
+	g_Console.writeToBuffer(c, Menu[1], (pressed == 1 ? 0x03 : 0x09));
+	c.Y += 1;
+	g_Console.writeToBuffer(c, Menu[2], (pressed == 2 ? 0x03 : 0x09));
 
-	switch (pressed)
+
+}
+
+void selectionScreen()
+{
+
+	if (pressed < 0)
 	{
-	case 0:
-		g_Console.writeToBuffer(c, Menu[0], 0x03);
-		c.Y += 1;
-		g_Console.writeToBuffer(c, Menu[1], 0x09);
-		c.Y += 1;
-		g_Console.writeToBuffer(c, Menu[2], 0x09);
-		break;
-	case 1:
-		g_Console.writeToBuffer(c, Menu[0], 0x09);
-		c.Y += 1;
-		g_Console.writeToBuffer(c, Menu[1], 0x03);
-		c.Y += 1;
-		g_Console.writeToBuffer(c, Menu[2], 0x09);
-		break;
-	case 2:
-		g_Console.writeToBuffer(c, Menu[0], 0x09);
-		c.Y += 1;
-		g_Console.writeToBuffer(c, Menu[1], 0x09);
-		c.Y += 1;
-		g_Console.writeToBuffer(c, Menu[2], 0x03);
-		break;
-	default:
-		if (pressed < 0)
-		{
-			pressed = 2;
-		}
-		else if (pressed > 2)
-		{
-			pressed = 0;
-		}
-		break;
+		pressed = 2;
+	}
+	else if (pressed > 2)
+	{
+		pressed = 0;
 	}
 
 	if (g_dBounceTime > g_dElapsedTime)
@@ -174,7 +156,7 @@ void selectionScreen()
 	if (bSomethingHappened)
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
-		g_dBounceTime = g_dElapsedTime + 0.325; // 125ms should be enougInfant Annihilatorh
+		g_dBounceTime = g_dElapsedTime + 0.325; // 125ms should be enough
 	}
 }
 
