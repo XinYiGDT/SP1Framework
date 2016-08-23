@@ -36,7 +36,6 @@ void AiViewRange(struct SGameBots *Ai)
 	double distChar2 = distCharToAi(Ai->m_cLocation.X, Ai->m_cLocation.Y, g_sChar2.m_cLocation.X, g_sChar2.m_cLocation.Y);
 
 
-
 	for (int i = 0; i < 2; ++i)
 	{
 		int targetVec[2];
@@ -63,9 +62,6 @@ void AiViewRange(struct SGameBots *Ai)
 			if (result <= 26.56505118)
 			{
 				Char1inView = true;
-				Ai->PathfindToChar = true;
-				Ai->PathfindCoord.X = g_sChar.m_cLocation.X;
-				Ai->PathfindCoord.Y = g_sChar.m_cLocation.Y;
 			}
 			else
 			{
@@ -75,7 +71,7 @@ void AiViewRange(struct SGameBots *Ai)
 		else
 		{
 			targetVec[0] = (g_sChar2.m_cLocation.X - Ai->m_cLocation.X);
-			targetVec[1] = (g_sChar2.m_cLocation.X - Ai->m_cLocation.X);
+			targetVec[1] = (g_sChar2.m_cLocation.Y - Ai->m_cLocation.Y);
 
 			if (distChar2 > 10)
 			{
@@ -92,9 +88,6 @@ void AiViewRange(struct SGameBots *Ai)
 			if (result <= 26.56505118)
 			{
 				Char2inView = true;
-				Ai->PathfindToChar = true;
-				Ai->PathfindCoord.X = g_sChar2.m_cLocation.X;
-				Ai->PathfindCoord.Y = g_sChar2.m_cLocation.Y;
 			}
 			else
 			{
@@ -102,6 +95,34 @@ void AiViewRange(struct SGameBots *Ai)
 			}
 		}
 
+	}
+
+	if (Char1inView == true && Char2inView == false)
+	{
+		Ai->PathfindToChar = true;
+		Ai->PathfindCoord.X = g_sChar.m_cLocation.X;
+		Ai->PathfindCoord.Y = g_sChar.m_cLocation.Y;
+	}
+	else if (Char1inView == false && Char2inView == true)
+	{
+		Ai->PathfindToChar = true;
+		Ai->PathfindCoord.X = g_sChar2.m_cLocation.X;
+		Ai->PathfindCoord.Y = g_sChar2.m_cLocation.Y;
+	}
+	else if (Char1inView == true && Char2inView == true)
+	{
+		if (distChar1 <= distChar2)	//If char1 is nearer, find char1
+		{
+			Ai->PathfindToChar = true;
+			Ai->PathfindCoord.X = g_sChar.m_cLocation.X;
+			Ai->PathfindCoord.Y = g_sChar.m_cLocation.Y;
+		}
+		else						//else if char2 is nearer, find char2
+		{
+			Ai->PathfindToChar = true;
+			Ai->PathfindCoord.X = g_sChar2.m_cLocation.X;
+			Ai->PathfindCoord.Y = g_sChar2.m_cLocation.Y;
+		}
 	}
 
 }

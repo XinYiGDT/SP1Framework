@@ -94,23 +94,7 @@ void init(void)
 	g_Console.setConsoleFont(0, 16, L"Consolas");
 
 	//AIs==========================
-	gameAIs[0].m_cLocation.X = 1;
-	gameAIs[0].m_cLocation.Y = 2;
-	gameAIs[0].g_bRoamAreaA.X = 0;
-	gameAIs[0].g_bRoamAreaA.Y = 1;
-	gameAIs[0].g_bRoamAreaB.X = 25;
-	gameAIs[0].g_bRoamAreaB.Y = 13;
-	gameAIs[0].m_bActive = true;
-	gameAIs[0].PathfindToChar = false;
-
-	gameAIs[1].m_cLocation.X = 50;
-	gameAIs[1].m_cLocation.Y = 2;
-	gameAIs[1].g_bRoamAreaA.X = 25;
-	gameAIs[1].g_bRoamAreaA.Y = 1;
-	gameAIs[1].g_bRoamAreaB.X = 52;
-	gameAIs[1].g_bRoamAreaB.Y = 13;
-	gameAIs[1].m_bActive = true;
-	gameAIs[1].PathfindToChar = false;
+	Aiinit();
 
 	storeMazeMap();
 }
@@ -283,11 +267,12 @@ void moveCharacter()
 		g_sChar2.m_cLocation.X = randPointX2;
 		g_sChar2.m_cLocation.Y = randPointY2;
 
-		gameAIs[0].m_cLocation.X = AIpositionX;
+		Aiinit();
+/*		gameAIs[0].m_cLocation.X = AIpositionX;
 		gameAIs[0].m_cLocation.Y = AIpositionY;
 
 		gameAIs[1].m_cLocation.X = AIpositionX2;
-		gameAIs[1].m_cLocation.Y = AIpositionY2;
+		gameAIs[1].m_cLocation.Y = AIpositionY2;*/
 
 		gameTime = 60;
 		addScore++;
