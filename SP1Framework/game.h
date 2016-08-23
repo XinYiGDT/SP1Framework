@@ -90,6 +90,6 @@ void moveAI();
 void renderSound();
 
 void gameOver();
-void selectionScreen();
+
 
 #endif // _GAME_H

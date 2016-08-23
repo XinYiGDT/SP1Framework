@@ -1,5 +1,6 @@
 #include "gameState.h"
 #include "Framework\console.h"
+#include <fstream>
 #include <string>
 
 using namespace std;
@@ -11,8 +12,55 @@ extern double  g_dElapsedTime;
 extern double  g_dBounceTime;
 extern Console g_Console;
 
+extern string line;
+extern fstream myfile;
+
+char Name[40][80];
+int nRow = 1;
+
 int pressed = 0;
 
+void renderSplashScreen()  // renders the splash screen
+{
+	COORD c = g_Console.getConsoleSize();
+	/*c.Y /= 3;
+	c.X = c.X / 2 - 9;
+	g_Console.writeToBuffer(c, "A game in 3 seconds", 0x03);
+	c.Y += 1;
+	c.X = g_Console.getConsoleSize().X / 2 - 20;
+	g_Console.writeToBuffer(c, "Press <Space> to change character colour", 0x09);
+	c.Y += 1;
+	c.X = g_Console.getConsoleSize().X / 2 - 9;
+	g_Console.writeToBuffer(c, "Press 'Esc' to quit", 0x09);*/
+
+	myfile.open("name.txt");
+
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line))
+		{
+
+			for (int i = 0; i < 52; i++)
+			{
+				if (line[i] == '|')
+				{
+					Name[nRow][i] = '|';
+				}
+				else if (line[i] == '_')
+				{
+					Name[nRow][i] = '_';
+				}
+				else
+				{
+					Name[nRow][i] = ' ';
+				}
+			}
+
+			nRow++;
+		}
+		myfile.close();
+	}
+}
 
 void selectionScreen()
 {
