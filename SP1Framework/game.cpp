@@ -181,7 +181,7 @@ void render()
 	{
 	case S_SPLASHSCREEN: renderSplashScreen();
 		break;
-	case S_SELECT: selectionScreen();
+	case S_SELECT: renderselectionScreen();
 		break;
 	case S_GAME: renderGame();
 		break;
@@ -239,10 +239,6 @@ void moveCharacter()
 
 		rendmapbool = false;
 
-
-		//		colX = 1;
-		//		rowY = 2;
-
 		storeMazeMap();
 
 		while (checkloca)
@@ -268,11 +264,6 @@ void moveCharacter()
 		g_sChar2.m_cLocation.Y = randPointY2;
 
 		Aiinit();
-/*		gameAIs[0].m_cLocation.X = AIpositionX;
-		gameAIs[0].m_cLocation.Y = AIpositionY;
-
-		gameAIs[1].m_cLocation.X = AIpositionX2;
-		gameAIs[1].m_cLocation.Y = AIpositionY2;*/
 
 		gameTime = 60;
 		addScore++;
@@ -421,6 +412,7 @@ void moveAI()
 		{
 			gameAIs[i].m_bActive = false;			//Changes colour
 			AIPathFind(&gameAIs[i], gameAIs[i].PathfindCoord.X, gameAIs[i].PathfindCoord.Y); //Pathfinds to coordinate
+
 			if (gameAIs[i].m_cLocation.X == gameAIs[i].PathfindCoord.X && gameAIs[i].m_cLocation.Y == gameAIs[i].PathfindCoord.Y)
 				gameAIs[i].PathfindToChar = false;	//If Ai reaches Coordinates, set to false and continue roaming in another frame
 

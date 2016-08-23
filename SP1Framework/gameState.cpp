@@ -62,7 +62,7 @@ void renderSplashScreen()  // renders the splash screen
 	}*/
 }
 
-void selectionScreen()
+void renderselectionScreen()
 {
 	string Menu[3] = { "Play Game", "Mini Puzzle Game", "Exit game" };
 	COORD c = g_Console.getConsoleSize();
@@ -92,7 +92,51 @@ void selectionScreen()
 		c.Y += 1;
 		g_Console.writeToBuffer(c, Menu[2], 0x03);
 		break;
-	default:
+	}
+
+	/*
+		g_Console.writeToBuffer(c, Menu[0], (pressed == 0?0x03:0x09));
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[1], (pressed == 1?0x03:0x09));
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[2], (pressed == 2?0x03:0x09));
+
+	*/
+
+
+}
+
+void selectionScreen()
+{
+	/*string Menu[3] = { "Play Game", "Mini Puzzle Game", "Exit game" };
+	COORD c = g_Console.getConsoleSize();
+	c.Y /= 3;
+	c.X = c.X / 2 - 9;
+
+	switch (pressed)
+	{
+	case 0:
+		g_Console.writeToBuffer(c, Menu[0], 0x03);
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[1], 0x09);
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[2], 0x09);
+		break;
+	case 1:
+		g_Console.writeToBuffer(c, Menu[0], 0x09);
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[1], 0x03);
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[2], 0x09);
+		break;
+	case 2:
+		g_Console.writeToBuffer(c, Menu[0], 0x09);
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[1], 0x09);
+		c.Y += 1;
+		g_Console.writeToBuffer(c, Menu[2], 0x03);
+		break;*/
+//default:
 		if (pressed < 0)
 		{
 			pressed = 2;
@@ -101,8 +145,8 @@ void selectionScreen()
 		{
 			pressed = 0;
 		}
-		break;
-	}
+		//break;
+	//}
 
 	if (g_dBounceTime > g_dElapsedTime)
 	{
@@ -142,7 +186,7 @@ void selectionScreen()
 	if (bSomethingHappened)
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
-		g_dBounceTime = g_dElapsedTime + 0.325; // 125ms should be enougInfant Annihilatorh
+		g_dBounceTime = g_dElapsedTime + 0.325; // 125ms should be enough
 	}
 }
 
