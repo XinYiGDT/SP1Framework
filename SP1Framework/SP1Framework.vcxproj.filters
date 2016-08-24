@@ -49,6 +49,7 @@
     <ClCompile Include="AIinit.cpp">
       <Filter>Source Files\AI</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPathFind.h">
@@ -84,6 +85,7 @@
     <ClInclude Include="Framework\timer.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

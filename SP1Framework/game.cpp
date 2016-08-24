@@ -10,6 +10,7 @@
 #include <fstream>
 #include <windows.h>
 #include <string>
+#include <mmsystem.h>
 
 #define numOfAis 2
 
@@ -76,7 +77,6 @@ Console g_Console(80, 40, "SP1 Framework");
 //--------------------------------------------------------------
 void init(void)
 {
-	//PlaySound(TEXT("The Sense Of Me by Mud Flow.mp3"), NULL, SND_FILENAME);
 
 	// Set precision for floating point output
 	g_dElapsedTime = 0.0;
@@ -100,6 +100,8 @@ void init(void)
 
 	storeMazeMap();
 	openLogo();
+	sound();
+	readAnimation();
 }
 
 //--------------------------------------------------------------
@@ -300,7 +302,7 @@ void renderGame()
 	renderCharacter();  // renders the character into the buffer
 	renderTime();
 	score();
-	renderSound();
+	
 }
 
 void renderMap()
@@ -430,9 +432,9 @@ void moveAI()
 	//End of void moveAI
 }
 
-void renderSound()
+void sound()
 {
 	//sound
-	//PlaySound(TEXT("The Sense Of Me by Mud Flow.mp3"), 0, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	PlaySound(TEXT("The Sense Of Me by Mud Flow.wav"), NULL, SND_ASYNC | SND_LOOP);
 
 }

@@ -82,6 +82,7 @@
     <ClCompile Include="AiPathFindHeuristic.cpp" />
     <ClCompile Include="AiPresenceArea.cpp" />
     <ClCompile Include="AiViewRange.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BotRoam.cpp" />
     <ClCompile Include="CharacterMovement.cpp" />
     <ClCompile Include="distCharToAi.cpp" />
@@ -97,6 +98,7 @@
   <ItemGroup>
     <ClInclude Include="AIPathFind.h" />
     <ClInclude Include="AiPathFindHeuristic.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="CharacterMovement.h" />
     <ClInclude Include="distCharToAi.h" />
     <ClInclude Include="Framework\console.h" />

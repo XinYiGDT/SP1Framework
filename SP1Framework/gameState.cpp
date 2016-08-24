@@ -20,9 +20,11 @@ int nRow = 1;
 
 int pressed = 0;
 
+int animationOffset;
+
 void openLogo()
 {
-	myfile.open("name3.txt");
+	myfile.open("name.txt");
 
 	//reading
 	if (myfile.is_open())
@@ -30,15 +32,11 @@ void openLogo()
 		while (getline(myfile, line2))
 		{
 
-			for (int i = 0; i < 70; i++)
+			for (int i = 0; i < 75; i++)
 			{
-				if (line2[i] == '>')
+				if (line2[i] == '#')
 				{
-					Name[nRow][i] = '>';
-				}
-				else if (line2[i] == '<')
-				{
-					Name[nRow][i] = '<';
+					Name[nRow][i] = '#';
 				}
 				else
 				{
@@ -73,22 +71,22 @@ void renderSelectionScreen()
 	string Menu[3] = { "Play Game", "Mini Puzzle Game", "Exit game" };
 	COORD c = g_Console.getConsoleSize();
 	COORD b = g_Console.getConsoleSize();;
-	c.Y /= 3;
+	c.Y /= 2;
 	c.X = c.X / 2 - 9;
 
 	//Printing it
-	for (int bRow = 1; bRow < 9; bRow++)
+	for (int bRow = 1; bRow < 8; bRow++)
 	{
-		for (int bCol = 0; bCol < 70; bCol++)
+		for (int bCol = 0; bCol < 75; bCol++)
 		{
 			char pix;
 			pix = Name[bRow][bCol];
-			b.X = bCol;
-			b.Y = bRow;
+			b.X = bCol + 3;
+			b.Y = bRow + 5;
 
 			if (Name[bRow][bCol] != ' ')
 			{
-				g_Console.writeToBuffer(b, pix, 0xF3);
+				g_Console.writeToBuffer(b, pix, 0xFF);
 			}
 			else
 			{
@@ -102,6 +100,39 @@ void renderSelectionScreen()
 	g_Console.writeToBuffer(c, Menu[1], (pressed == 1 ? 0x03 : 0x09));
 	c.Y += 1;
 	g_Console.writeToBuffer(c, Menu[2], (pressed == 2 ? 0x03 : 0x09));
+
+	COORD x;
+	x.X = 5;
+	x.Y = 20;
+
+	if (animationOffset <= 20)
+	{
+		renderAnimation(0, x);
+	}
+	else if (animationOffset > 20)
+	{
+		renderAnimation(1, x);
+	}
+
+	x.X = 50;
+	x.Y = 20;
+
+	if (animationOffset <= 20)
+	{
+		renderAnimation(2, x);
+	}
+	else if (animationOffset > 20)
+	{
+		renderAnimation(3, x);
+	}
+
+
+	if (animationOffset >= 40)
+	{
+		animationOffset = 0;
+	}
+
+	animationOffset++;
 
 
 }

@@ -9,6 +9,7 @@
 #include "CharacterMovement.h"
 #include "score.h"
 #include "gameState.h"
+#include "Animation.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -93,9 +94,10 @@ void renderTime();//renders time
 void renderAI();            // AI control
 void moveAI();
 
-void renderSound();
+void sound();
 
 void gameOver();
 
+void renderAnimation(int keyFrame, COORD animationC);
 
 #endif // _GAME_H
