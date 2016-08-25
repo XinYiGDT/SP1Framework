@@ -28,7 +28,11 @@ double gameTime = 60;//Set time 1min
 double gameScore = 0; //Set starting score
 double addScore = 1;//Set score per sec
 
+//Logo
 char Name[40][80];
+
+//fog
+char fog1[40][80];
 
 COORD b;
 
@@ -66,7 +70,7 @@ bool bSomethingHappened = false;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once 
 
 // Console object
-Console g_Console(80, 40, "SP1 Framework");
+Console g_Console(80, 40, "Separato");
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -102,6 +106,8 @@ void init(void)
 	openLogo();
 	sound();
 	readAnimation();
+
+	memset(fog1, ' ', sizeof(fog1[0][0]) * 40 * 80);
 }
 
 //--------------------------------------------------------------
@@ -332,6 +338,9 @@ void renderMap()
 			}
 		}
 	}
+
+	renderFog(&g_sChar, &g_sChar2, &g_Console, fog1);
+
 }
 void renderCharacter()
 {

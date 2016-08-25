@@ -10,6 +10,7 @@
 #include "score.h"
 #include "gameState.h"
 #include "Animation.h"
+#include "fogOfWar.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -97,7 +98,6 @@ void moveAI();
 void sound();
 
 void gameOver();
-
-void renderAnimation(int keyFrame, COORD animationC);
+void renderFog( SGameChar *g_sChar, SGameChar *g_sChar2, Console *g_Console, char fog1[40][80]);
 
 #endif // _GAME_H
