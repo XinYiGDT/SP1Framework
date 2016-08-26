@@ -1,11 +1,10 @@
 #include "Animation.h"
-#include "game.h"
-#include "Framework\console.h"
 
 using namespace std;
 
 extern Console g_Console;
 
+//[txt][x][y]
 char AnimationArray[4][150][150];
 char indexChar;
 
@@ -25,8 +24,10 @@ void readAnimation()
 
 	for (int i = 0; i < 4; i++)
 	{
+		//fstream::in = input
 		fstream find(frameLoad[i], fstream::in);
 
+		//noskipws = Do not skip whitespaces
 		while (find >> noskipws >> StringToLoad)
 		{
 			indexChar = StringToLoad;

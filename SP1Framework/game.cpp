@@ -28,7 +28,11 @@ double gameTime = 60;//Set time 1min
 double gameScore = 0; //Set starting score
 double addScore = 1;//Set score per sec
 
+//Logo
 char Name[40][80];
+
+//fog
+char fog1[40][80];
 
 COORD b;
 
@@ -66,7 +70,7 @@ bool bSomethingHappened = false;
 double  g_dBounceTime; // this is to prevent key bouncing, so we won't trigger keypresses more than once 
 
 // Console object
-Console g_Console(80, 40, "SP1 Framework");
+Console g_Console(80, 40, "Separato");
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -102,6 +106,8 @@ void init(void)
 	openLogo();
 	sound();
 	readAnimation();
+
+	memset(fog1, ' ', sizeof(fog1[0][0]) * 40 * 80);
 }
 
 //--------------------------------------------------------------
@@ -274,12 +280,15 @@ void moveCharacter()
 
 		gameTime = 60;
 		addScore++;
+
+		//reset the fog
+		memset(fog1, ' ', sizeof(fog1[0][0]) * 40 * 80);
 	}
 
 	if (bSomethingHappened)
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
-		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enougInfant Annihilatorh
+		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
 	}
 
 	for (int i = 0; i < numOfAis; ++i)
@@ -336,7 +345,7 @@ void renderMap()
 			}
 			else if (MazeMap[bRow][bCol] == '#')
 			{
-				g_Console.writeToBuffer(c, pix, 0x22);
+				g_Console.writeToBuffer(c, pix, 0xAA);
 			}
 			else
 			{
@@ -344,6 +353,12 @@ void renderMap()
 			}
 		}
 	}
+
+	if (gameScore >= 50)
+	{
+			renderFog(&g_sChar, &g_sChar2, &g_Console, fog1);
+	}
+
 }
 void renderCharacter()
 {
@@ -353,11 +368,11 @@ void renderCharacter()
 
 	if (g_sChar.m_bActive)
 	{
-		charColor = 0x0B;
+		charColor = 0x8B;
 	}
 	if (g_sChar2.m_bActive)
 	{
-		charColor2 = 0x0D;
+		charColor2 = 0x8C;
 	}
 	g_Console.writeToBuffer(g_sChar.m_cLocation, 0x95, charColor);
 	g_Console.writeToBuffer(g_sChar2.m_cLocation, 0x94, charColor2);
