@@ -2,6 +2,7 @@
 #include "Framework\console.h"
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -11,6 +12,10 @@ extern bool g_abKeyPressed[K_COUNT];
 extern double  g_dElapsedTime;
 extern double  g_dBounceTime;
 extern Console g_Console;
+extern double gameScore;
+bool GOentered = false;
+int highscore[5] = { 0, };
+bool storedHs = false;
 
 string line2;
 extern fstream myfile;
@@ -190,8 +195,91 @@ void selectionScreen()
 		g_dBounceTime = g_dElapsedTime + 0.325; // 125ms should be enough
 	}
 }
-
+vector<int> something;
 void gameOver()
 {
+	ofstream hsfile;
+	ifstream hsReadFile;
 
+	if (GOentered == false)//Enter once only. Here got prob.
+	{
+		double tempscore;
+		hsfile.open("highscore.txt", ios::app);
+	
+		
+		hsfile << gameScore << endl;
+		hsReadFile.open("highscore.txt");
+		while (true)
+		{	
+			hsReadFile >> line2;
+
+			if (hsReadFile.eof())
+				break;
+
+			
+
+			something.push_back(stoi(line2));
+
+		
+		
+		}
+		hsfile.close();
+		hsReadFile.close();
+		GOentered = true;
+	}
+
+	if (storedHs == false)
+	{
+		hsReadFile.open("highscore.txt");
+		if (hsReadFile.is_open())
+		{
+			int allscores[100] = { 0, };;
+			//while (getline(hsReadFile, line2))
+			//{
+			//	allscores[i] = stoi(line2);//Store all scores in file to the allscores array
+			//	i++; HARAMBAE IS HARAM. BUT I STILL LOVE HARAMBE DICK
+			//}
+			for (int j = 0; j < 5; j++)
+			{
+				double tempscore = 0;
+				for (int k = 0; k < something.size(); k++)
+				{
+					if (something[k] > tempscore)//if X score in the allscores array is larger than the tempscore
+					{
+						bool insidehs = false;
+						for (int l = 0; l < 5; l++)
+						{
+							if (highscore[l] == something[k]) //check if all score is alr inside highscore
+							{
+								insidehs = true;
+							}
+
+						}
+						if (insidehs == false)//if the score is NOT inside the highscore array, assign that score to tempscore
+						{
+							tempscore = something[k];
+						}
+					}
+				}
+				highscore[j] = tempscore;
+			}
+			hsReadFile.close();
+		}
+
+		storedHs = true;
+	}
+}
+
+void renderGameOver()
+{
+	COORD hscoord;
+	hscoord.X = g_Console.getConsoleSize().X / 2;
+	hscoord.Y = g_Console.getConsoleSize().Y / 2;
+
+	for (int i = 0; i < 5; i++)
+	{
+		string highscorestr = to_string(highscore[i]);
+		g_Console.writeToBuffer(hscoord, highscorestr);
+		hscoord.Y++;
+	}
 }

@@ -169,6 +169,8 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
+	case S_GAMEOVER: gameOver();
+		break;
 	}
 }
 //--------------------------------------------------------------
@@ -190,7 +192,7 @@ void render()
 		break;
 	case S_GAME: renderGame();
 		break;
-	case S_GAMEOVER:  gameOver();
+	case S_GAMEOVER:  renderGameOver();
 		break;
 
 	}
@@ -278,6 +280,16 @@ void moveCharacter()
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
 		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enougInfant Annihilatorh
+	}
+
+	for (int i = 0; i < numOfAis; ++i)
+	{
+		if (gameAIs[i].m_cLocation.X == g_sChar.m_cLocation.X && gameAIs[i].m_cLocation.Y == g_sChar.m_cLocation.Y
+			|| gameAIs[i].m_cLocation.X == g_sChar2.m_cLocation.X && gameAIs[i].m_cLocation.Y == g_sChar2.m_cLocation.Y)
+		{
+			g_eGameState = S_GAMEOVER;
+		}
+		
 	}
 }
 void processUserInput()
