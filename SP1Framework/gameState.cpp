@@ -105,36 +105,34 @@ void renderSelectionScreen()
 	x.X = 5;
 	x.Y = 20;
 
-	if (animationOffset <= 20)
+	if (animationOffset == 0)
+	{
+		animationOffset = g_dElapsedTime;
+	}
+
+	if (g_dElapsedTime - animationOffset < 0.4 )
 	{
 		renderAnimation(0, x);
 	}
-	else if (animationOffset > 20)
+	else if (g_dElapsedTime + animationOffset > 0.3)
 	{
 		renderAnimation(1, x);
+		animationOffset = 0.3;
 	}
 
-	x.X = 50;
+	x.X = 55;
 	x.Y = 20;
 
-	if (animationOffset <= 20)
+	if (g_dElapsedTime - animationOffset < 0.4)
 	{
 		renderAnimation(2, x);
 	}
-	else if (animationOffset > 20)
+	else if (g_dElapsedTime + animationOffset > 0.3)
 	{
 		renderAnimation(3, x);
+		animationOffset = 0.3;
 	}
-
-
-	if (animationOffset >= 40)
-	{
-		animationOffset = 0;
-	}
-
-	animationOffset++;
-
-
+	
 }
 
 void selectionScreen()

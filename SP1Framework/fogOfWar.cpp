@@ -35,6 +35,25 @@ void renderFog( SGameChar *g_sChar, SGameChar *g_sChar2, Console *g_Console, cha
 		}
 	}
 
+	//check 2nd player position
+	for (short x = g_sChar2->m_cLocation.X - viewRange - 1; x < g_sChar2->m_cLocation.X + viewRange + 1; x++)
+	{
+		for (short y = g_sChar2->m_cLocation.Y - viewRange + 1; y < g_sChar2->m_cLocation.Y + viewRange - 2; y++)
+		{
+			if (x < 0)
+			{
+				continue;
+			}
+			if (y < 0)
+			{
+				continue;
+			}
+
+			fog1[y][x] = MazeMap[y + 1][x];
+			fog2[y][x] = fog1[y][x];
+		}
+	}
+
 	//render fog with map
 	for (int row = 0; row < 40; row++)
 	{
@@ -45,11 +64,22 @@ void renderFog( SGameChar *g_sChar, SGameChar *g_sChar2, Console *g_Console, cha
 				break;
 			}
 
-			g_Console->writeToBuffer(c, fog1[row][col], 0x08);
+			if (fog1[row][col] == 'M')
+			{
+				g_Console->writeToBuffer(c, fog1[row][col], 0x77);
+			}
+			else if (fog1[row][col] == '#')
+			{
+				g_Console->writeToBuffer(c, fog1[row][col], 0x22);
+			}
+			else
+			{
+				g_Console->writeToBuffer(c, fog1[row][col], 0x08);
+			}
 
 			if (fog2[row][col] != '\0')
 			{
-				g_Console->writeToBuffer(c, fog2[row][col], 0x0d);
+				g_Console->writeToBuffer(c, fog2[row][col], 0x02);
 			}
 
 			c.X++;
