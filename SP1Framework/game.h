@@ -11,6 +11,7 @@
 #include "gameState.h"
 #include "Animation.h"
 #include "fogOfWar.h"
+#include "Pup.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -65,6 +66,12 @@ struct SGameBots
 	bool  m_bActive;
 };
 
+
+struct SGamePup
+{
+	COORD m_cLocation;
+	bool m_bActive = false;
+};
 
 
 
