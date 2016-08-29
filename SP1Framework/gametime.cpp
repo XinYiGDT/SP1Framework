@@ -7,10 +7,6 @@ extern Console g_Console;
 
 void renderTime()
 {
-	if (gameTime == 0)
-	{
-		return;
-	}
 	COORD timercoord;
 	COORD timecoordA;
 	COORD timecoordB;

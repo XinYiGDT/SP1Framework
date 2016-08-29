@@ -298,8 +298,10 @@ void moveCharacter()
 		{
 			g_eGameState = S_GAMEOVER;
 		}
-		
 	}
+
+	if (gameTime == 0)
+		g_eGameState = S_GAMEOVER;
 }
 void processUserInput()
 {

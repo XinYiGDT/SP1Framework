@@ -196,10 +196,10 @@ void selectionScreen()
 vector<int> something;
 void gameOver()
 {
-	ofstream hsfile;
-	ifstream hsReadFile;
+	ofstream hsfile; //write file
+	ifstream hsReadFile; //read file
 
-	if (GOentered == false)//Enter once only. Here got prob.
+	if (GOentered == false)//Enter once only
 	{
 		double tempscore;
 		hsfile.open("highscore.txt", ios::app);
@@ -207,7 +207,7 @@ void gameOver()
 		
 		hsfile << gameScore << endl;
 		hsReadFile.open("highscore.txt");
-		while (true)
+		while (true) //loop to read each line
 		{	
 			hsReadFile >> line2;
 
@@ -216,7 +216,7 @@ void gameOver()
 
 			
 
-			something.push_back(stoi(line2));
+			something.push_back(stoi(line2)); //put each score into vector
 
 		
 		
@@ -231,13 +231,7 @@ void gameOver()
 		hsReadFile.open("highscore.txt");
 		if (hsReadFile.is_open())
 		{
-			int allscores[100] = { 0, };;
-			//while (getline(hsReadFile, line2))
-			//{
-			//	allscores[i] = stoi(line2);//Store all scores in file to the allscores array
-			//	i++; HARAMBAE IS HARAM. BUT I STILL LOVE HARAMBE DICK
-			//}
-			for (int j = 0; j < 5; j++)
+			for (int j = 0; j < 5; j++) //loop to get the highest 5 score
 			{
 				double tempscore = 0;
 				for (int k = 0; k < something.size(); k++)
