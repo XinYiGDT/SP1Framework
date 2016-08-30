@@ -41,7 +41,8 @@ enum EGAMESTATES
 	S_MGAME_TETRIS,
 	S_COUNT,
 	S_GAMEOVER,
-	S_SELECT
+	S_SELECT,
+	S_CREDIT
 };
 
 // struct for the game character
