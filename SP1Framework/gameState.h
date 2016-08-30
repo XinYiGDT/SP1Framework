@@ -1,9 +1,9 @@
 #include "game.h"
 
 void renderSelectionScreen();
-void openLogo();
+void openFiles();
 void renderSplashScreen();
 void selectionScreen();
 void renderGameOver();
 void renderCredit();
-void credit();
+//void credit();

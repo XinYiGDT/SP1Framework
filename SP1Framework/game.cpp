@@ -31,6 +31,9 @@ double addScore = 1;//Set score per sec
 //Logo
 char Name[40][80];
 
+//Credit text
+char text[40][80];
+
 //fog
 char fog1[40][80];
 
@@ -106,7 +109,7 @@ void init(void)
 	Aiinit();
 
 	storeMazeMap();
-	openLogo();
+	openFiles();
 	sound();
 	readAnimation();
 
@@ -180,8 +183,8 @@ void update(double dt)
 		break;
 	case S_GAMEOVER: gameOver();
 		break;
-	case S_CREDIT: credit();
-		break;
+	//case S_CREDIT: credit();
+		//break;
 	}
 }
 //--------------------------------------------------------------
@@ -364,7 +367,7 @@ void renderMap()
 		}
 	}
 
-	if (gameScore >= 50)
+	if (gameScore >= 300)
 	{
 			renderFog(&g_sChar, &g_sChar2, &g_Console, fog1);
 	}

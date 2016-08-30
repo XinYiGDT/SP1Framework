@@ -21,17 +21,20 @@ string line2;
 extern fstream myfile;
 
 extern char Name[40][80];
+extern char text[40][80];
 int nRow = 1;
 
 int pressed = 0;
 
+int up = 0;
+
 int animationOffset;
 
-void openLogo()
+void openFiles()
 {
 	myfile.open("name.txt");
 
-	//reading
+	//reading logo
 	if (myfile.is_open())
 	{
 		while (getline(myfile, line2))
@@ -53,6 +56,36 @@ void openLogo()
 		}
 		myfile.close();
 	}
+
+
+	myfile.open("Credit.txt");
+
+	//reading credit text
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line2))
+		{
+
+			for (int i = 0; i < 75; i++)
+			{
+				if (line2[i] == '#')
+				{
+					text[nRow][i] = '#';
+				}
+				else if (line2[i] == '\n')
+				{
+					text[nRow][i] = '\n';
+				}
+				else
+				{
+					text[nRow][i] = ' ';
+				}
+			}
+
+			nRow++;
+		}
+		myfile.close();
+	}
 }
 
 void renderSplashScreen()  // renders the splash screen
@@ -62,9 +95,6 @@ void renderSplashScreen()  // renders the splash screen
 	c.X = c.X / 2 - 9;
 	g_Console.writeToBuffer(c, "A game in 3 seconds", 0x03);
 	c.Y += 1;
-	c.X = g_Console.getConsoleSize().X / 2 - 20;
-	g_Console.writeToBuffer(c, "Press <Space> to change character colour", 0x09);
-	c.Y += 1;
 	c.X = g_Console.getConsoleSize().X / 2 - 9;
 	g_Console.writeToBuffer(c, "Press 'Esc' to quit", 0x09);
 
@@ -73,13 +103,13 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderSelectionScreen()
 {
-	string Menu[3] = { "Play Game", "Mini Puzzle Game", "Exit game" };
+	string Menu[4] = { "Play Game", "Mini Puzzle Game", "Credits" , "Exit game" };
 	COORD c = g_Console.getConsoleSize();
-	COORD b = g_Console.getConsoleSize();;
+	COORD b = g_Console.getConsoleSize();
 	c.Y /= 2;
 	c.X = c.X / 2 - 9;
 
-	//Printing it
+	//Printing logo
 	for (int bRow = 1; bRow < 8; bRow++)
 	{
 		for (int bCol = 0; bCol < 75; bCol++)
@@ -105,6 +135,8 @@ void renderSelectionScreen()
 	g_Console.writeToBuffer(c, Menu[1], (pressed == 1 ? 0x03 : 0x09));
 	c.Y += 1;
 	g_Console.writeToBuffer(c, Menu[2], (pressed == 2 ? 0x03 : 0x09));
+	c.Y += 1;
+	g_Console.writeToBuffer(c, Menu[3], (pressed == 3 ? 0x03 : 0x09));
 
 	COORD x;
 	x.X = 5;
@@ -145,9 +177,9 @@ void selectionScreen()
 
 	if (pressed < 0)
 	{
-		pressed = 2;
+		pressed = 3;
 	}
-	else if (pressed > 2)
+	else if (pressed > 3)
 	{
 		pressed = 0;
 	}
@@ -180,6 +212,10 @@ void selectionScreen()
 		{
 
 		}
+		else if (pressed == 2)
+		{
+			g_eGameState = S_CREDIT;
+		}
 		else
 		{
 			g_bQuitGame = true;
@@ -190,7 +226,7 @@ void selectionScreen()
 	if (bSomethingHappened)
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
-		g_dBounceTime = g_dElapsedTime + 0.325; // 125ms should be enough
+		g_dBounceTime = g_dElapsedTime + 0.3; // 125ms should be enough
 	}
 }
 vector<int> something;
@@ -278,10 +314,43 @@ void renderGameOver()
 
 void renderCredit()
 {
+	COORD b = g_Console.getConsoleSize();
+	
 
+	//printing the text
+	for (int bRow = 1; bRow < 30; bRow++)
+	{
+		for (int bCol = 0; bCol < 75; bCol++)
+		{
+			char pix;
+			pix = text[bRow][bCol];
+			b.X = bCol + 3;
+			b.Y = bRow + 5;
+
+			if (text[bRow][bCol] != ' ')
+			{
+				g_Console.writeToBuffer(b, pix, 0xFF);
+			}
+			else
+			{
+				g_Console.writeToBuffer(b, pix, 0x88);
+			}
+		}
+	}
+
+	
 }
 
-void credit()
+/*void credit()
 {
+	//animation
+	if (animationOffset == 0)
+	{
+		animationOffset = g_dElapsedTime;
+	}
 
-}
+	if (g_dElapsedTime - animationOffset < 0.4)
+	{
+		up++;
+	}
+}*/
