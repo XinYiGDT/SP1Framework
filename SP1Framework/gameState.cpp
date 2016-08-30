@@ -21,7 +21,7 @@ string line2;
 extern fstream myfile;
 
 extern char Name[40][80];
-extern char text[40][80];
+extern char text[50][80];
 int nRow = 1;
 
 int pressed = 0;
@@ -72,9 +72,9 @@ void openFiles()
 				{
 					text[nRow][i] = '#';
 				}
-				else if (line2[i] == '\n')
+				else if (line2[i] == '\0')
 				{
-					text[nRow][i] = '\n';
+					break;
 				}
 				else
 				{
@@ -318,39 +318,46 @@ void renderCredit()
 	
 
 	//printing the text
-	for (int bRow = 1; bRow < 30; bRow++)
+	for (int bRow = 1; bRow < 50; bRow++)
 	{
 		for (int bCol = 0; bCol < 75; bCol++)
 		{
 			char pix;
 			pix = text[bRow][bCol];
-			b.X = bCol + 3;
-			b.Y = bRow + 5;
+			b.X = bCol + 15;
+			b.Y = (bRow + up) + 33;
 
 			if (text[bRow][bCol] != ' ')
 			{
-				g_Console.writeToBuffer(b, pix, 0xFF);
+				g_Console.writeToBuffer(b, pix, 0x08);
 			}
 			else
 			{
-				g_Console.writeToBuffer(b, pix, 0x88);
+				g_Console.writeToBuffer(b, pix, 0x0D);
 			}
 		}
 	}
 
-	
-}
-
-/*void credit()
-{
 	//animation
 	if (animationOffset == 0)
 	{
 		animationOffset = g_dElapsedTime;
 	}
 
-	if (g_dElapsedTime - animationOffset < 0.4)
+	if (g_dElapsedTime - animationOffset < 0.3)
 	{
-		up++;
+		up--;
 	}
-}*/
+	else
+	{
+		animationOffset = 0.125;
+	}
+	
+	
+}
+
+void credit()
+{
+	if (g_dElapsedTime > 8.0) // wait for 8 seconds to switch to game mode, else do nothing
+		g_eGameState = S_SELECT;
+}
