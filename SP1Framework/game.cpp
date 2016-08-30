@@ -385,7 +385,7 @@ void renderMap()
 		}
 	}
 
-	if (gameScore >= 10)
+	if (gameScore >= 300)
 	{
 			renderFog(&g_sChar, &g_sChar2, &g_Console, fog1);
 	}
