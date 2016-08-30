@@ -12,7 +12,7 @@
 #include <string>
 #include <mmsystem.h>
 
-#define numOfAis 2
+#define numOfAis 3
 
 
 double  g_dElapsedTime;
@@ -454,36 +454,36 @@ void renderAI()
 void moveAI()
 {
 
-	if (AItime == 0)
-		AItime = g_dElapsedTime;
-	else
-	{
-		if (g_dElapsedTime - AItime > AIreactiontime)
-			AItime = 0;
-		return;
-	}
-
 
 	for (int i = 0; i < numOfAis; ++i)
 	{
 		AiViewRange(&gameAIs[i]);					//Check if there is any Char in the view range. If there is, PathfindToChar will be set to true
-		if (gameAIs[i].PathfindToChar == false)		//If there is no Pathfinding
+
+		if (g_dElapsedTime - AItime > 0.5)
 		{
-			BotRoam(&gameAIs[i]);					//Let the Ai Roam around
-			AiPresenceArea(&gameAIs[i]);			//Check if the Ai exits the Roam area. If true, get them back to their respective areas
-			gameAIs[i].m_bActive = true;
+
+			if (gameAIs[i].PathfindToChar == false)		//If there is no Pathfinding
+			{
+				BotRoam(&gameAIs[i]);					//Let the Ai Roam around
+				AiPresenceArea(&gameAIs[i]);			//Check if the Ai exits the Roam area. If true, get them back to their respective areas
+				gameAIs[i].m_bActive = true;
+			}
+
+			else if (gameAIs[i].PathfindToChar == true)	//If there is Pathfinding
+			{
+				gameAIs[i].m_bActive = false;			//Changes colour
+				AIPathFind(&gameAIs[i], gameAIs[i].PathfindCoord.X, gameAIs[i].PathfindCoord.Y); //Pathfinds to coordinate
+
+				if (gameAIs[i].m_cLocation.X == gameAIs[i].PathfindCoord.X && gameAIs[i].m_cLocation.Y == gameAIs[i].PathfindCoord.Y)
+					gameAIs[i].PathfindToChar = false;	//If Ai reaches Coordinates, set to false and continue roaming in another frame
+
+				AiPresenceArea(&gameAIs[i]);			//Checks and ensures Ai stays in roam area.
+			}
 		}
-
-		else if (gameAIs[i].PathfindToChar == true)	//If there is Pathfinding
-		{
-			gameAIs[i].m_bActive = false;			//Changes colour
-			AIPathFind(&gameAIs[i], gameAIs[i].PathfindCoord.X, gameAIs[i].PathfindCoord.Y); //Pathfinds to coordinate
-
-			if (gameAIs[i].m_cLocation.X == gameAIs[i].PathfindCoord.X && gameAIs[i].m_cLocation.Y == gameAIs[i].PathfindCoord.Y)
-				gameAIs[i].PathfindToChar = false;	//If Ai reaches Coordinates, set to false and continue roaming in another frame
-
-			AiPresenceArea(&gameAIs[i]);			//Checks and ensures Ai stays in roam area.
-		}
+	}
+	if (g_dElapsedTime - AItime > 0.5)
+	{
+		AItime = g_dElapsedTime;
 	}
 
 	//This Allows the Ai to roam and have a view range of 10m in a cone radius of about 52degrees

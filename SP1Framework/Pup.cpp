@@ -46,7 +46,7 @@ void renderPup()
 		{
 			PuprandPointX = rand() % 50 + 1;
 			PuprandPointY = rand() % 24 + 2;
-			if (MazeMap[PuprandPointY][PuprandPointX] != 'M' && MazeMap[PuprandPointY][PuprandPointX] != '#')
+			if (MazeMap[PuprandPointY][PuprandPointX] != 'M' && MazeMap[PuprandPointY][PuprandPointX] != (char)219)
 			{
 				g_sPup.m_cLocation.X = PuprandPointX;
 				g_sPup.m_cLocation.Y = PuprandPointY;
