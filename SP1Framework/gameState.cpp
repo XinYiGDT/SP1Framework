@@ -29,6 +29,7 @@ int pressed = 0;
 int up = 0;
 
 int animationOffset;
+double animationOffset2=0.0;
 
 void openFiles()
 {
@@ -70,7 +71,7 @@ void openFiles()
 			{
 				if (line2[i] == '#')
 				{
-					text[nRow][i] = '#';
+					text[nRow][i] = (char)219;
 				}
 				else if (line2[i] == '\0')
 				{
@@ -311,46 +312,57 @@ void renderGameOver()
 		hscoord.Y++;
 	}
 }
+COORD e = g_Console.getConsoleSize();
+
+int bRow = 1;
+int bCol = 0;
+
+bool moveup = true;
 
 void renderCredit()
 {
-	COORD b = g_Console.getConsoleSize();
-	
-
 	//printing the text
-	for (int bRow = 1; bRow < 50; bRow++)
+	if (moveup==true)
 	{
-		for (int bCol = 0; bCol < 75; bCol++)
+		e.X = bCol + 15;
+		e.Y = bRow + 33;
+
+		moveup = false;
+	}
+	for (bRow = 1; bRow < 50; bRow++)
+	{
+		for (bCol = 0; bCol < 75; bCol++)
 		{
 			char pix;
 			pix = text[bRow][bCol];
-			b.X = bCol + 15;
-			b.Y = (bRow + up) + 33;
+			
+			
 
 			if (text[bRow][bCol] != ' ')
 			{
-				g_Console.writeToBuffer(b, pix, 0x08);
+				g_Console.writeToBuffer(e.X + bCol, e.Y + bRow, pix, 0x08);
 			}
 			else
 			{
-				g_Console.writeToBuffer(b, pix, 0x0D);
+				g_Console.writeToBuffer(e.X + bCol, e.Y + bRow, pix, 0x0D);
 			}
 		}
 	}
 
 	//animation
-	if (animationOffset == 0)
+	/*if (animationOffset == 0)
 	{
 		animationOffset = g_dElapsedTime;
-	}
+	}*/
 
-	if (g_dElapsedTime - animationOffset < 0.3)
+	if (g_dElapsedTime - animationOffset2 > 0.07)
 	{
-		up--;
+		e.Y--;
+		animationOffset2 = g_dElapsedTime;
 	}
 	else
 	{
-		animationOffset = 0.125;
+		return;
 	}
 	
 	
@@ -358,6 +370,6 @@ void renderCredit()
 
 void credit()
 {
-	if (g_dElapsedTime > 8.0) // wait for 8 seconds to switch to game mode, else do nothing
+	if (g_dElapsedTime > 11.0) // wait for 11 seconds to switch to game mode, else do nothing
 		g_eGameState = S_SELECT;
 }
