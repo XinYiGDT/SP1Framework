@@ -35,7 +35,8 @@ enum EGAMESTATES
 	S_GAME,
 	S_COUNT,
 	S_GAMEOVER,
-	S_SELECT
+	S_SELECT,
+	S_CREDIT
 };
 
 // struct for the game character

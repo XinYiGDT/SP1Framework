@@ -177,6 +177,8 @@ void update(double dt)
 		break;
 	case S_GAMEOVER: gameOver();
 		break;
+	case S_CREDIT: credit();
+		break;
 	}
 }
 //--------------------------------------------------------------
@@ -199,6 +201,8 @@ void render()
 	case S_GAME: renderGame();
 		break;
 	case S_GAMEOVER:  renderGameOver();
+		break;
+	case S_CREDIT: renderCredit();
 		break;
 
 	}

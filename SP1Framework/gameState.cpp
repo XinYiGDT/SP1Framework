@@ -275,3 +275,13 @@ void renderGameOver()
 		hscoord.Y++;
 	}
 }
+
+void renderCredit()
+{
+
+}
+
+void credit()
+{
+
+}
