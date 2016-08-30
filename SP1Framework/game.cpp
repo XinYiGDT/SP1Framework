@@ -377,7 +377,7 @@ void renderMap()
 			{
 				g_Console.writeToBuffer(c, pix, 0xFF);
 			}
-			else if (MazeMap[bRow][bCol] == '#')
+			else if (MazeMap[bRow][bCol] == (char)219)
 			{
 				g_Console.writeToBuffer(c, pix, 0xAA);
 			}
@@ -388,7 +388,7 @@ void renderMap()
 		}
 	}
 
-	if (gameScore >= 10)
+	if (gameScore >= 300)
 	{
 			renderFog(&g_sChar, &g_sChar2, &g_Console, fog1);
 	}

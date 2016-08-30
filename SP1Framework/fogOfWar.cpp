@@ -68,18 +68,19 @@ void renderFog( SGameChar *g_sChar, SGameChar *g_sChar2, Console *g_Console, cha
 			{
 				g_Console->writeToBuffer(c, fog1[row][col], 0x77);
 			}
-			else if (fog1[row][col] == '#')
-			{
-				g_Console->writeToBuffer(c, fog1[row][col], 0x22);
-			}
 			else
 			{
-				g_Console->writeToBuffer(c, fog1[row][col], 0x08);
+				g_Console->writeToBuffer(c, fog1[row][col], 0x02);
 			}
 
 			if (fog2[row][col] != '\0')
 			{
-				g_Console->writeToBuffer(c, fog2[row][col], 0x02);
+				g_Console->writeToBuffer(c, fog2[row][col], 0x0A);
+
+				if (fog2[row][col] == 'M')
+				{
+					g_Console->writeToBuffer(c, fog2[row][col], 0xFF);
+				}
 			}
 
 			c.X++;

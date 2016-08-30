@@ -29,7 +29,14 @@ int pressed = 0;
 int up = 0;
 
 int animationOffset;
-double animationOffset2=0.0;
+int resetTime;
+double animationOffset2 = 0.0;
+
+COORD e = g_Console.getConsoleSize();
+int bRow = 1;
+int bCol = 0;
+
+bool moveup = true;
 
 void openFiles()
 {
@@ -318,12 +325,7 @@ void renderGameOver()
 		hscoord.Y++;
 	}
 }
-COORD e = g_Console.getConsoleSize();
 
-int bRow = 1;
-int bCol = 0;
-
-bool moveup = true;
 
 void renderCredit()
 {
@@ -376,6 +378,19 @@ void renderCredit()
 
 void credit()
 {
-	if (g_dElapsedTime > 11.0) // wait for 11 seconds to switch to game mode, else do nothing
+
+	if (g_dElapsedTime - resetTime >= 10.0) // wait for 10 seconds to switch to game mode, else do nothing
+	{
 		g_eGameState = S_SELECT;
+		resetTime = g_dElapsedTime;
+
+		if (moveup == false)
+		{
+			moveup = true;
+		}
+	}
+	else
+	{
+		return;
+	}
 }

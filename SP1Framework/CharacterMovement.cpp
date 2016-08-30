@@ -14,11 +14,11 @@ void characterMovement(short direction)
 		bSomethingHappened = true;
 
 		//Check if next location is obstructed. If not, move to that location.
-		if (!(MazeMap[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == 'M' || MazeMap[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == '#'))
+		if (!(MazeMap[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == 'M' || MazeMap[g_sChar.m_cLocation.Y - 1][g_sChar.m_cLocation.X] == (char)219))
 		{
 			g_sChar.m_cLocation.Y--;
 		}
-		if (!(MazeMap[g_sChar2.m_cLocation.Y - 1][g_sChar2.m_cLocation.X] == 'M' || MazeMap[g_sChar2.m_cLocation.Y - 1][g_sChar2.m_cLocation.X] == '#'))
+		if (!(MazeMap[g_sChar2.m_cLocation.Y - 1][g_sChar2.m_cLocation.X] == 'M' || MazeMap[g_sChar2.m_cLocation.Y - 1][g_sChar2.m_cLocation.X] == (char)219))
 		{
 			g_sChar2.m_cLocation.Y--;
 		}
@@ -31,11 +31,11 @@ void characterMovement(short direction)
 		g_sChar2.m_cLocation.Y++;
 		bSomethingHappened = true;
 
-		if (MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M' || MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
+		if (MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M' || MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == (char)219)
 		{
 			g_sChar.m_cLocation.Y--;
 		}
-		if (MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M' || MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == '#')
+		if (MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M' || MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == (char)219)
 		{
 			g_sChar2.m_cLocation.Y--;
 		}
@@ -46,11 +46,11 @@ void characterMovement(short direction)
 		g_sChar2.m_cLocation.X--;
 		bSomethingHappened = true;
 
-		if (MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M' || MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
+		if (MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M' || MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == (char)219)
 		{
 			g_sChar.m_cLocation.X++;
 		}
-		if (MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M' || MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == '#')
+		if (MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M' || MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == (char)219)
 		{
 			g_sChar2.m_cLocation.X++;
 		}
@@ -61,11 +61,11 @@ void characterMovement(short direction)
 		g_sChar2.m_cLocation.X++;
 		bSomethingHappened = true;
 
-		if (MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M' || MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == '#')
+		if (MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == 'M' || MazeMap[g_sChar.m_cLocation.Y][g_sChar.m_cLocation.X] == (char)219)
 		{
 			g_sChar.m_cLocation.X--;
 		}
-		if (MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M' || MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == '#')
+		if (MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == 'M' || MazeMap[g_sChar2.m_cLocation.Y][g_sChar2.m_cLocation.X] == (char)219)
 		{
 			g_sChar2.m_cLocation.X--;
 		}

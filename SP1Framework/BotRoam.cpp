@@ -16,10 +16,10 @@ void BotRoam(struct SGameBots *Ai)
 	{
 		for (int x = -2; x < 3; ++x)
 		{
-			if ((x == -2 || y == -2 || x == 2 || y == 2) && (MazeMap[y][x] == 'M' || MazeMap[y][x] == ' #'))
+			if ((x == -2 || y == -2 || x == 2 || y == 2) && (MazeMap[y][x] == 'M' || MazeMap[y][x] == (char)219))
 				x++;
 
-			if (1 <= x && x <= 1 && 1 <= y && y <= 1 && (MazeMap[y][x] == 'M' || MazeMap[y][x] == ' #'))
+			if (1 <= x && x <= 1 && 1 <= y && y <= 1 && (MazeMap[y][x] == 'M' || MazeMap[y][x] == (char)219))
 				x += 2;
 		}
 	}
@@ -55,7 +55,7 @@ void BotRoam(struct SGameBots *Ai)
 	if (Ai->g_bDirection == B_LEFT)
 	{
 		//Check if next location is obstructed. If not, move to that location.
-		if (!(MazeMap[Ai->m_cLocation.Y][Ai->m_cLocation.X - 1] == 'M' || MazeMap[Ai->m_cLocation.Y][Ai->m_cLocation.X - 1] == '#'))
+		if (!(MazeMap[Ai->m_cLocation.Y][Ai->m_cLocation.X - 1] == 'M' || MazeMap[Ai->m_cLocation.Y][Ai->m_cLocation.X - 1] == (char)219))
 			Ai->m_cLocation.X--;
 		else
 			haveWall = true;
@@ -63,7 +63,7 @@ void BotRoam(struct SGameBots *Ai)
 	if (Ai->g_bDirection == B_RIGHT)
 	{
 		//Check if next location is obstructed. If not, move to that location.
-		if (!(MazeMap[Ai->m_cLocation.Y][Ai->m_cLocation.X + 1] == 'M' || MazeMap[Ai->m_cLocation.Y][Ai->m_cLocation.X + 1] == '#'))
+		if (!(MazeMap[Ai->m_cLocation.Y][Ai->m_cLocation.X + 1] == 'M' || MazeMap[Ai->m_cLocation.Y][Ai->m_cLocation.X + 1] == (char)219))
 			Ai->m_cLocation.X++;
 		else
 			haveWall = true;
@@ -71,7 +71,7 @@ void BotRoam(struct SGameBots *Ai)
 	if (Ai->g_bDirection == B_UP)
 	{
 		//Check if next location is obstructed. If not, move to that location.
-		if (!(MazeMap[Ai->m_cLocation.Y - 1][Ai->m_cLocation.X] == 'M' || MazeMap[Ai->m_cLocation.Y - 1][Ai->m_cLocation.X] == '#'))
+		if (!(MazeMap[Ai->m_cLocation.Y - 1][Ai->m_cLocation.X] == 'M' || MazeMap[Ai->m_cLocation.Y - 1][Ai->m_cLocation.X] == (char)219))
 			Ai->m_cLocation.Y--;
 		else
 			haveWall = true;
@@ -79,7 +79,7 @@ void BotRoam(struct SGameBots *Ai)
 	if (Ai->g_bDirection == B_DOWN)
 	{
 		//Check if next location is obstructed. If not, move to that location.
-		if (!(MazeMap[Ai->m_cLocation.Y + 1][Ai->m_cLocation.X] == 'M' || MazeMap[Ai->m_cLocation.Y + 1][Ai->m_cLocation.X] == '#'))
+		if (!(MazeMap[Ai->m_cLocation.Y + 1][Ai->m_cLocation.X] == 'M' || MazeMap[Ai->m_cLocation.Y + 1][Ai->m_cLocation.X] == (char)219))
 			Ai->m_cLocation.Y++;
 		else
 			haveWall = true;

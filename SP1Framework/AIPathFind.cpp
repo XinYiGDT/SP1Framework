@@ -79,7 +79,7 @@ void AIPathFind(struct SGameBots *OriginalAi, short targetXCoord, short targetYC
 				if (x == 0 && y == 0)
 					continue;
 
-				if (MazeMap[AI.Y + y][AI.X + x] == 'M' || MazeMap[AI.Y + y][AI.X + x] == '#')//If there is a wall, ignore
+				if (MazeMap[AI.Y + y][AI.X + x] == 'M' || MazeMap[AI.Y + y][AI.X + x] == (char)219)//If there is a wall, ignore
 				{
 					continue;
 				}
