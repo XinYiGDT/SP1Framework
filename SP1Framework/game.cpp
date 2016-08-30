@@ -183,8 +183,6 @@ void update(double dt)
 	{
 	case S_SPLASHSCREEN: splashScreenWait(); // game logic for the splash screen
 		break;
-	case S_INSTRUCTION: Instruction();
-		break;
 	case S_SELECT: selectionScreen();
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
@@ -213,8 +211,6 @@ void render()
 	switch (g_eGameState)
 	{
 	case S_SPLASHSCREEN: renderSplashScreen();
-		break;
-	case S_INSTRUCTION: renderInstruction();
 		break;
 	case S_SELECT: renderSelectionScreen();
 		break;

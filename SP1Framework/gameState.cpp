@@ -103,8 +103,7 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderSelectionScreen()
 {
-	string Menu[4] = { "Play Game", "Instuctions", "Mini Puzzle Game", "Exit game" };
-
+	string Menu[4] = { "Play Game", "Mini Puzzle Game", "Credits" , "Exit game" };
 	COORD c = g_Console.getConsoleSize();
 	COORD b = g_Console.getConsoleSize();
 	c.Y /= 2;
@@ -210,10 +209,6 @@ void selectionScreen()
 			g_eGameState = S_GAME;
 		}
 		else if (pressed == 1)
-		{
-			g_eGameState = S_INSTRUCTION;
-		}
-		else if (pressed == 2)
 		{
 			g_eGameState = S_MGAME_TETRIS;
 		}

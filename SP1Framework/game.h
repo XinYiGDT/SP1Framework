@@ -37,7 +37,6 @@ enum EKEYS
 enum EGAMESTATES
 {
 	S_SPLASHSCREEN,
-	S_INSTRUCTION,
 	S_GAME,
 	S_SNAKE,
 	S_MGAME_TETRIS,
@@ -114,8 +113,5 @@ void sound();
 
 void gameOver();
 void renderFog( SGameChar *g_sChar, SGameChar *g_sChar2, Console *g_Console, char fog1[40][80]);
-
-void Instruction();
-void renderInstruction();
 
 #endif // _GAME_H

@@ -92,7 +92,6 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameState.cpp" />
     <ClCompile Include="gametime.cpp" />
-    <ClCompile Include="Instruction.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pup.cpp" />
     <ClCompile Include="puzzle.cpp" />
