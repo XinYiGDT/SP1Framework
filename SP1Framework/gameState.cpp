@@ -22,6 +22,7 @@ extern fstream myfile;
 
 extern char Name[40][80];
 extern char text[50][80];
+extern char go[40][80];
 int nRow = 1;
 
 int pressed = 0;
@@ -87,6 +88,51 @@ void openFiles()
 				else
 				{
 					text[nRow][i] = ' ';
+				}
+			}
+
+			nRow++;
+		}
+		myfile.close();
+	}
+
+	myfile.open("GameOver.txt");
+
+	//read Gameover text
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line2))
+		{
+
+			for (int i = 0; i < 75; i++)
+			{
+				if (line2[i] == '_')
+				{
+					go[nRow][i] = '_';
+				}
+				else if (line2[i] == '/')
+				{
+					go[nRow][i] = '/';
+				}
+				else if (line2[i] == (char)92)
+				{
+					go[nRow][i] = (char)92;
+				}
+				else if (line2[i] == '(')
+				{
+					go[nRow][i] = '(';
+				}
+				else if (line2[i] == ')')
+				{
+					go[nRow][i] = ')';
+				}
+				else if (line2[i] == '\0')
+				{
+					break;
+				}
+				else
+				{
+					go[nRow][i] = ' ';
 				}
 			}
 
@@ -314,6 +360,28 @@ void gameOver()
 
 void renderGameOver()
 {
+	COORD d = g_Console.getConsoleSize();
+
+	for (int bRow = 1; bRow < 8; bRow++)
+	{
+		for (int bCol = 0; bCol < 75; bCol++)
+		{
+			char pix;
+			pix = go[bRow][bCol];
+			d.X = bCol + 3;
+			d.Y = bRow + 5;
+
+			if (go[bRow][bCol] != ' ')
+			{
+				g_Console.writeToBuffer(d, pix, 0x0F);
+			}
+			else
+			{
+				g_Console.writeToBuffer(d, pix, 0x08);
+			}
+		}
+	}
+
 	COORD hscoord;
 	hscoord.X = g_Console.getConsoleSize().X / 2;
 	hscoord.Y = g_Console.getConsoleSize().Y / 2;

@@ -39,6 +39,9 @@ char text[50][80];
 //fog
 char fog1[40][80];
 
+//Gameover text
+char go[40][80];
+
 COORD b;
 
 //Positions
