@@ -32,7 +32,7 @@ double addScore = 1;//Set score per sec
 char Name[40][80];
 
 //Credit text
-char text[40][80];
+char text[50][80];
 
 //fog
 char fog1[40][80];
@@ -193,8 +193,8 @@ void update(double dt)
 		break;
 	case S_GAMEOVER: gameOver();
 		break;
-	//case S_CREDIT: credit();
-		//break;
+	case S_CREDIT: credit();
+		break;
 	}
 }
 //--------------------------------------------------------------
@@ -232,7 +232,7 @@ void render()
 
 void splashScreenWait()    // waits for time to pass in splash screen
 {
-	if (g_dElapsedTime > 2.0) // wait for 3 seconds to switch to game mode, else do nothing
+	if (g_dElapsedTime > 2.0) // wait for 2 seconds to switch to game mode, else do nothing
 		g_eGameState = S_SELECT;
 }
 

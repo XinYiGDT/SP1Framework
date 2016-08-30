@@ -6,4 +6,4 @@ void renderSplashScreen();
 void selectionScreen();
 void renderGameOver();
 void renderCredit();
-//void credit();
+void credit();
