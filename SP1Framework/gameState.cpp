@@ -29,7 +29,7 @@ int pressed = 0;
 int up = 0;
 
 int animationOffset;
-int resetTime;
+double resetTime;
 double animationOffset2 = 0.0;
 
 COORD e = g_Console.getConsoleSize();
@@ -332,8 +332,8 @@ void renderCredit()
 	//printing the text
 	if (moveup==true)
 	{
-		e.X = bCol + 15;
-		e.Y = bRow + 33;
+		e.X = 0 + 15;
+		e.Y = 1 + 33;
 
 		moveup = false;
 	}
@@ -379,7 +379,7 @@ void renderCredit()
 void credit()
 {
 
-	if (g_dElapsedTime - resetTime >= 10.0) // wait for 10 seconds to switch to game mode, else do nothing
+	if (g_dElapsedTime - resetTime > 10.0) // wait for 10 seconds to switch to game mode, else do nothing
 	{
 		g_eGameState = S_SELECT;
 		resetTime = g_dElapsedTime;
