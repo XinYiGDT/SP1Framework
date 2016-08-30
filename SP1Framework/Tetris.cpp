@@ -67,8 +67,6 @@ int containerEnd = (g_Console.getConsoleSize().X / 2) + 6;//(g_Console.getConsol
 extern EGAMESTATES g_eGameState;
 
 
-int a;
-int b;
 bool settest = false;
 void tetris()
 {
@@ -265,10 +263,12 @@ void rendertetris()
 		COORD tetEndScore;
 		COORD losec;
 		COORD Restartins;
+		COORD Escapeins;
 
 		std::string loseStr = "You LOSE!";
 		std::string endScorestr = "Your Score: " + std::to_string(Tetscore);
 		std::string Restartinststr = "Press R to restart game";
+		std::string Escapeinststr = "Press Esc to go back to main menu";
 
 		losec.X = g_Console.getConsoleSize().X / 2 - loseStr.length() / 2;
 		losec.Y = g_Console.getConsoleSize().Y / 2 - 1;
@@ -276,10 +276,13 @@ void rendertetris()
 		tetEndScore.Y = g_Console.getConsoleSize().Y / 2;
 		Restartins.X = g_Console.getConsoleSize().X / 2 - Restartinststr.length() / 2;
 		Restartins.Y = g_Console.getConsoleSize().Y / 2 + 1;
+		Escapeins.X = g_Console.getConsoleSize().X / 2 - Escapeinststr.length() / 2;
+		Escapeins.Y = g_Console.getConsoleSize().Y / 2 + 2;
 
 		g_Console.writeToBuffer(losec, loseStr, 0xCF);
 		g_Console.writeToBuffer(tetEndScore, endScorestr);
 		g_Console.writeToBuffer(Restartins, Restartinststr, 0xF0);
+		g_Console.writeToBuffer(Escapeins, Escapeinststr, 0xF0);
 
 		if (g_abKeyPressed[K_R])
 		{
@@ -287,6 +290,8 @@ void rendertetris()
 			tetris();
 			TetloseGame = false;
 		}
+		if (g_abKeyPressed[K_ESCAPE])
+			g_eGameState = S_SPLASHSCREEN;
 	}
 }
 

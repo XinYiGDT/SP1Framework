@@ -1,9 +1,12 @@
 #include "TetrisMinigame.h"
+#include "Framework\console.h"
 
 
+extern Console g_Console;
 
 //Border
 extern char TetrisWalls[40][80];
+extern int WallWidth;
 
 //Timing
 extern double g_dBounceTime;
@@ -46,7 +49,8 @@ void moveShape()
 		for (int i = 0; i < 4; i++)
 		{
 			if (TetShapesInGame[FallingShape.fallingShapeCoords[i].Y][FallingShape.fallingShapeCoords[i].X - 1] == '#'
-				|| TetrisWalls[FallingShape.fallingShapeCoords[i].Y][(FallingShape.fallingShapeCoords[i].X - 1)] == 'M')
+				|| TetrisWalls[FallingShape.fallingShapeCoords[i].Y][FallingShape.fallingShapeCoords[i].X - 1] == 'M'
+				|| (FallingShape.fallingShapeCoords[i].Y <= 2) && (FallingShape.fallingShapeCoords[i].X - 1) == (g_Console.getConsoleSize().X / 2 - WallWidth/2))
 			{
 				TSomethingHappened = true;
 				gotOneCoordTouch = true;
@@ -70,7 +74,8 @@ void moveShape()
 		for (int i = 0; i < 4; i++)
 		{
 			if (TetShapesInGame[FallingShape.fallingShapeCoords[i].Y][FallingShape.fallingShapeCoords[i].X + 1] == '#'
-				|| TetrisWalls[FallingShape.fallingShapeCoords[i].Y][FallingShape.fallingShapeCoords[i].X + 1] == 'M')
+				|| TetrisWalls[FallingShape.fallingShapeCoords[i].Y][FallingShape.fallingShapeCoords[i].X + 1] == 'M'
+				|| (FallingShape.fallingShapeCoords[i].Y <= 2) && (FallingShape.fallingShapeCoords[i].X - 1) == (g_Console.getConsoleSize().X / 2 + WallWidth / 2))
 			{
 				TSomethingHappened = true;
 				gotOneCoordTouch = true;
@@ -136,22 +141,19 @@ void moveShape()
 			//                 [ -1 0 ]
 			RX = FallingShape.fallingShapeCoords[1].Y - FallingShape.fallingShapeCoords[0].Y;//Rotation matrix
 			RY = -1 * (FallingShape.fallingShapeCoords[1].X - FallingShape.fallingShapeCoords[0].X);
-			//			newShapeC.RotatingCoord1.X = RX;
-			//			newShapeC.RotatingCoord1.Y = RY;
+
 			FallingShape.fallingShapeCoords[1].X = FallingShape.fallingShapeCoords[0].X + RX;// newShapeC.RotatingCoord1.X;
 			FallingShape.fallingShapeCoords[1].Y = FallingShape.fallingShapeCoords[0].Y + RY;// newShapeC.RotatingCoord1.Y;
 
 			RX = FallingShape.fallingShapeCoords[2].Y - FallingShape.fallingShapeCoords[0].Y;//Rotation matrix
 			RY = -1 * (FallingShape.fallingShapeCoords[2].X - FallingShape.fallingShapeCoords[0].X);
-			//			newShapeC.RotatingCoord1.X = RX;
-			//			newShapeC.RotatingCoord1.Y = RY;
+
 			FallingShape.fallingShapeCoords[2].X = FallingShape.fallingShapeCoords[0].X + RX;// newShapeC.RotatingCoord2.X;
 			FallingShape.fallingShapeCoords[2].Y = FallingShape.fallingShapeCoords[0].Y + RY;// newShapeC.RotatingCoord2.Y;
 
 			RX = FallingShape.fallingShapeCoords[3].Y - FallingShape.fallingShapeCoords[0].Y;//Rotation matrix
 			RY = -1 * (FallingShape.fallingShapeCoords[3].X - FallingShape.fallingShapeCoords[0].X);
-			//			newShapeC.RotatingCoord1.X = RX;
-			//			newShapeC.RotatingCoord1.Y = RY;
+
 			FallingShape.fallingShapeCoords[3].X = FallingShape.fallingShapeCoords[0].X + RX;// newShapeC.RotatingCoord3.X;
 			FallingShape.fallingShapeCoords[3].Y = FallingShape.fallingShapeCoords[0].Y + RY;// newShapeC.RotatingCoord3.Y;		}
 		}
