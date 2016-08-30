@@ -341,7 +341,7 @@ void renderGame()
 	renderCharacter();  // renders the character into the buffer
 	renderTime();
 	score();
-	//Pup();
+	Pup();
 	
 }
 

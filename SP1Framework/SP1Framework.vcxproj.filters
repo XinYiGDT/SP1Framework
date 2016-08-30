@@ -67,6 +67,9 @@
     <ClCompile Include="Tetris.cpp">
       <Filter>Source Files\Tetris Minigame</Filter>
     </ClCompile>
+    <ClCompile Include="Pup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPathFind.h">
@@ -109,6 +112,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TetrisMinigame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
