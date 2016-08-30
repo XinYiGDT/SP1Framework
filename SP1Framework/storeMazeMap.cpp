@@ -139,7 +139,7 @@ void openMazeType(short mazeNum)
 			{
 				if (line[i] == '#')
 				{
-					MazeMap[rowY][colX] = '#';
+					MazeMap[rowY][colX] = (char)219;
 					colX++;
 				}
 				else
