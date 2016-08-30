@@ -185,6 +185,8 @@ void update(double dt)
 		break;
 	case S_SELECT: selectionScreen();
 		break;
+	case S_INSTRUCTIONS: Instuctions();
+		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
 	case S_SNAKE: snakelogic();
@@ -213,6 +215,8 @@ void render()
 	case S_SPLASHSCREEN: renderSplashScreen();
 		break;
 	case S_SELECT: renderSelectionScreen();
+		break;
+	case S_INSTRUCTIONS: renderInstruction();
 		break;
 	case S_GAME: renderGame();
 		break;
