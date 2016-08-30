@@ -13,7 +13,7 @@
 #include "fogOfWar.h"
 #include "Pup.h"
 #include "TetrisMinigame.h"
-
+#include "puzzle.h"
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
 
@@ -38,6 +38,7 @@ enum EGAMESTATES
 {
 	S_SPLASHSCREEN,
 	S_GAME,
+	S_SNAKE,
 	S_MGAME_TETRIS,
 	S_COUNT,
 	S_GAMEOVER,

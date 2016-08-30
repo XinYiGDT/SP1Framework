@@ -70,6 +70,9 @@
     <ClCompile Include="Pup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="puzzle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPathFind.h">
@@ -115,6 +118,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="puzzle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

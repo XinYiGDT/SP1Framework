@@ -113,6 +113,7 @@ void init(void)
 	memset(fog1, ' ', sizeof(fog1[0][0]) * 40 * 80);
 
 	tetris();//init tetris
+	Setup();//snake init
 }
 
 //--------------------------------------------------------------
@@ -183,6 +184,8 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
+	case S_SNAKE: snakelogic();
+		break;
 	case S_MGAME_TETRIS: tetrisUpdate();
 		break;
 	case S_GAMEOVER: gameOver();
@@ -209,6 +212,8 @@ void render()
 	case S_SELECT: renderSelectionScreen();
 		break;
 	case S_GAME: renderGame();
+		break;
+	case S_SNAKE: rendersnake();
 		break;
 	case S_MGAME_TETRIS: rendertetris();
 		break;
@@ -312,7 +317,7 @@ void moveCharacter()
 		if (gameAIs[i].m_cLocation.X == g_sChar.m_cLocation.X && gameAIs[i].m_cLocation.Y == g_sChar.m_cLocation.Y
 			|| gameAIs[i].m_cLocation.X == g_sChar2.m_cLocation.X && gameAIs[i].m_cLocation.Y == g_sChar2.m_cLocation.Y)
 		{
-			g_eGameState = S_GAMEOVER;
+			g_eGameState = S_SNAKE;
 		}
 	}
 

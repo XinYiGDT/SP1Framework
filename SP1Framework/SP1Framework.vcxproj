@@ -94,6 +94,7 @@
     <ClCompile Include="gametime.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pup.cpp" />
+    <ClCompile Include="puzzle.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="storeMazeMap.cpp" />
     <ClCompile Include="TetGravity.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="gameState.h" />
     <ClInclude Include="gametimer.h" />
     <ClInclude Include="Pup.h" />
+    <ClInclude Include="puzzle.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="storeMazeMap.h" />
     <ClInclude Include="TetrisMinigame.h" />
