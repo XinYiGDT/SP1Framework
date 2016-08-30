@@ -111,6 +111,8 @@ void init(void)
 	readAnimation();
 
 	memset(fog1, ' ', sizeof(fog1[0][0]) * 40 * 80);
+
+	tetris();//init tetris
 }
 
 //--------------------------------------------------------------
@@ -146,6 +148,9 @@ void getInput(void)
 	g_abKeyPressed[K_LEFT] = isKeyPressed(VK_LEFT);
 	g_abKeyPressed[K_RIGHT] = isKeyPressed(VK_RIGHT);
 	g_abKeyPressed[K_SPACE] = isKeyPressed(VK_SPACE);
+	g_abKeyPressed[K_R] = isKeyPressed(0x52);
+	g_abKeyPressed[K_Z] = isKeyPressed(0x5A);
+	g_abKeyPressed[K_C] = isKeyPressed(0x43);
 	g_abKeyPressed[K_ESCAPE] = isKeyPressed(VK_ESCAPE);
 	g_abKeyPressed[K_ENTER] = isKeyPressed(VK_RETURN);
 }
@@ -178,6 +183,8 @@ void update(double dt)
 		break;
 	case S_GAME: gameplay(); // gameplay logic when we are in the game
 		break;
+	case S_MGAME_TETRIS: tetrisUpdate();
+		break;
 	case S_GAMEOVER: gameOver();
 		break;
 	}
@@ -200,6 +207,8 @@ void render()
 	case S_SELECT: renderSelectionScreen();
 		break;
 	case S_GAME: renderGame();
+		break;
+	case S_MGAME_TETRIS: rendertetris();
 		break;
 	case S_GAMEOVER:  renderGameOver();
 		break;
@@ -328,7 +337,7 @@ void renderGame()
 	renderCharacter();  // renders the character into the buffer
 	renderTime();
 	score();
-	Pup();
+	//Pup();
 	
 }
 

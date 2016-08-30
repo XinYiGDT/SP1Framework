@@ -12,6 +12,7 @@
 #include "Animation.h"
 #include "fogOfWar.h"
 #include "Pup.h"
+#include "TetrisMinigame.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -25,6 +26,9 @@ enum EKEYS
 	K_RIGHT,
 	K_ESCAPE,
 	K_SPACE,
+	K_R,
+	K_Z,
+	K_C,
 	K_COUNT,
 	K_ENTER
 };
@@ -34,6 +38,7 @@ enum EGAMESTATES
 {
 	S_SPLASHSCREEN,
 	S_GAME,
+	S_MGAME_TETRIS,
 	S_COUNT,
 	S_GAMEOVER,
 	S_SELECT

@@ -49,8 +49,24 @@
     <ClCompile Include="AIinit.cpp">
       <Filter>Source Files\AI</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="fogOfWar.cpp" />
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fogOfWar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TetGravity.cpp">
+      <Filter>Source Files\Tetris Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="Tetinit.cpp">
+      <Filter>Source Files\Tetris Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="TetMoveShape.cpp">
+      <Filter>Source Files\Tetris Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="Tetris.cpp">
+      <Filter>Source Files\Tetris Minigame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPathFind.h">
@@ -86,8 +102,15 @@
     <ClInclude Include="Framework\timer.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="fogOfWar.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fogOfWar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisMinigame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -104,6 +127,9 @@
     </Filter>
     <Filter Include="Source Files\AI">
       <UniqueIdentifier>{2054e390-4064-4ccb-803c-e97136c6792d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tetris Minigame">
+      <UniqueIdentifier>{31ceb550-3045-40db-99df-d7e7fd4da24f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -95,6 +95,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="storeMazeMap.cpp" />
+    <ClCompile Include="TetGravity.cpp" />
+    <ClCompile Include="Tetinit.cpp" />
+    <ClCompile Include="TetMoveShape.cpp" />
+    <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPathFind.h" />
@@ -110,6 +114,7 @@
     <ClInclude Include="gametimer.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="storeMazeMap.h" />
+    <ClInclude Include="TetrisMinigame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
