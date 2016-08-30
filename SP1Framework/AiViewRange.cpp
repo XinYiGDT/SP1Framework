@@ -85,7 +85,7 @@ void AiViewRange(struct SGameBots *Ai)
 			ans /= targetVecLen;
 			result = acos(ans) * 180 / 3.14159265;
 
-			if (result <= 26.56505118)
+			if (result <= 50)//View Angle
 			{
 				Char2inView = true;
 			}

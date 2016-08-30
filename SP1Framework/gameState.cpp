@@ -210,7 +210,7 @@ void selectionScreen()
 		}
 		else if (pressed == 1)
 		{
-
+			g_eGameState = S_MGAME_TETRIS;
 		}
 		else if (pressed == 2)
 		{

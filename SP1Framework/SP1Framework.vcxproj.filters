@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="CharacterMovement.cpp">
@@ -55,6 +55,24 @@
     <ClCompile Include="fogOfWar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TetGravity.cpp">
+      <Filter>Source Files\Tetris Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="Tetinit.cpp">
+      <Filter>Source Files\Tetris Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="TetMoveShape.cpp">
+      <Filter>Source Files\Tetris Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="Tetris.cpp">
+      <Filter>Source Files\Tetris Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="Pup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="puzzle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIPathFind.h">
@@ -96,6 +114,15 @@
     <ClInclude Include="fogOfWar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TetrisMinigame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="puzzle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -112,6 +139,9 @@
     </Filter>
     <Filter Include="Source Files\AI">
       <UniqueIdentifier>{2054e390-4064-4ccb-803c-e97136c6792d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tetris Minigame">
+      <UniqueIdentifier>{31ceb550-3045-40db-99df-d7e7fd4da24f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
