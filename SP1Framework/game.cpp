@@ -27,6 +27,8 @@ double timer = 0;
 double gameTime = 60;//Set time 1min
 double gameScore = 0; //Set starting score
 double addScore = 1;//Set score per sec
+double reactiontime = 0.125;
+double AIreactiontime = 0.5;
 
 //Logo
 char Name[40][80];
@@ -246,7 +248,7 @@ void gameplay()            // gameplay logic
 	processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
 	moveCharacter();    // moves the character, collision detection, physics, etc
 	// sound can be played here too.
-
+	updatePup(); //Pup activation
 }
 
 void moveCharacter()
@@ -308,6 +310,8 @@ void moveCharacter()
 
 		gameTime = 60;
 		addScore++;
+		g_sPup.m_bActive = false;
+		renderPup();
 
 		//reset the fog
 		memset(fog1, ' ', sizeof(fog1[0][0]) * 40 * 80);
@@ -316,7 +320,7 @@ void moveCharacter()
 	if (bSomethingHappened)
 	{
 		// set the bounce time to some time in the future to prevent accidental triggers
-		g_dBounceTime = g_dElapsedTime + 0.125; // 125ms should be enough
+		g_dBounceTime = g_dElapsedTime + reactiontime; // 125ms should be enough
 	}
 
 	for (int i = 0; i < numOfAis; ++i)
@@ -353,8 +357,7 @@ void renderGame()
 	renderCharacter();  // renders the character into the buffer
 	renderTime();
 	score();
-	Pup();
-	
+	renderPup();	
 }
 
 void renderMap()
@@ -455,7 +458,7 @@ void moveAI()
 		AItime = g_dElapsedTime;
 	else
 	{
-		if (g_dElapsedTime - AItime > 0.5)
+		if (g_dElapsedTime - AItime > AIreactiontime)
 			AItime = 0;
 		return;
 	}
