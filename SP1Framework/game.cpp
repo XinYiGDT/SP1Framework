@@ -63,6 +63,9 @@ double AItime = 0.0;
 SGameChar   g_sChar;
 SGameChar   g_sChar2;
 
+//Power Up
+SGamePup g_sPup;
+
 EGAMESTATES g_eGameState = S_SPLASHSCREEN;
 EGAMESTATES g_eGameState2 = S_GAME;
 
@@ -329,6 +332,7 @@ void renderGame()
 	renderCharacter();  // renders the character into the buffer
 	renderTime();
 	score();
+	Pup();
 	
 }
 
