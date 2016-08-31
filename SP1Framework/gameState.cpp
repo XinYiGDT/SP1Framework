@@ -65,7 +65,7 @@ void openFiles()
 		}
 		myfile.close();
 	}
-
+	nRow = 0;
 
 	myfile.open("Credit.txt");
 
@@ -96,6 +96,7 @@ void openFiles()
 		myfile.close();
 	}
 
+	nRow = 0;
 	myfile.open("GameOver.txt");
 
 	//read Gameover text
@@ -106,36 +107,15 @@ void openFiles()
 
 			for (int i = 0; i < 75; i++)
 			{
-				if (line2[i] == '_')
-				{
-					go[nRow][i] = '_';
-				}
-				else if (line2[i] == '/')
-				{
-					go[nRow][i] = '/';
-				}
-				else if (line2[i] == (char)92)
-				{
-					go[nRow][i] = (char)92;
-				}
-				else if (line2[i] == '(')
-				{
-					go[nRow][i] = '(';
-				}
-				else if (line2[i] == ')')
-				{
-					go[nRow][i] = ')';
-				}
-				else if (line2[i] == '\0')
+				if (line2[i] == '\0')
 				{
 					break;
 				}
 				else
 				{
-					go[nRow][i] = ' ';
+					go[nRow][i] = line2[i];
 				}
 			}
-
 			nRow++;
 		}
 		myfile.close();
@@ -356,20 +336,25 @@ void gameOver()
 
 		storedHs = true;
 	}
+
+	if (g_abKeyPressed[K_ESCAPE])
+	{
+		g_eGameState = S_SELECT;
+	}
 }
 
 void renderGameOver()
 {
 	COORD d = g_Console.getConsoleSize();
 
-	for (int bRow = 1; bRow < 8; bRow++)
+	for (int bRow = 0; bRow < 9; bRow++)
 	{
 		for (int bCol = 0; bCol < 75; bCol++)
 		{
 			char pix;
 			pix = go[bRow][bCol];
-			d.X = bCol + 3;
-			d.Y = bRow + 5;
+			d.X = bCol + 12;
+			d.Y = bRow + 10;
 
 			if (go[bRow][bCol] != ' ')
 			{
@@ -382,16 +367,25 @@ void renderGameOver()
 		}
 	}
 
-	COORD hscoord;
-	hscoord.X = g_Console.getConsoleSize().X / 2;
-	hscoord.Y = g_Console.getConsoleSize().Y / 2;
 
+	string hsstr = "HIGHSCORE";
+	g_Console.writeToBuffer(g_Console.getConsoleSize().X / 2 - hsstr.length()/2, g_Console.getConsoleSize().Y / 2 - 1, hsstr);
+	COORD hscoord;
+	hscoord.Y = g_Console.getConsoleSize().Y / 2;
 	for (int i = 0; i < 5; i++)
 	{
 		string highscorestr = to_string(highscore[i]);
+
+		hscoord.X = g_Console.getConsoleSize().X / 2 - highscorestr.length() / 2;
+
 		g_Console.writeToBuffer(hscoord, highscorestr);
 		hscoord.Y++;
 	}
+
+
+
+	string escGOstr = "Press Esc to exit to main menu";
+	g_Console.writeToBuffer(g_Console.getConsoleSize().X / 2 - escGOstr.length() / 2, hscoord.Y + 3, escGOstr);
 }
 
 
