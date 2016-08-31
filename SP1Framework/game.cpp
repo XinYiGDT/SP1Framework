@@ -306,6 +306,7 @@ void moveCharacter()
 	{
 
 		rendmapbool = false;
+		mazeMaprow = 2;
 
 		storeMazeMap();
 
@@ -333,6 +334,8 @@ void moveCharacter()
 
 		Aiinit();
 
+	
+		
 		gameTime = 60;
 		addScore++;
 		g_sPup.m_bActive = false;
