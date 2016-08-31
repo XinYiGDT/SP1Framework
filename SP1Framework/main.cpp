@@ -34,7 +34,7 @@ int main( void )
 //--------------------------------------------------------------
 void mainLoop( void )
 {
-    g_Timer.startTimer();    // Start timer to calculate how long it takes to render this frame
+    g_Timer.startTimer();// Start timer to calculate how long it takes to render this frame
     while (!g_bQuitGame)      // run this loop until user wants to quit 
     {        
         getInput();                         // get keyboard input

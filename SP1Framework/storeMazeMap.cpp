@@ -13,8 +13,9 @@ extern Console g_Console;
 
 //extern short colX;
 //extern short rowY;
-short colX = 1;
-short rowY = 2;
+//short colX = 1;
+//short rowY = 2;
+short mazeMaprow = 2;
 
 extern bool checkloca;
 
@@ -23,8 +24,8 @@ extern std::fstream myfile;
 
 void storeMazeMap()
 {
-	colX = 1;//reset this variable
-	rowY = 2;
+	//colX = 1;//reset this variable
+	//rowY = 2;
 
 	int bRow = 1;
 	int bCol = 0;
@@ -133,24 +134,31 @@ void openMazeType(short mazeNum)
 
 	if (myfile.is_open())
 	{
+
 		while (std::getline(myfile, line))
 		{
 			for (int i = 0; i < 50; i++)
 			{
 				if (line[i] == '#')
 				{
-					MazeMap[rowY][colX] = (char)219;
-					colX++;
+					MazeMap[mazeMaprow][i + 1] = (char)219;
+					
 				}
 				else
 				{
-					MazeMap[rowY][colX] = ' ';
-					colX++;
+					MazeMap[mazeMaprow][i + 1] = ' ';
+					
 				}
 			}
-			colX = 1;
-			rowY++;
+		
+			mazeMaprow++;
 		}
 		myfile.close();
+	}
+
+	if (mazeMaprow >= 27)//If row is completed. reset to 2.
+	{
+		mazeMaprow = 2;
+
 	}
 }

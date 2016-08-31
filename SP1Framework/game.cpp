@@ -30,6 +30,10 @@ double addScore = 1;//Set score per sec
 double reactiontime = 0.125;
 double AIreactiontime = 0.5;
 
+extern double scoretimer;
+
+
+
 //Logo
 char Name[40][80];
 
@@ -61,6 +65,8 @@ bool checkloca = false;
 
 std::string line;
 std::fstream myfile;
+
+extern short mazeMaprow;
 
 //AIs
 SGameBots gameAIs[numOfAis];
@@ -110,8 +116,22 @@ void init(void)
 	// sets the width, height and the font name to use in the console
 	g_Console.setConsoleFont(0, 16, L"Consolas");
 
+	g_sPup.m_bActive = false;
 	//AIs==========================
+	AItime = 0;
 	Aiinit();
+
+	addScore = 1;
+	gameScore = 0;
+	gameTime = 60;
+	scoretimer = 0;
+	timer = 0;
+
+	reactiontime = 0.125;
+	AIreactiontime = 0.5;
+
+	rendmapbool = false;
+	mazeMaprow = 2;
 
 	storeMazeMap();
 	openFiles();
@@ -119,6 +139,8 @@ void init(void)
 	readAnimation();
 
 	memset(fog1, ' ', sizeof(fog1[0][0]) * 40 * 80);
+
+
 
 	tetris();//init tetris
 	Setup();//snake init
@@ -295,8 +317,8 @@ void moveCharacter()
 			randPointX2 = (rand() % 20) + 2;
 			randPointY2 = (rand() % 25) + 1;
 
-			if (MazeMap[randPointY][randPointX] != 'M' && MazeMap[randPointY][randPointX] != '#'
-				&& MazeMap[randPointY2][randPointX2] != 'M' && MazeMap[randPointY2][randPointX2] != '#')
+			if (MazeMap[randPointY][randPointX] != 'M' && MazeMap[randPointY][randPointX] != (char)219
+				&& MazeMap[randPointY2][randPointX2] != 'M' && MazeMap[randPointY2][randPointX2] != (char)219)
 			{
 
 				checkloca = false;

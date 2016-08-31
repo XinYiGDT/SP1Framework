@@ -125,14 +125,10 @@ void openFiles()
 void renderSplashScreen()  // renders the splash screen
 {
 	COORD c = g_Console.getConsoleSize();
+	string loadingstr = "Now Loading...";
 	c.Y /= 3;
-	c.X = c.X / 2 - 9;
-	g_Console.writeToBuffer(c, "A game in 3 seconds", 0x03);
-	c.Y += 1;
-	c.X = g_Console.getConsoleSize().X / 2 - 9;
-	g_Console.writeToBuffer(c, "Press 'Esc' to quit", 0x09);
-
-
+	c.X = c.X / 2 - loadingstr.length()/2;
+	g_Console.writeToBuffer(c, loadingstr, 0x0D);
 }
 
 void renderSelectionScreen()
@@ -269,6 +265,9 @@ void selectionScreen()
 		g_dBounceTime = g_dElapsedTime + 0.3; // 125ms should be enough
 	}
 }
+
+extern bool rendmapbool;
+extern bool checkloca;
 vector<int> something;
 void gameOver()
 {
@@ -339,7 +338,12 @@ void gameOver()
 
 	if (g_abKeyPressed[K_ESCAPE])
 	{
+		init();
+		rendmapbool = false;
+		checkloca = false;
+		renderMap();
 		g_eGameState = S_SELECT;
+		
 	}
 }
 

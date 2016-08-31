@@ -54,6 +54,13 @@ void Setup()//This initialises only once when the game starts.
 	fruitX = width - 1;
 	fruitY = height - 1;
 
+	moveSpeedTime = 0;
+	sscore = 0;
+	targetScore = 0;
+	nTail = 0;
+
+
+
 	int bRow = 1;
 	int bCol = 0;
 
@@ -83,6 +90,9 @@ void Setup()//This initialises only once when the game starts.
 
 	Tail[0].Child.X = 5;
 	Tail[0].Child.Y = 5;
+
+	
+	Tail[100];
 
 }
 void rendersnake()
