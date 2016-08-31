@@ -85,8 +85,8 @@ void AIPathFind(struct SGameBots *OriginalAi, short targetXCoord, short targetYC
 				}
 
 				//Prevent Corner cutting============================================
-				if (((x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1) || (x == 1 && y == 1)) && (MazeMap[AI.Y][AI.X + x] == '#')		//-- 0- +-
-					|| ((x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1) || (x == 1 && y == 1)) && (MazeMap[AI.Y + y][AI.X] == '#'))		//-0 00 +0
+				if (((x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1) || (x == 1 && y == 1)) && (MazeMap[AI.Y][AI.X + x] == (char)219)	//-- 0- +-
+					|| ((x == -1 && y == -1) || (x == 1 && y == -1) || (x == -1 && y == 1) || (x == 1 && y == 1)) && (MazeMap[AI.Y + y][AI.X] == (char)219))//-0 00 +0
 				{																																			//-+ 0+ ++
 					continue;																																//if there is wall adjacent to the tile,
 				}																																			//in (x=0) OR (y=0), ignore
