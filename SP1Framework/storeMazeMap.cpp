@@ -156,9 +156,4 @@ void openMazeType(short mazeNum)
 		myfile.close();
 	}
 
-	if (mazeMaprow >= 27)//If row is completed. reset to 2.
-	{
-		mazeMaprow = 2;
-
-	}
 }

@@ -1,6 +1,7 @@
 #include "AIPathFind.h"
 
 extern SGameBots gameAIs[];
+//extern double g_dElapsedTime;
 
 void Aiinit()
 {
@@ -12,6 +13,8 @@ void Aiinit()
 	gameAIs[0].g_bRoamAreaB.Y = 26;
 	gameAIs[0].m_bActive = true;
 	gameAIs[0].PathfindToChar = false;
+	gameAIs[0].AIReactionTimeDelay = 0.0;
+	gameAIs[0].AIReactionTime = 0.35;
 
 	gameAIs[1].m_cLocation.X = 50;
 	gameAIs[1].m_cLocation.Y = 2;
@@ -21,6 +24,8 @@ void Aiinit()
 	gameAIs[1].g_bRoamAreaB.Y = 13;
 	gameAIs[1].m_bActive = true;
 	gameAIs[1].PathfindToChar = false;
+	gameAIs[1].AIReactionTimeDelay = 0.0;
+	gameAIs[1].AIReactionTime = 0.35;
 
 	gameAIs[2].m_cLocation.X = 25;
 	gameAIs[2].m_cLocation.Y = 13;
@@ -30,5 +35,7 @@ void Aiinit()
 	gameAIs[2].g_bRoamAreaB.Y = 21;
 	gameAIs[2].m_bActive = true;
 	gameAIs[2].PathfindToChar = false;
+	gameAIs[2].AIReactionTimeDelay = 0.0;
+	gameAIs[2].AIReactionTime = 0.35;
 
 }

@@ -62,7 +62,7 @@ enum BOTSDIRECTION
 	B_UP,
 	B_DOWN
 };
-
+#define numOfAis 3
 struct SGameBots
 {
 	COORD m_cLocation;
@@ -72,6 +72,8 @@ struct SGameBots
 	bool PathfindToChar;
 	COORD PathfindCoord;
 	bool  m_bActive;
+	double AIReactionTimeDelay;
+	double AIReactionTime;
 };
 
 

@@ -12,7 +12,6 @@
 #include <string>
 #include <mmsystem.h>
 
-#define numOfAis 3
 
 
 double  g_dElapsedTime;
@@ -24,14 +23,13 @@ short randRendmap2 = 0;//store the second maze type number
 short randRendmap3 = 0;//store the third maze type number
 char MazeMap[40][80];
 double timer = 0;
-double gameTime = 60;//Set time 1min
+int gameTime = 60;//Set time 1min
 double gameScore = 0; //Set starting score
 double addScore = 1;//Set score per sec
 double reactiontime = 0.125;
-double AIreactiontime = 0.5;
+
 
 extern double scoretimer;
-
 
 
 //Logo
@@ -55,12 +53,6 @@ short randPointY;
 short randPointX2;
 short randPointY2;
 
-short AIpositionX = 1;
-short AIpositionY = 25;
-
-short AIpositionX2 = 50;
-short AIpositionY2 = 2;
-
 bool checkloca = false;
 
 std::string line;
@@ -70,8 +62,6 @@ extern short mazeMaprow;
 
 //AIs
 SGameBots gameAIs[numOfAis];
-double AItime = 0.0;
-
 
 // Game specific variables here
 SGameChar   g_sChar;
@@ -118,17 +108,16 @@ void init(void)
 
 	g_sPup.m_bActive = false;
 	//AIs==========================
-	AItime = 0;
+
 	Aiinit();
 
 	addScore = 1;
 	gameScore = 0;
-	gameTime = 60;
+	
 	scoretimer = 0;
 	timer = 0;
-
+	gameTime = 60;
 	reactiontime = 0.125;
-	AIreactiontime = 0.5;
 
 	rendmapbool = false;
 	mazeMaprow = 2;
@@ -139,8 +128,6 @@ void init(void)
 	readAnimation();
 
 	memset(fog1, ' ', sizeof(fog1[0][0]) * 40 * 80);
-
-
 
 	tetris();//init tetris
 	Setup();//snake init
@@ -306,7 +293,7 @@ void moveCharacter()
 	{
 
 		rendmapbool = false;
-
+		mazeMaprow = 2;
 		storeMazeMap();
 
 		while (checkloca)
@@ -332,8 +319,9 @@ void moveCharacter()
 		g_sChar2.m_cLocation.Y = randPointY2;
 
 		Aiinit();
+		
 
-		gameTime = 60;
+		gameTime += 15;
 		addScore++;
 		g_sPup.m_bActive = false;
 		renderPup();
@@ -475,7 +463,8 @@ void renderAI()
 	}
 }
 
-
+extern bool Pup7active;
+extern bool Pup8active;
 void moveAI()
 {
 
@@ -484,18 +473,28 @@ void moveAI()
 	{
 		AiViewRange(&gameAIs[i]);					//Check if there is any Char in the view range. If there is, PathfindToChar will be set to true
 
-		if (g_dElapsedTime - AItime > 0.5)
-		{
+		if (g_dElapsedTime - gameAIs[i].AIReactionTimeDelay > gameAIs[i].AIReactionTime)
 
 			if (gameAIs[i].PathfindToChar == false)		//If there is no Pathfinding
 			{
+				if (Pup7active == false && Pup8active == false)//If powerups that affect AI speed is NOT activated, AIreactionTime remains 0.35
+				{
+					gameAIs[i].AIReactionTime = 0.35;
+				}
 				BotRoam(&gameAIs[i]);					//Let the Ai Roam around
 				AiPresenceArea(&gameAIs[i]);			//Check if the Ai exits the Roam area. If true, get them back to their respective areas
 				gameAIs[i].m_bActive = true;
+
+
+				gameAIs[i].AIReactionTimeDelay = g_dElapsedTime;
 			}
 
 			else if (gameAIs[i].PathfindToChar == true)	//If there is Pathfinding
 			{
+				if (Pup7active == false && Pup8active == false)//If powerups that affect AI speed is NOT activated, AIreactionTime remains 0.12 when pathfinding
+				{
+					gameAIs[i].AIReactionTime = 0.12;
+				}
 				gameAIs[i].m_bActive = false;			//Changes colour
 				AIPathFind(&gameAIs[i], gameAIs[i].PathfindCoord.X, gameAIs[i].PathfindCoord.Y); //Pathfinds to coordinate
 
@@ -503,12 +502,10 @@ void moveAI()
 					gameAIs[i].PathfindToChar = false;	//If Ai reaches Coordinates, set to false and continue roaming in another frame
 
 				AiPresenceArea(&gameAIs[i]);			//Checks and ensures Ai stays in roam area.
+
+				gameAIs[i].AIReactionTimeDelay = g_dElapsedTime;
 			}
-		}
-	}
-	if (g_dElapsedTime - AItime > 0.5)
-	{
-		AItime = g_dElapsedTime;
+	
 	}
 
 	//This Allows the Ai to roam and have a view range of 10m in a cone radius of about 52degrees

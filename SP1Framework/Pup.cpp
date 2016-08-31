@@ -2,8 +2,10 @@
 #include "Framework\console.h"
 #include <iomanip>
 
+extern SGameBots gameAIs[numOfAis];
+
 extern Console g_Console;
-extern double gameTime;
+extern int gameTime;
 extern SGameChar g_sChar;
 extern SGameChar g_sChar2;
 extern SGamePup g_sPup;
@@ -12,7 +14,7 @@ extern bool checkloca;
 extern double g_dElapsedTime;
 extern double addScore;
 extern double reactiontime;
-extern double AIreactiontime;
+
 double Puptimer;
 int Pupcheck = 0;
 bool Pup3active = false;
@@ -188,7 +190,10 @@ void updatePup()
 		{
 			Pupcheck = 0;
 			Pup7active = false;
-			AIreactiontime = 0.5;
+			for (int i = 0; i < numOfAis; i++)
+			{
+				gameAIs[i].AIReactionTime = 0.35;
+			}
 			stringactive = false;
 		}
 	}
@@ -209,7 +214,10 @@ void updatePup()
 		{
 			Pupcheck = 0;
 			Pup8active = false;
-			AIreactiontime = 0.5;
+			for (int i = 0; i < numOfAis; i++)
+			{
+				gameAIs[i].AIReactionTime = 0.35;
+			}
 			stringactive = false;
 		}
 	}
@@ -277,12 +285,18 @@ void Pup6() //slow down characters
 
 void Pup7() //speed up AI
 {
-	AIreactiontime = 0.2;
+	for (int i = 0; i < numOfAis; i++)
+	{
+		gameAIs[i].AIReactionTime = 0.2;
+	}
 	Pup7active = true;
 }
 
 void Pup8() //slow down AI
 {
-	AIreactiontime = 0.8;
+	for (int i = 0; i < numOfAis; i++)
+	{
+		gameAIs[i].AIReactionTime = 0.8;
+	}
 	Pup8active = true;
 }

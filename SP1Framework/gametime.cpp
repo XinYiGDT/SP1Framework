@@ -1,6 +1,6 @@
 #include "gametimer.h"
 #include "Framework\console.h"
-extern double gameTime;
+extern int gameTime;
 extern double timer;
 extern double g_dElapsedTime;
 extern Console g_Console;
@@ -12,17 +12,10 @@ void renderTime()
 	COORD timecoordB;
 
 	std::string timerstr = "Time Left: ";
+	timerstr += std::to_string(gameTime);
+
 	timercoord.X = 52 / 2 - (timerstr.length() / 2) - 1;
 	timercoord.Y = 27;
-	timecoordA.X = 52 / 2 + (timerstr.length() / 2) + 1;
-	timecoordA.Y = 27;
-	timecoordB.X = 52 / 2 + (timerstr.length() / 2) + 2;
-	timecoordB.Y = 27;
-
-	char A, B;
-	int gTime = gameTime;
-	B = gTime % 10 + 48;
-	A = gTime / 10 + 48;
 
 	if (timer == 0)
 	{
@@ -35,8 +28,7 @@ void renderTime()
 			timer = 0;
 		}
 		g_Console.writeToBuffer(timercoord, timerstr);
-		g_Console.writeToBuffer(timecoordA, A);
-		g_Console.writeToBuffer(timecoordB, B);
+
 		return;
 	}
 
@@ -44,8 +36,7 @@ void renderTime()
 
 
 	g_Console.writeToBuffer(timercoord, timerstr);
-	g_Console.writeToBuffer(timecoordA, A);
-	g_Console.writeToBuffer(timecoordB, B);
+
 
 
 
